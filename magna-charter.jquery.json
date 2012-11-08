@@ -1,0 +1,28 @@
+{
+  "name": "magna-charter",
+  "title": "Magna Charter",
+  "description": "A jQuery plugin for producing bar charts from tables.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/alphagov/magna-charter",
+  "author": {
+    "name": "Jack Franklin",
+    "email": "jack@jackfranklin.net"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alphagov/magna-charter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alphagov/magna-charter/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/alphagov/magna-charter/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "1.8"
+  },
+  "keywords": []
+}

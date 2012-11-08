@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Magna Charter Test Suite</title>
+  <!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
+  <script src="../libs/jquery-loader.js"></script>
+  <!-- Load local QUnit (grunt requires v1.0.0 or newer). -->
+  <link rel="stylesheet" href="../libs/qunit/qunit.css" media="screen">
+  <script src="../libs/qunit/qunit.js"></script>
+  <!-- Load local lib and tests. -->
+  <script src="../src/magna-charter.js"></script>
+  <script src="magna-charter_test.js"></script>
+  <!-- Removing access to jQuery and $. But it'll still be available as _$, if
+         you REALLY want to mess around with jQuery in the console. REMEMBER WE
+         ARE TESTING YOUR PLUGIN HERE -->
+  <script>window._$ = jQuery.noConflict(true);</script>
+</head>
+<body>
+  <h1 id="qunit-header">Magna Charter Test Suite</h1>
+  <h2 id="qunit-banner"></h2>
+  <div id="qunit-testrunner-toolbar"></div>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture">
+    <table>
+      <thead>
+        <tr><td>Some Data</td><td>Values</td></tr>
+      </thead>
+      <tbody>
+        <tr><td>Testing One</td><td>5</td></tr>
+        <tr><td>Testing Two</td><td>4</td></tr>
+        <tr><td>Testing Three</td><td>3</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
