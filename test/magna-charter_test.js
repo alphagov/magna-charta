@@ -42,6 +42,9 @@
     // check the tbody tr do
     ok(this.$table.find("tbody tr").hasClass("mc-row"), "adds class to tbody table rows");
   });
+  test('add classes to all cells that are given a width', function() {
+    equal(this.$table.find(".mc-bar-cell").length, 3);
+  });
 
   test('calulateMaxWidth returns object with right max value in', function() {
     deepEqual(this.mC.calculateMaxWidth(), {

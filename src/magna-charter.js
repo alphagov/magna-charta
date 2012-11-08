@@ -44,13 +44,16 @@
       this.$bodyRows.each(function(i, item) {
         var $this = $(item);
         var $bodyCells = $this.find("td:not(:first)");
+        var cellsTotalValue = 0;
         $bodyCells.each(function(j, cell) {
-          var $cell = $(cell);
+
+          var $cell = $(cell).addClass("mc-bar-cell");
           var cellVal = that.utils.stripValue($cell.text());
           if(that.utils.isFloat(cellVal)) {
-            values.push(parseFloat(cellVal, 10));
+            cellsTotalValue += parseFloat(cellVal, 10);
           }
         });
+        values.push(cellsTotalValue);
         resp.max = parseFloat(that.utils.returnMax(values), 10);
       });
       resp.single = parseFloat(100/resp.max, 10);
