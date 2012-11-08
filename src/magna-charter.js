@@ -13,6 +13,7 @@
       this.$table = table;
       this.$bodyRows = this.$table.find("tbody tr");
       this.addClasses();
+      this.dimensions = this.calculateMaxWidth();
       return this;
     },
     utils: {
@@ -54,7 +55,20 @@
       });
       resp.single = parseFloat(100/resp.max, 10);
       return resp;
+    },
+    applyWidths: function() {
+      var that = this;
+      this.$bodyRows.each(function(i, row) {
+        var $this = $(row);
+        $this.find("td:not(:first)").each(function(j, cell) {
+          var val = parseFloat(that.utils.stripValue($(cell).text()), 10) * that.dimensions.single;
+          $(cell).css({
+            "width": val + "%"
+          });
+        });
+      });
     }
+
   };
 
 

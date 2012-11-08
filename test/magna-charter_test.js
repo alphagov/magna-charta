@@ -50,6 +50,13 @@
     });
   });
 
+  test('applying the calculated widths correctly', function() {
+    this.mC.applyWidths();
+    equal(this.$table.find("tbody td").eq(1).attr("style"), "width: 100%; ");
+    equal(this.$table.find("tbody td").eq(3).attr("style"), "width: 80%; ");
+    equal(this.$table.find("tbody td").eq(5).attr("style"), "width: 60%; ");
+  });
+
   module("jQuery.magnaCharter");
 
   test('utils.isFloat', function() {
