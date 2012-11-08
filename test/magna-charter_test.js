@@ -24,8 +24,11 @@
 
   module('jQuery#magnaCharter', {
     setup: function() {
+      // get a plugin instance
       this.$table = $("#qunit-fixture").children("table");
       this.$mC = this.$table.magnaCharter();
+      // and get an instance to the object
+      this.mC = $.magnaCharter.init(this.$table);
     }
   });
 
@@ -36,8 +39,37 @@
   test('adds a class to all rows it affects', 2, function() {
     // check the thead tr doesnt have the class
     ok(!this.$table.find("thead tr").hasClass("mc-row"), 'doesnt add class to thead rows');
-    // check the tbody tr do 
+    // check the tbody tr do
     ok(this.$table.find("tbody tr").hasClass("mc-row"), "adds class to tbody table rows");
+  });
+
+  test('calulateMaxWidth returns object with right max value in', function() {
+    deepEqual(this.mC.calculateMaxWidth(), {
+      max: parseFloat(5, 10),
+      single: parseFloat(100/5)
+    });
+  });
+
+  module("jQuery.magnaCharter");
+
+  test('utils.isFloat', function() {
+    ok($.magnaCharter.utils.isFloat(4.56), "4.56 is a float");
+    ok($.magnaCharter.utils.isFloat(7), "7 is a float");
+    ok(!$.magnaCharter.utils.isFloat("hello"), "hello is not a float");
+    ok(!$.magnaCharter.utils.isFloat("hello1344"), "hello1344 is not a float");
+  });
+
+  test('utils.returnMax', function() {
+    equal($.magnaCharter.utils.returnMax([5,6,7,1]), 7);
+    equal($.magnaCharter.utils.returnMax([1,2,1,6]), 6);
+    equal($.magnaCharter.utils.returnMax([2,2,1,3]), 3);
+    equal($.magnaCharter.utils.returnMax([5,4,3]), 5);
+  });
+
+  test('utils.stripValue', function() {
+    equal($.magnaCharter.utils.stripValue("1.23m"), "1.23");
+    equal($.magnaCharter.utils.stripValue("£1.23m"), "1.23");
+    equal($.magnaCharter.utils.stripValue("0.56%"), "0.56");
   });
 
 
