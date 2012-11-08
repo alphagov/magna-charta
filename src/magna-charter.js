@@ -75,6 +75,7 @@
   $.fn.magnaCharter = function() {
     return this.each(function() {
       var mC = $.magnaCharter.init($(this));
+      mC.applyWidths();
     });
   };
 

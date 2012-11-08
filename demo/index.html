@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Magna Charter Demo</title>
+  <style>
+    table {
+      width: 600px;
+      border-collapse: separate;
+    }
+    tbody td:nth-child(even) { display: inline-block; background: red; }
+    tbody td:nth-child(odd) {
+      width: 30%;
+    }
+  </style>
+  <script src="../libs/jquery-loader.js"></script>
+  <script src="../src/magna-charter.js"></script>
+  <script>
+    $(function() {
+      $("table").magnaCharter();
+    });
+  </script>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr><td>Testing Data</td><td>Value</td></tr>
+    </thead>
+    <tbody>
+      <tr><td>Something</td><td>5</td></tr>
+      <tr><td>Something</td><td>4</td></tr>
+      <tr><td>Something</td><td>3</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>
+
