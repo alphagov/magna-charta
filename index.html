@@ -1,1 +1,130 @@
-Testing Github pages
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Magna Charta</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://raw.github.com/alphagov/magna-charta/master/dist/magna-charta.min.js"></script>
+    <script src="demo.js"></script>
+  </head>
+  <body>
+    <a href="https://www.github.com/alphagov/magna-charta"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+    <div class="container">
+      <h1>Magna Charta</h1>
+
+      <p>Magna Charter is a jQuery plugin used to create accessible and lovely looking bar charts.</p>
+
+      <h2>How it works</h2>
+
+      <p>It works by applying some styling to regular HTML tables, to enable cells to be given a certain width. The Magna Charta then calculates and applies the widths to each cell with a value in, creating the graphs. Keep reading for some examples.</p>
+
+      <h2>How to use it</h2>
+      <p>Grab yourself a copy of jQuery and the <a href="https://raw.github.com/alphagov/magna-charta/master/dist/magna-charta.min.js">Magna Charta source</a>.
+
+      <p>Then you'll want to simply call <code>$.magnaCharta</code> on some tables:</p>
+      <pre>
+        <code>
+          var chart = $.magnaCharta($("#table1"));
+        </code>
+      </pre>
+      <p>Once you instantiate the chart, the Magna Charta object is returned to you. This means you can programatically update the table cell values and then redo the bar charts, if you need to:</p>
+
+      <pre><code>
+        // code here that updates the table cell values
+        chart.applyWidths();
+        // chart is now updated with new values
+      </code></pre>
+
+      <p>It's also possible to easily add a button to revert the chart to a table, and vice-versa. There are two methods that do this:</p>
+
+      <ul>
+        <li><code>chart.revert()</code> - completely reverts the effects of Magna Charta. Removes widths, classes, and so on.</li>
+        <li><code>chart.apply()</code> - recreates the chart, re-adds all the classes and applies the widths again.</li>
+      </ul>
+
+      <p>There are a couple of options you can pass into the magnaCharta on init:</p>
+
+      <pre>
+        <code>
+        var chart = $.magnaCharta($("table"), {
+          outOf: 95,
+          applyOnInit: true
+        });
+        </code>
+      </pre>
+
+      <p>The values assigned above are the defaults.</p>
+      <ul>
+        <li><code>outOf</code> means what total % to divide by to calculate the percentages. 95 means that the biggest bar will take up 95% of the width of the table. This is useful as it leaves you room to add some margins, or perhaps some text that hangs off the edge of the chart.</li>
+        <li><code>applyOnInit</code> turns the tables into charts as soon as they are initialised. If you set this to false, you'll need to manually apply the charts with: <code>chart.apply();</code>.</li>
+      </ul>
+
+      <p>If you take a look at the <a href="demo.js">JavaScript powering the demos, you can see these in action</a>.</p>
+
+
+      <p>MC doesn't add any CSS at all. We don't like plugins that dictate appearances too much. What we do is add some really useful CSS classes to things to easily let you style things. Here are the classes we add:</p>
+      <ul>
+        <li><code>.mc-table</code> on any table that's been turned into a chart.</li>
+        <li><code>.mc-key-cell</code> to any table cell that's not been turned into bar.</li>
+        <li><code>.mc-bar-cell</code> to any table cell that's been turned into a bar.</li>
+        <li><code>.mc-row</code> to any row that has bars within.</li>
+      </ul>
+
+      <p>There are two really important bits of styling that you need to add:</p>
+      <pre>
+        <code>
+          .mc-table { border-collapse: separate; }
+          .mc-bar-cell { display: inline-block; }
+        </code>
+      </pre>
+
+      <p>If you'd like to see the CSS that powers the examples below, check out <a href="style.css">the stylesheet</a>.</p>
+
+      <h2>Live Demos</h2>
+      <p>Press the "toggle" button by each chart to toggle between chart and table.</p>
+
+      <h4>Chart Number 1</h4>
+      <span>Toggle</span>
+      <p class="fig">Shows the niceness of types of Biscuits</p>
+      <table id="single">
+        <thead>
+          <tr><td>Testing Data</td><td>Value</td></tr>
+        </thead>
+        <tbody>
+          <tr><td>Caramel Digestives</td><td>5</td></tr>
+          <tr><td>Teacakes</td><td>4</td></tr>
+          <tr><td>Hobnobs</td><td>3</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Chart Number 2</h4>
+      <span>Toggle</span>
+      <p class="fig">Cookies from Sainsburys, rated by taste and size.</p>
+      <table id="multiple">
+        <thead>
+          <tr><td>Cookie</td><td>Size Rating/5</td><td>Taste Rating/5</td></tr>
+        </thead>
+        <tbody>
+          <tr><td>White Choc and Raspberry</td><td>3</td><td>4</td></tr>
+          <tr><td>Triple Choc Chip</td><td>5</td><td>5</td></tr>
+          <tr><td>Oatmeal and Raisin</td><td>4</td><td>5</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Chart Number 3</h4>
+      <span>Toggle</span>
+      <p class="fig">Most awesome developer names (this one was initialised with <code>applyOnInit</code> set to <code>false</code>):</p>
+      <table id="single2">
+        <thead>
+          <tr><td>Name</td><td>Rating / 10</td></tr>
+        </thead>
+        <tbody>
+          <tr><td>Jack</td><td>10</td></tr>
+          <tr><td>William</td><td>9</td></tr>
+          <tr><td>Michael</td><td>8</td></tr>
+          <tr><td>Steven</td><td>7</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+
+.container {
+  width: 80%;
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 17px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-bottom: 25px;
+}
+
+h4 { margin-top: 20px; margin-bottom: 10px; display: inline-block; }
+
+span {
+  font-style: italic;
+}
+
+span:hover { cursor: pointer; text-decoration: underline; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr {
+  border-bottom: 1px solid #111;
+}
+
+td {
+  padding: 10px 0;
+}
+tbody tr:last-of-type { border-bottom: none; }
+
+thead td { font-weight: bold; }
+
+/** styling for MC charts **/
+.mc-table {
+  border-collapse: separate;
+}
+
+.mc-bar-cell { display: inline-block; background: red; color: white; text-indent: 5px;}
+
+.mc-table td {
+  height: 30px;
+  line-height: 30px;
+}
+
+.mc-table thead { display: none; }
+
+.mc-table#multiple .mc-bar-cell:nth-of-type(even) { background: blue; }
+.mc-table .mc-key-cell {
+  width: 40%;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.fig {
+  text-indent: 20px;
+  border-bottom: 1px solid #111;
+  padding: 5px;
+  margin-bottom: 10px;
+}
