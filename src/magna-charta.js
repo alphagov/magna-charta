@@ -11,12 +11,31 @@
   var MagnaCharta = function() {
     this.init = function(table, options) {
       this.setUpOptions(options);
-      this.$table = $(table);
+      this.$table = $(table).addClass("mc-table");
       this.$bodyRows = this.$table.find("tbody tr");
       this.addClasses();
       this.applyWidths();
 
       return this;
+    };
+
+
+    this.reapply = function() {
+      this.addClasses();
+      this.applyWidths();
+    };
+
+    this.revert = function() {
+      this.removeWidths();
+      this.removeClasses();
+    };
+
+    this.removeClasses = function() {
+      this.$table.removeClass("mc-table").find(".mc-key-cell, .mc-row, .mc-bar-cell").removeClass("mc-key-cell mc-row mc-bar-cell");
+    };
+
+    this.removeWidths = function() {
+      this.$table.find(".mc-bar-cell").css("width", "");
     };
 
     this.setUpOptions = function(options) {
@@ -54,6 +73,7 @@
       this.$bodyRows.each(function(i, item) {
         var $this = $(item);
         var $bodyCells = $this.find("td:not(:first)");
+        $this.find("td:first").addClass("mc-key-cell");
         var cellsTotalValue = 0;
         $bodyCells.each(function(j, cell) {
           var $cell = $(cell).addClass("mc-bar-cell");

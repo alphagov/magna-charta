@@ -48,6 +48,10 @@
     equal(this.$multiTable.find(".mc-bar-cell").length, 6);
   });
 
+  test('adds a class to all cells that become keys', function() {
+    equal(this.$singleTable.find(".mc-key-cell").length, 3);
+  });
+
 
   test('add classes to all cells that are given a width', function() {
     equal(this.$singleTable.find(".mc-bar-cell").length, 3);
@@ -81,6 +85,25 @@
     equal(this.$multiTable.find("tbody td").get(5).style.width, cW(12, 2));
     equal(this.$multiTable.find("tbody td").get(7).style.width, cW(12, 3));
     equal(this.$multiTable.find("tbody td").get(8).style.width, cW(12, 9));
+  });
+
+  test('it can revert back to a regular table', function() {
+    this.singleMC.revert();
+    equal(this.$singleTable.find(".mc-key-cell").length, 0);
+    equal(this.$singleTable.find(".mc-bar-cell").length, 0);
+    equal(this.$singleTable.find(".mc-row").length, 0);
+    equal(this.$singleTable.find("tbody td").get(1).style.width, "");
+  });
+  
+  test('it can revert back to a regular table and then back to chart', function() {
+    this.singleMC.revert();
+    equal(this.$singleTable.find(".mc-key-cell").length, 0);
+    equal(this.$singleTable.find(".mc-bar-cell").length, 0);
+    equal(this.$singleTable.find(".mc-row").length, 0);
+    equal(this.$singleTable.find("tbody td").get(1).style.width, "");
+    this.singleMC.reapply();
+    equal(this.$singleTable.find("tbody td").get(1).style.width, (95/5)*5 + "%");
+    equal(this.$singleTable.find(".mc-bar-cell").length, 3);
   });
 
   test('utils.isFloat', function() {
