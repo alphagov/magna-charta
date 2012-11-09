@@ -14,6 +14,7 @@
       this.$bodyRows = this.$table.find("tbody tr");
       this.addClasses();
       this.dimensions = this.calculateMaxWidth();
+      this.applyWidths();
       return this;
     };
     this.utils = {
