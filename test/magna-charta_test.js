@@ -101,7 +101,7 @@
     equal(this.$singleTable.find(".mc-bar-cell").length, 0);
     equal(this.$singleTable.find(".mc-row").length, 0);
     equal(this.$singleTable.find("tbody td").get(1).style.width, "");
-    this.singleMC.reapply();
+    this.singleMC.apply();
     equal(this.$singleTable.find("tbody td").get(1).style.width, (95/5)*5 + "%");
     equal(this.$singleTable.find(".mc-bar-cell").length, 3);
   });

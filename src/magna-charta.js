@@ -13,8 +13,7 @@
       var defaults = {
         outOf: 95,
         applyOnInit: true
-      }
-      console.log(defaults, options);
+      };
       this.options = $.extend({}, defaults, options);
       this.$table = table;
       this.$bodyRows = this.$table.find("tbody tr");
