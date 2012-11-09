@@ -10,7 +10,7 @@ Download the [production version][min] or the [development version][max].
 
 ## Documentation
 
-Documentation is on Github Pages, which means we can show you live graphs, rather than screenshots. [Read the documentation and examples](http://alphagov.github.com/magna-charta/)
+Documentation is on Github Pages, which means we can show you live graphs, rather than screenshots. [Read the documentation and examples](http://alphagov.github.com/magna-charta/).
 
 ## Contributing
 
