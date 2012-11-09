@@ -28,12 +28,14 @@
       this.$table = $("#qunit-fixture").children("table");
       this.$mC = this.$table.magnaCharta();
       // and get an instance to the object
+      // as all methods exist on the object
+      // so to test individual methods this is the best way
       this.mC = $.magnaCharta.init(this.$table);
     }
   });
 
   test('is chainable', 1, function() {
-    strictEqual(this.$mC, this.$table, 'should be chaninable');
+    strictEqual(this.$mC, this.$table, 'should be chainable');
   });
 
   test('adds a class to all rows it affects', 2, function() {
