@@ -4,14 +4,35 @@
   <title>Magna Charter Demo</title>
   <style>
     * { margin: 0; padding; 0; }
+    body { font-family: Helvetica, Arial, sans-serif; padding: 100px; }
     table {
       width: 600px;
       border-collapse: separate;
+      margin-bottom: 50px;
     }
     .mc-bar-cell { display: inline-block; background: red; color: white;}
+    #single td {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    #single thead { display: none; }
+    #single td:not(.mc-bar-cell) {
+      text-align: right;
+      padding-right: 10px;
+    }
+
     #multiple .mc-bar-cell:nth-of-type(even) { background: blue; }
     tbody td:not(.mc-bar-cell) {
       width: 30%;
+    }
+
+    p {
+      text-indent: 20px;
+      border-bottom: 1px solid #111;
+      padding: 5px;
+      width: 600px;
+      margin-bottom: 10px;
     }
   </style>
   <script src="../libs/jquery-loader.js"></script>
@@ -24,14 +45,15 @@
   </script>
 </head>
 <body>
+  <p>Shows the niceness of types of Biscuits</p>
   <table id="single">
     <thead>
       <tr><td>Testing Data</td><td>Value</td></tr>
     </thead>
     <tbody>
-      <tr><td>Something</td><td>5</td></tr>
-      <tr><td>Something</td><td>4</td></tr>
-      <tr><td>Something</td><td>3</td></tr>
+      <tr><td>Caramel Digestives</td><td>5</td></tr>
+      <tr><td>Teacakes</td><td>4</td></tr>
+      <tr><td>Hobnobs</td><td>3</td></tr>
     </tbody>
   </table>
 

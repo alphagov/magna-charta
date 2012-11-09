@@ -5,13 +5,22 @@
 (function($) {
 
   var MagnaCharta = function() {
-    this.init = function(table) {
+    this.init = function(table, options) {
+      this.setUpOptions(options);
       this.$table = $(table);
       this.$bodyRows = this.$table.find("tbody tr");
       this.addClasses();
       this.dimensions = this.calculateMaxWidth();
+
+
       this.applyWidths();
+
       return this;
+    };
+
+    this.setUpOptions = function(options) {
+      this.options = options || {};
+      this.options.outOf = this.options.outOf || 95;
     };
     this.utils = {
       isFloat: function(val) {
@@ -55,7 +64,7 @@
         values.push(cellsTotalValue);
         resp.max = parseFloat(that.utils.returnMax(values), 10);
       });
-      resp.single = parseFloat(100/resp.max, 10);
+      resp.single = parseFloat(this.options.outOf/resp.max, 10);
       return resp;
     };
 
