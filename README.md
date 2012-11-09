@@ -67,13 +67,49 @@ We don't just stop at single-bar bar charts, either. Stacked ones are supported:
 </table>
 ```
 
-You don't need to do any extra configuration either:
+You don't need to do any extra configuration:
 
 ```javascript
 var multiple = $.magnaCharta($("#multiple"));
 ```
 
 ![](http://cl.ly/image/2h061H2V3n35/Screen%20Shot%202012-11-09%20at%2012.26.03.png)
+
+It's also possible to easily add a button to revert the chart to a table, and vice-versa. There are two methods that do this:
+
+- `chart.revert()` - completely reverts the effects of Magna Charta. Removes widths, classes, and so on.
+- `chart.apply()` - recreates the chart, re-adds all the classes and applies the widths again.
+
+It's easy enough to write a line of code that will toggle them:
+
+```javascript
+(chart.$table.hasClass("mc-table") ? chart.revert() : chart.apply());
+```
+
+Sometimes you might want to be able to set up a table but not actually apply the widths, so the default state is a plain table, with a button to switch to a chart. There is an option you can pass in to do this.
+
+### Options
+
+As we've already seen, a table is turned into a chart simply with:
+
+```javascript
+var chart = $.magnaCharta($("table"));
+```
+
+You can also pass in a second argument, an object of options
+
+```javascript
+var chart = $.magnaCharta($("table"), {
+  outOf: 95,
+  applyOnInit: true
+});
+```
+
+The above values are the default.
+
+- `outOf` means what total % to divide by to calculate the percentages. 95 means that the biggest bar will take up 95% of the width of the table. This is useful as it leaves you room to add some margins, or perhaps some text that hangs off the edge of the chart.
+- `applyOnInit` turns the tables into charts as soon as they are initialised. If you set this to false, you'll need to manually apply the charts: `chart.apply();`.
+
 
 
 

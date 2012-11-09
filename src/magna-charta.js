@@ -10,19 +10,24 @@
 
   var MagnaCharta = function() {
     this.init = function(table, options) {
-      this.setUpOptions(options);
-      this.$table = $(table).addClass("mc-table");
+      var defaults = {
+        outOf: 95,
+        applyOnInit: true
+      }
+      console.log(defaults, options);
+      this.options = $.extend({}, defaults, options);
+      this.$table = table;
       this.$bodyRows = this.$table.find("tbody tr");
-      this.addClasses();
-      this.applyWidths();
+
+      if(this.options.applyOnInit) {
+        this.apply();
+      }
 
       return this;
     };
 
-
-    this.reapply = function() {
+    this.apply = function() {
       this.addClasses();
-      this.calculateMaxWidth();
       this.applyWidths();
     };
 
@@ -39,10 +44,6 @@
       this.$table.find(".mc-bar-cell").css("width", "");
     };
 
-    this.setUpOptions = function(options) {
-      this.options = options || {};
-      this.options.outOf = this.options.outOf || 95;
-    };
     this.utils = {
       isFloat: function(val) {
         return !isNaN(parseFloat(val));
@@ -108,8 +109,8 @@
 
   };
 
-  $.magnaCharta = function(table) {
-    return new MagnaCharta().init(table);
+  $.magnaCharta = function(table, options) {
+    return new MagnaCharta().init(table, options);
   };
 
 
