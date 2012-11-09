@@ -22,6 +22,7 @@
 
     this.reapply = function() {
       this.addClasses();
+      this.calculateMaxWidth();
       this.applyWidths();
     };
 
@@ -61,6 +62,7 @@
 
     this.addClasses = function() {
       this.$bodyRows.addClass("mc-row");
+      this.$table.addClass("mc-table");
     };
 
     this.calculateMaxWidth = function() {
