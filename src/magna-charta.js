@@ -8,15 +8,15 @@
 
 (function($) {
 
-  $.magnaCharta = {
-    init: function(table) {
-      this.$table = table;
+  var MagnaCharta = function() {
+    this.init = function(table) {
+      this.$table = $(table);
       this.$bodyRows = this.$table.find("tbody tr");
       this.addClasses();
       this.dimensions = this.calculateMaxWidth();
       return this;
-    },
-    utils: {
+    };
+    this.utils = {
       isFloat: function(val) {
         return !isNaN(parseFloat(val));
       },
@@ -30,11 +30,14 @@
         }
         return max;
       }
-    },
-    addClasses: function() {
+    };
+
+
+    this.addClasses = function() {
       this.$bodyRows.addClass("mc-row");
-    },
-    calculateMaxWidth: function() {
+    };
+
+    this.calculateMaxWidth = function() {
       var that = this;
       var resp = {
         max: 0,
@@ -46,7 +49,6 @@
         var $bodyCells = $this.find("td:not(:first)");
         var cellsTotalValue = 0;
         $bodyCells.each(function(j, cell) {
-
           var $cell = $(cell).addClass("mc-bar-cell");
           var cellVal = that.utils.stripValue($cell.text());
           if(that.utils.isFloat(cellVal)) {
@@ -58,8 +60,9 @@
       });
       resp.single = parseFloat(100/resp.max, 10);
       return resp;
-    },
-    applyWidths: function() {
+    };
+
+    this.applyWidths = function() {
       var that = this;
       this.$bodyRows.each(function(i, row) {
         var $this = $(row);
@@ -70,16 +73,14 @@
           });
         });
       });
-    }
+    };
+
 
   };
 
-
-  $.fn.magnaCharta = function() {
-    return this.each(function() {
-      var mC = $.magnaCharta.init($(this));
-      mC.applyWidths();
-    });
+  $.magnaCharta = function(table) {
+    return new MagnaCharta().init(table);
   };
+
 
 }(jQuery));

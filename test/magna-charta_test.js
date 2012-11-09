@@ -22,66 +22,69 @@
       raises(block, [expected], [message])
   */
 
-  module('jQuery#magnaCharta', {
+  module('jQuery.magnaCharta', {
     setup: function() {
       // get a plugin instance
-      this.$table = $("#qunit-fixture").children("table");
-      this.$mC = this.$table.magnaCharta();
-      // and get an instance to the object
-      // as all methods exist on the object
-      // so to test individual methods this is the best way
-      this.mC = $.magnaCharta.init(this.$table);
+      this.$singleTable = $("#qunit-fixture").children("#single");
+      this.singleMC = $.magnaCharta(this.$singleTable);
+
+      // now do the same for a table with more rows of data
+      this.$multiTable = $("#qunit-fixture").children("#multiple");
+      this.multiMC = $.magnaCharta(this.$multiTable);
     }
   });
 
-  test('is chainable', 1, function() {
-    strictEqual(this.$mC, this.$table, 'should be chainable');
+
+  test('adds a class to all rows it affects', function() {
+    // check the thead tr doesnt have the class
+    ok(!this.$singleTable.find("thead tr").hasClass("mc-row"), 'doesnt add class to thead rows');
+    // check the tbody tr do
+    equal(this.$singleTable.find(".mc-row").length, 3);
+    equal(this.$multiTable.find(".mc-row").length, 3);
   });
 
-  test('adds a class to all rows it affects', 2, function() {
-    // check the thead tr doesnt have the class
-    ok(!this.$table.find("thead tr").hasClass("mc-row"), 'doesnt add class to thead rows');
-    // check the tbody tr do
-    ok(this.$table.find("tbody tr").hasClass("mc-row"), "adds class to tbody table rows");
+  test('adds a class to all table cells that become bars', function() {
+    equal(this.$singleTable.find(".mc-bar-cell").length, 3);
+    equal(this.$multiTable.find(".mc-bar-cell").length, 6);
   });
+
+
   test('add classes to all cells that are given a width', function() {
-    equal(this.$table.find(".mc-bar-cell").length, 3);
+    equal(this.$singleTable.find(".mc-bar-cell").length, 3);
   });
 
   test('calulateMaxWidth returns object with right max value in', function() {
-    deepEqual(this.mC.calculateMaxWidth(), {
+    deepEqual(this.singleMC.calculateMaxWidth(), {
       max: parseFloat(5, 10),
       single: parseFloat(100/5)
     });
   });
 
   test('applying the calculated widths correctly', function() {
-    this.mC.applyWidths();
-    equal(this.$table.find("tbody td").get(1).style.width, "100%");
-    equal(this.$table.find("tbody td").get(3).style.width, "80%");
-    equal(this.$table.find("tbody td").get(5).style.width, "60%");
+    this.singleMC.applyWidths();
+    equal(this.$singleTable.find("tbody td").get(1).style.width, "100%");
+    equal(this.$singleTable.find("tbody td").get(3).style.width, "80%");
+    equal(this.$singleTable.find("tbody td").get(5).style.width, "60%");
   });
 
-  module("jQuery.magnaCharta");
-
   test('utils.isFloat', function() {
-    ok($.magnaCharta.utils.isFloat(4.56), "4.56 is a float");
-    ok($.magnaCharta.utils.isFloat(7), "7 is a float");
-    ok(!$.magnaCharta.utils.isFloat("hello"), "hello is not a float");
-    ok(!$.magnaCharta.utils.isFloat("hello1344"), "hello1344 is not a float");
+    ok(this.singleMC.utils.isFloat(4.56), "4.56 is a float");
+    ok(this.singleMC.utils.isFloat(7), "7 is a float");
+    ok(!this.singleMC.utils.isFloat("hello"), "hello is not a float");
+    ok(!this.singleMC.utils.isFloat("hello1344"), "hello1344 is not a float");
   });
 
   test('utils.returnMax', function() {
-    equal($.magnaCharta.utils.returnMax([5,6,7,1]), 7);
-    equal($.magnaCharta.utils.returnMax([1,2,1,6]), 6);
-    equal($.magnaCharta.utils.returnMax([2,2,1,3]), 3);
-    equal($.magnaCharta.utils.returnMax([5,4,3]), 5);
+    equal(this.singleMC.utils.returnMax([5,6,7,1]), 7);
+    equal(this.singleMC.utils.returnMax([1,2,1,6]), 6);
+    equal(this.singleMC.utils.returnMax([2,2,1,3]), 3);
+    equal(this.singleMC.utils.returnMax([5,4,3]), 5);
   });
 
   test('utils.stripValue', function() {
-    equal($.magnaCharta.utils.stripValue("1.23m"), "1.23");
-    equal($.magnaCharta.utils.stripValue("£1.23m"), "1.23");
-    equal($.magnaCharta.utils.stripValue("0.56%"), "0.56");
+    equal(this.singleMC.utils.stripValue("1.23m"), "1.23");
+    equal(this.singleMC.utils.stripValue("£1.23m"), "1.23");
+    equal(this.singleMC.utils.stripValue("0.56%"), "0.56");
   });
 
 
