@@ -108,16 +108,37 @@ var chart = $.magnaCharta($("table"), {
 The above values are the default.
 
 - `outOf` means what total % to divide by to calculate the percentages. 95 means that the biggest bar will take up 95% of the width of the table. This is useful as it leaves you room to add some margins, or perhaps some text that hangs off the edge of the chart.
-- `applyOnInit` turns the tables into charts as soon as they are initialised. If you set this to false, you'll need to manually apply the charts: `chart.apply();`.
+- `applyOnInit` turns the tables into charts as soon as they are initialised. If you set this to false, you'll need to manually apply the charts: `chart.apply();`. There's an example of this in `demo/demo.js`.
 
+### Multiple Tables
 
+If you have multiple tables you'd like to turn into charts, you should loop through each of them and set up an individual instance of the Magna Charta for each table. For example, this:
 
+```javascript
+var tables = [];
+$("table").each(function(i, item) {
+  tables.push($.magnaCharta($(item)));
+});
+```
 
+Instead of:
 
+```javascript
+var tables = $.magnaCharta($("table"));
+```
 
+## Contributing
 
-## Examples
-_(Coming soon)_
+You're going to need Node, npm and Grunt (`npm install -g grunt`) to work on Magna Charta.
+
+- Fork and clone the repository
+- Run `grunt test` to make sure the tests are still passing (which they should be).
+- Write tests for your new feature and watch them fail.
+- Write your feature.
+- Get all tests passing.
+- Push up to your fork, and then make a pull request.
 
 ## Release History
-_(Nothing yet)_
+
+__V0.1.0__
+- initial release!
