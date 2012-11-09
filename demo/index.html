@@ -3,12 +3,14 @@
 <head>
   <title>Magna Charter Demo</title>
   <style>
+    * { margin: 0; padding; 0; }
     table {
       width: 600px;
       border-collapse: separate;
     }
-    tbody td:nth-child(even) { display: inline-block; background: red; }
-    tbody td:nth-child(odd) {
+    .mc-bar-cell { display: inline-block; background: red; color: white;}
+    #multiple .mc-bar-cell:nth-of-type(even) { background: blue; }
+    tbody td:not(.mc-bar-cell) {
       width: 30%;
     }
   </style>
@@ -16,12 +18,13 @@
   <script src="../src/magna-charta.js"></script>
   <script>
     $(function() {
-      var chart = $.magnaCharta($("table"));
+      var chart = $.magnaCharta($("#single"));
+      var multiple = $.magnaCharta($("#multiple"));
     });
   </script>
 </head>
 <body>
-  <table>
+  <table id="single">
     <thead>
       <tr><td>Testing Data</td><td>Value</td></tr>
     </thead>
@@ -29,6 +32,17 @@
       <tr><td>Something</td><td>5</td></tr>
       <tr><td>Something</td><td>4</td></tr>
       <tr><td>Something</td><td>3</td></tr>
+    </tbody>
+  </table>
+
+  <table id="multiple">
+    <thead>
+      <tr><td>Some Data</td><td>YES</td><td>NO</td></tr>
+    </thead>
+    <tbody>
+      <tr><td>Testing One</td><td>5</td><td>6</td></tr>
+      <tr><td>Testing Two</td><td>6</td><td>2</td></tr>
+      <tr><td>Testing Three</td><td>3</td><td>9</td></tr>
     </tbody>
   </table>
 </body>
