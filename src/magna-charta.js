@@ -1,6 +1,6 @@
 /*
- * magna-charter
- * https://github.com/alphagov/magna-charter
+ * magna-charta
+ * https://github.com/alphagov/magna-charta
  *
  * Copyright (c) 2012 Jack Franklin
  * Licensed under the MIT license.
@@ -8,7 +8,7 @@
 
 (function($) {
 
-  $.magnaCharter = {
+  $.magnaCharta = {
     init: function(table) {
       this.$table = table;
       this.$bodyRows = this.$table.find("tbody tr");
@@ -75,9 +75,9 @@
   };
 
 
-  $.fn.magnaCharter = function() {
+  $.fn.magnaCharta = function() {
     return this.each(function() {
-      var mC = $.magnaCharter.init($(this));
+      var mC = $.magnaCharta.init($(this));
       mC.applyWidths();
     });
   };

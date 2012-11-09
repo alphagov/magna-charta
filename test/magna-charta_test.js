@@ -22,13 +22,13 @@
       raises(block, [expected], [message])
   */
 
-  module('jQuery#magnaCharter', {
+  module('jQuery#magnaCharta', {
     setup: function() {
       // get a plugin instance
       this.$table = $("#qunit-fixture").children("table");
-      this.$mC = this.$table.magnaCharter();
+      this.$mC = this.$table.magnaCharta();
       // and get an instance to the object
-      this.mC = $.magnaCharter.init(this.$table);
+      this.mC = $.magnaCharta.init(this.$table);
     }
   });
 
@@ -60,26 +60,26 @@
     equal(this.$table.find("tbody td").get(5).style.width, "60%");
   });
 
-  module("jQuery.magnaCharter");
+  module("jQuery.magnaCharta");
 
   test('utils.isFloat', function() {
-    ok($.magnaCharter.utils.isFloat(4.56), "4.56 is a float");
-    ok($.magnaCharter.utils.isFloat(7), "7 is a float");
-    ok(!$.magnaCharter.utils.isFloat("hello"), "hello is not a float");
-    ok(!$.magnaCharter.utils.isFloat("hello1344"), "hello1344 is not a float");
+    ok($.magnaCharta.utils.isFloat(4.56), "4.56 is a float");
+    ok($.magnaCharta.utils.isFloat(7), "7 is a float");
+    ok(!$.magnaCharta.utils.isFloat("hello"), "hello is not a float");
+    ok(!$.magnaCharta.utils.isFloat("hello1344"), "hello1344 is not a float");
   });
 
   test('utils.returnMax', function() {
-    equal($.magnaCharter.utils.returnMax([5,6,7,1]), 7);
-    equal($.magnaCharter.utils.returnMax([1,2,1,6]), 6);
-    equal($.magnaCharter.utils.returnMax([2,2,1,3]), 3);
-    equal($.magnaCharter.utils.returnMax([5,4,3]), 5);
+    equal($.magnaCharta.utils.returnMax([5,6,7,1]), 7);
+    equal($.magnaCharta.utils.returnMax([1,2,1,6]), 6);
+    equal($.magnaCharta.utils.returnMax([2,2,1,3]), 3);
+    equal($.magnaCharta.utils.returnMax([5,4,3]), 5);
   });
 
   test('utils.stripValue', function() {
-    equal($.magnaCharter.utils.stripValue("1.23m"), "1.23");
-    equal($.magnaCharter.utils.stripValue("£1.23m"), "1.23");
-    equal($.magnaCharter.utils.stripValue("0.56%"), "0.56");
+    equal($.magnaCharta.utils.stripValue("1.23m"), "1.23");
+    equal($.magnaCharta.utils.stripValue("£1.23m"), "1.23");
+    equal($.magnaCharta.utils.stripValue("0.56%"), "0.56");
   });
 
 
