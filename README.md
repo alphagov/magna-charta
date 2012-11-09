@@ -38,8 +38,10 @@ And see your table turned into a barchart. Magna Charta doesn't dictate your CSS
 
 MC adds the following classes:
 
+- `.mc-table` on the `table` element of any table affected by the plugin.
 - `.mc-row` is added to any `tr` that is affected by the plugin.
 - `.mc-bar-cell` is added to any `td` that is turned into a bar.
+- `.mc-key-cell` on any `td`s that are not turned into bars (usually the first `td` in any row).
 
 Once you instantiate the chart, the Magna Charta object is returned to you. This means you can programatically update the table cell values and then redo the bar charts, if you need to:
 

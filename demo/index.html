@@ -5,25 +5,25 @@
   <style>
     * { margin: 0; padding; 0; }
     body { font-family: Helvetica, Arial, sans-serif; padding: 100px; }
-    table {
+    table.mc-table {
       width: 600px;
       border-collapse: separate;
       margin-bottom: 50px;
     }
     .mc-bar-cell { display: inline-block; background: red; color: white; text-indent: 5px;}
-    td {
+    .mc-table td {
       height: 30px;
       line-height: 30px;
     }
 
-    thead { display: none; }
+    .mc-table thead { display: none; }
     td:not(.mc-bar-cell) {
       text-align: right;
       padding-right: 10px;
     }
 
-    #multiple .mc-bar-cell:nth-of-type(even) { background: blue; }
-    tbody td:not(.mc-bar-cell) {
+    .mc-table#multiple .mc-bar-cell:nth-of-type(even) { background: blue; }
+    .mc-table .mc-key-cell {
       width: 40%;
     }
 
@@ -37,15 +37,11 @@
   </style>
   <script src="../libs/jquery-loader.js"></script>
   <script src="../src/magna-charta.js"></script>
-  <script>
-    $(function() {
-      var chart = $.magnaCharta($("#single"));
-      var multiple = $.magnaCharta($("#multiple"));
-    });
-  </script>
+  <script src="demo.js"></script>
 </head>
 <body>
   <p>Shows the niceness of types of Biscuits</p>
+  <span>Toggle Table / Chart</span>
   <table id="single">
     <thead>
       <tr><td>Testing Data</td><td>Value</td></tr>
