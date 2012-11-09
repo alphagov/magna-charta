@@ -10,21 +10,21 @@
       border-collapse: separate;
       margin-bottom: 50px;
     }
-    .mc-bar-cell { display: inline-block; background: red; color: white;}
-    #single td {
+    .mc-bar-cell { display: inline-block; background: red; color: white; text-indent: 5px;}
+    td {
       height: 30px;
       line-height: 30px;
     }
 
-    #single thead { display: none; }
-    #single td:not(.mc-bar-cell) {
+    thead { display: none; }
+    td:not(.mc-bar-cell) {
       text-align: right;
       padding-right: 10px;
     }
 
     #multiple .mc-bar-cell:nth-of-type(even) { background: blue; }
     tbody td:not(.mc-bar-cell) {
-      width: 30%;
+      width: 40%;
     }
 
     p {
@@ -57,14 +57,15 @@
     </tbody>
   </table>
 
+  <p>Cookies from Sainsburys, rated by taste and size.</p>
   <table id="multiple">
     <thead>
-      <tr><td>Some Data</td><td>YES</td><td>NO</td></tr>
+      <tr><td>Cookie</td><td>Size Rating/5</td><td>Taste Rating/5</td></tr>
     </thead>
     <tbody>
-      <tr><td>Testing One</td><td>5</td><td>6</td></tr>
-      <tr><td>Testing Two</td><td>6</td><td>2</td></tr>
-      <tr><td>Testing Three</td><td>3</td><td>9</td></tr>
+      <tr><td>White Choc and Raspberry</td><td>3</td><td>4</td></tr>
+      <tr><td>Triple Choc Chip</td><td>5</td><td>5</td></tr>
+      <tr><td>Oatmeal and Raisin</td><td>4</td><td>5</td></tr>
     </tbody>
   </table>
 </body>

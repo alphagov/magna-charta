@@ -10,9 +10,6 @@
       this.$table = $(table);
       this.$bodyRows = this.$table.find("tbody tr");
       this.addClasses();
-      this.dimensions = this.calculateMaxWidth();
-
-
       this.applyWidths();
 
       return this;
@@ -69,6 +66,7 @@
     };
 
     this.applyWidths = function() {
+      this.dimensions = this.calculateMaxWidth();
       var that = this;
       this.$bodyRows.each(function(i, row) {
         var $this = $(row);
