@@ -28,7 +28,9 @@ $colours: $blue, $red, $orange, $purple, $green, $dark-blue;
 .mc-table {
   font-size: $font-size;
   border-spacing: 0 $bar-spacing;
-  thead th{
+  border: 1px solid $light-grey;
+  padding: $font-size 0;
+  thead{
    display: none;
   }
   $len: length($colours);
@@ -38,18 +40,22 @@ $colours: $blue, $red, $orange, $purple, $green, $dark-blue;
   }
   &.stacked{
     // Stacked bar charts get a key
-    thead th{
-      &.mc-key-cell {
-        display: block;
-        margin-bottom: $bar-spacing;
-        margin-left: 100%;
-        padding-left: $bar-spacing;
-        border-left: $font-size solid;
-        text-align: left;
-        font-weight: normal;
-      }
-      &.total{
+    thead {
+      display: table-header-group;
+      th{
         display: none;
+        &.mc-key-cell {
+          display: block;
+          margin-bottom: $bar-spacing;
+          margin-left: 100%;
+          padding-left: $bar-spacing;
+          border-left: $font-size solid;
+          text-align: left;
+          font-weight: normal;
+        }
+        &.total{
+          display: none;
+        }
       }
     }
     // For stacked bar charts, colours cycle through cells

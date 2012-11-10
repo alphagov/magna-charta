@@ -7,8 +7,10 @@
  */
 .mc-table {
   font-size: 16px;
-  border-spacing: 0 5px; }
-  .mc-table thead th {
+  border-spacing: 0 5px;
+  border: 1px solid #cacac8;
+  padding: 16px 0; }
+  .mc-table thead {
     display: none; }
   .mc-table tr:nth-child(6n+1) td.mc-bar-cell {
     background-color: #005abb; }
@@ -22,16 +24,20 @@
     background-color: #899635; }
   .mc-table tr:nth-child(6n+6) td.mc-bar-cell {
     background-color: #1a2791; }
-  .mc-table.stacked thead th.mc-key-cell {
-    display: block;
-    margin-bottom: 5px;
-    margin-left: 100%;
-    padding-left: 5px;
-    border-left: 16px solid;
-    text-align: left;
-    font-weight: normal; }
-  .mc-table.stacked thead th.total {
-    display: none; }
+  .mc-table.stacked thead {
+    display: table-header-group; }
+    .mc-table.stacked thead th {
+      display: none; }
+      .mc-table.stacked thead th.mc-key-cell {
+        display: block;
+        margin-bottom: 5px;
+        margin-left: 100%;
+        padding-left: 5px;
+        border-left: 16px solid;
+        text-align: left;
+        font-weight: normal; }
+      .mc-table.stacked thead th.total {
+        display: none; }
   .mc-table.stacked tr td.mc-bar-cell:nth-child(6n+2) {
     background-color: #005abb; }
   .mc-table.stacked tr th.mc-key-cell:nth-child(6n+2) {
