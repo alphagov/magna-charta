@@ -8,13 +8,14 @@
 
 // IMPORTED STYLES
 
-@import 'colours';      // Cabinet Office colour palette
+@import 'colours';      // Cabinet Office colour palette (feel free to choose your own)
 
 // DEFAULT CHART STYLES
 
 $font-size: 16px;       // The size of the bar values and labels
 $bar-padding: 8px;      // The padding between the bar values and the edge of the bar
 $bar-spacing: 5px;      // The spacing around the bars
+$stack-spacing: 1px;    // For stacked bars, the spacing between each stack in a bar
 $caption-side: top;     // Caption alignment. Top or bottom.
 
 // COLOURS
@@ -43,6 +44,7 @@ $colours: $blue, $red, $orange, $purple, $green, $dark-blue;
   td {
     text-align: right;
     padding-right: $bar-spacing;
+    margin-right: $stack-spacing;
     border: 0 solid; 
     &.mc-bar-cell { 
       display: inline-block;

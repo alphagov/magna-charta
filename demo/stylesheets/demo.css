@@ -37,6 +37,7 @@
   .mc-table td {
     text-align: right;
     padding-right: 5px;
+    margin-right: 1px;
     border: 0 solid; }
     .mc-table td.mc-bar-cell {
       display: inline-block;
