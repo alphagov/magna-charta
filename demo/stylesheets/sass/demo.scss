@@ -10,7 +10,7 @@
 
 @import 'colours';      // Cabinet Office colour palette
 
-// CHART DEFAULT STYLES
+// DEFAULT CHART STYLES
 
 $font-size: 16px;       // The size of the bar values and labels
 $bar-padding: 5px;      // The padding between the bar values and the edge of the bar
@@ -64,6 +64,4 @@ $colours: $blue, $red, $orange, $purple, $green, $dark-blue;
   }
 
 }
-
-//#multiple .mc-bar-cell:nth-of-type(even) { background: $blue; }
 
