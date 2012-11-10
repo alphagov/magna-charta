@@ -8,23 +8,28 @@
 
 // CHART STYLES
 
-.mc-table{
-
+.mc-table {
+  thead {
+    display: none;
+  }
+  td {
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+    padding-right: 10px;
+    &.mc-bar-cell { 
+      display: inline-block;
+      text-align: left;
+      padding: 0;
+      background: red;
+      color: white;
+      text-indent: 5px;
+    }
+  }
+  .mc-key-cell {
+    width: 40%;
+  }
 }
 
-.mc-bar-cell { display: inline-block; background: red; color: white; text-indent: 5px;}
-.mc-table td {
-  height: 30px;
-  line-height: 30px;
-}
+#multiple .mc-bar-cell:nth-of-type(even) { background: blue; }
 
-.mc-table thead { display: none; }
-td:not(.mc-bar-cell) {
-  text-align: right;
-  padding-right: 10px;
-}
-
-.mc-table#multiple .mc-bar-cell:nth-of-type(even) { background: blue; }
-.mc-table .mc-key-cell {
-  width: 40%;
-}

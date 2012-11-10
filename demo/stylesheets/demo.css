@@ -5,25 +5,22 @@
  * Author: Tim Paul
  * Licensed under the MIT license.
  */
-.mc-bar-cell {
-  display: inline-block;
-  background: red;
-  color: white;
-  text-indent: 5px; }
-
-.mc-table td {
-  height: 30px;
-  line-height: 30px; }
-
 .mc-table thead {
   display: none; }
-
-td:not(.mc-bar-cell) {
+.mc-table td {
+  height: 30px;
+  line-height: 30px;
   text-align: right;
   padding-right: 10px; }
-
-.mc-table#multiple .mc-bar-cell:nth-of-type(even) {
-  background: blue; }
-
+  .mc-table td.mc-bar-cell {
+    display: inline-block;
+    text-align: left;
+    padding: 0;
+    background: red;
+    color: white;
+    text-indent: 5px; }
 .mc-table .mc-key-cell {
   width: 40%; }
+
+#multiple .mc-bar-cell:nth-of-type(even) {
+  background: blue; }
