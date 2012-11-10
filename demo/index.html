@@ -2,27 +2,50 @@
 <html>
 <head>
   <title>Magna Charter Demo</title>
+  <style>
+    /* Basic page styles */
+    
+    * { margin: 0; padding: 0; }
+    body { font-family: Helvetica, Arial, sans-serif; padding: 100px; }
+    table {
+      width: 600px;
+      border-collapse: separate;
+      margin-bottom: 50px;
+    }
+    .toggle {
+      display: block;
+      padding: 10px;
+      border: 1px solid #111;
+      text-align: center;
+      width: 600px;
+      color: white;
+      background: red;
+      margin-bottom: 50px;
+    }
+  </style>
   <link href="stylesheets/demo.css" media="screen" rel="stylesheet" type="text/css">
   <script src="../libs/jquery-loader.js"></script>
   <script src="../src/magna-charta.js"></script>
   <script src="demo.js"></script>
 </head>
 <body>
-  <span>Toggle between charts and tables (click me)</span>
-  <p>Shows the niceness of types of Biscuits</p>
+  <span class="toggle">Toggle between charts and tables (click me)</span>
+
   <table id="single">
+    <caption>The niceness of types of biscuit</caption>
     <thead>
       <tr><td>Testing Data</td><td>Value</td></tr>
     </thead>
     <tbody>
       <tr><td>Caramel Digestives</td><td>5</td></tr>
+      <tr><td>Nice biscuits</td><td>4</td></tr>
       <tr><td>Teacakes</td><td>4</td></tr>
       <tr><td>Hobnobs</td><td>3</td></tr>
     </tbody>
   </table>
 
-  <p>Cookies from Sainsburys, rated by taste and size.</p>
   <table id="multiple">
+    <caption>Cookies from Sainsburys, rated by taste and size</caption>
     <thead>
       <tr><td>Cookie</td><td>Size Rating/5</td><td>Taste Rating/5</td></tr>
     </thead>
@@ -33,8 +56,8 @@
     </tbody>
   </table>
 
-   <p>Most awesome developer names (this one was initialised with applyOnInit set to false):</p>
   <table id="single2">
+    <caption>Most awesome developer names</caption>
     <thead>
       <tr><td>Name</td><td>Rating / 10</td></tr>
     </thead>
@@ -45,6 +68,7 @@
       <tr><td>Steven</td><td>7</td></tr>
     </tbody>
   </table>
+  <p>(this one was initialised with <code>applyOnInit</code> set to false)</p>
 </body>
 </html>
 
