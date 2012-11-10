@@ -1,0 +1,26 @@
+// CABINET OFFICE COLOUR PALETTE
+
+$blue: #005abb;       // pms 2935
+$light-blue: #5bb4e5; // pms 2915
+$grey: #616265;       // pms cg10
+$dark-blue: #1a2791;  // pms 2746
+$purple: #78256f;     // pms 512
+$red: #a33038;        // pms 1807
+$orange: #cd5a13;     // pms 159
+$yellow: #ecac00;     // pms 124
+$green: #899635;      // pms 7495
+$turquoise: #55bab7;  // pms 7472
+$light-grey: #cacac8; // pms cg3
+
+$black: #0b0c0c;
+$white: #fff;
+
+// SEMANTIC COLOURS
+
+$text-colour: $grey;
+$link: $blue;
+$link-hover: $dark-blue;
+$link-active: $blue;
+$link-visited: $blue;
+
+$colour-scheme: $blue; // Sets primary colour for documents

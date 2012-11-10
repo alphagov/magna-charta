@@ -11,6 +11,9 @@
       width: 600px;
       margin-bottom: 50px;
     }
+    td{
+      border-bottom: 1px solid grey; 
+    }
     .toggle {
       display: block;
       padding: 10px;
@@ -43,15 +46,15 @@
     </tbody>
   </table>
 
-  <table id="multiple">
+  <table id="multiple" class="stacked">
     <caption>Cookies from Sainsburys, rated by taste and size</caption>
     <thead>
-      <tr><td>Cookie</td><td>Size Rating/5</td><td>Taste Rating/5</td></tr>
+      <tr><td>Cookie</td><td>Size Rating out of 5</td><td>Taste Rating out of 5</td><td>Total out of 10</td></tr>
     </thead>
     <tbody>
-      <tr><td>White Choc and Raspberry</td><td>3</td><td>4</td></tr>
-      <tr><td>Triple Choc Chip</td><td>5</td><td>5</td></tr>
-      <tr><td>Oatmeal and Raisin</td><td>4</td><td>5</td></tr>
+      <tr><td>White Choc and Raspberry</td><td>3</td><td>4</td><td class="total">7</td></tr>
+      <tr><td>Triple Choc Chip</td><td>5</td><td>5</td><td class="total">10</td></tr>
+      <tr><td>Oatmeal and Raisin</td><td>4</td><td>5</td><td class="total">9</td></tr>
     </tbody>
   </table>
 

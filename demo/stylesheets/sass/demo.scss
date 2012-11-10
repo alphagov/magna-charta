@@ -6,30 +6,64 @@
  * Licensed under the MIT license.
  */
 
-// CHART STYLES
+// IMPORTED STYLES
+
+@import 'colours';      // Cabinet Office colour palette
+
+// CHART DEFAULT STYLES
+
+$font-size: 16px;       // The size of the bar values and labels
+$bar-padding: 5px;      // The padding between the bar values and the edge of the bar
+$bar-spacing: 5px;      // The spacing around the bars
+$caption-side: top;     // Caption alignment. Top or bottom.
+
+// COLOURS
+// Can be a single colour or a list of colours. 
+// The bars will cycle through the colours in list order.
+$colours: $blue, $red, $orange, $purple, $green, $dark-blue;
+
 
 .mc-table {
+  font-size: $font-size;
+  border-spacing: 0 $bar-spacing;
   thead {
     display: none;
   }
+  $len: length($colours);
+  // For single bar charts, colours cycle through rows
+  @for $i from 0 to $len {
+    tr:nth-child(#{$len}n+#{$i + 1}) td.mc-bar-cell{background-color: nth($colours, $i + 1)}
+  }
+  // For stacked bar charts, colours cycle through cells
+  &.stacked{  
+    @for $i from 0 to $len {
+      tr td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($colours, $i + 1)}
+    }
+  }
   td {
-    height: 30px;
-    line-height: 30px;
     text-align: right;
-    padding-right: 10px;
+    padding-right: $bar-spacing;
+    border: 0 solid; 
     &.mc-bar-cell { 
       display: inline-block;
       text-align: left;
-      padding: 0;
-      background: red;
-      color: white;
-      text-indent: 5px;
+      padding: $bar-padding 0;
+      color: $white;
+      text-indent: $bar-padding;
     }
+    &.total{
+      background-color: transparent !important;
+      color: $black;
+    }
+  }
+  caption{
+    caption-side: $caption-side;
   }
   .mc-key-cell {
     width: 40%;
   }
+
 }
 
-#multiple .mc-bar-cell:nth-of-type(even) { background: blue; }
+//#multiple .mc-bar-cell:nth-of-type(even) { background: $blue; }
 
