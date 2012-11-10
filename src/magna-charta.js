@@ -16,7 +16,7 @@
       };
       this.options = $.extend({}, defaults, options);
       this.$table = table;
-      this.$bodyRows = this.$table.find("tbody tr");
+      this.$bodyRows = this.$table.find("tr");
 
       if(this.options.applyOnInit) {
         this.apply();
@@ -75,6 +75,7 @@
       this.$bodyRows.each(function(i, item) {
         var $this = $(item);
         var $bodyCells = $this.find("td:not(:first)");
+        var $headCells = $this.find("th:not(:first, .total)").addClass("mc-key-cell");
         $this.find("td:first").addClass("mc-key-cell");
         var cellsTotalValue = 0;
         $bodyCells.each(function(j, cell) {

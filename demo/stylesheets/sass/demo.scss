@@ -12,7 +12,8 @@
 
 // DEFAULT CHART STYLES
 
-$font-size: 16px;       // The size of the bar values and labels
+$label-width: 40%;      // Horizontal width taken up by the bar labels
+$font-size: 16px;       // The size of the bar value and label text
 $bar-padding: 8px;      // The padding between the bar values and the edge of the bar
 $bar-spacing: 5px;      // The spacing around the bars
 $stack-spacing: 1px;    // For stacked bars, the spacing between each stack in a bar
@@ -27,21 +28,37 @@ $colours: $blue, $red, $orange, $purple, $green, $dark-blue;
 .mc-table {
   font-size: $font-size;
   border-spacing: 0 $bar-spacing;
-  thead {
-    display: none;
+  thead th{
+   display: none;
   }
   $len: length($colours);
   // For single bar charts, colours cycle through rows
   @for $i from 0 to $len {
     tr:nth-child(#{$len}n+#{$i + 1}) td.mc-bar-cell{background-color: nth($colours, $i + 1)}
   }
-  // For stacked bar charts, colours cycle through cells
-  &.stacked{  
+  &.stacked{
+    // Stacked bar charts get a key
+    thead th{
+      &.mc-key-cell {
+        display: block;
+        margin-bottom: $bar-spacing;
+        margin-left: 100%;
+        padding-left: $bar-spacing;
+        border-left: $font-size solid;
+        text-align: left;
+        font-weight: normal;
+      }
+      &.total{
+        display: none;
+      }
+    }
+    // For stacked bar charts, colours cycle through cells
     @for $i from 0 to $len {
       tr td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($colours, $i + 1)}
+      tr th.mc-key-cell:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($colours, $i + 1)}
     }
   }
-  td {
+  td, th {
     text-align: right;
     padding-right: $bar-spacing;
     margin-right: $stack-spacing;
@@ -62,7 +79,7 @@ $colours: $blue, $red, $orange, $purple, $green, $dark-blue;
     caption-side: $caption-side;
   }
   .mc-key-cell {
-    width: 40%;
+    width: $label-width;
   }
 
 }

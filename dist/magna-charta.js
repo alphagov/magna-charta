@@ -12,7 +12,7 @@
       };
       this.options = $.extend({}, defaults, options);
       this.$table = table;
-      this.$bodyRows = this.$table.find("tbody tr");
+      this.$bodyRows = this.$table.find("tr");
 
       if(this.options.applyOnInit) {
         this.apply();
