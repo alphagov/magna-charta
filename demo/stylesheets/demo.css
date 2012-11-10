@@ -41,9 +41,9 @@
     .mc-table td.mc-bar-cell {
       display: inline-block;
       text-align: left;
-      padding: 5px 0;
+      padding: 8px 0;
       color: white;
-      text-indent: 5px; }
+      text-indent: 8px; }
     .mc-table td.total {
       background-color: transparent !important;
       color: #0b0c0c; }
