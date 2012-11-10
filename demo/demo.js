@@ -1,12 +1,12 @@
 
 $(function() {
-  var chart = $.magnaCharta($("#single"));
-  var multiple = $.magnaCharta($("#multiple"));
-  var devs = $.magnaCharta($("#single2"), { applyOnInit: false });
+  var chart = $.magnaCharta($(".chart"));
+  var chart2 = $.magnaCharta($(".chart2"));
+  var table = $.magnaCharta($(".table"), { applyOnInit: false });
 
   $("span").on("click", function() {
     (chart.$table.hasClass("mc-table") ? chart.revert() : chart.apply());
-    (multiple.$table.hasClass("mc-table") ? multiple.revert() : multiple.apply());
-    (devs.$table.hasClass("mc-table") ? devs.revert() : devs.apply());
+    (chart2.$table.hasClass("mc-table") ? chart2.revert() : chart2.apply());
+    (table.$table.hasClass("mc-table") ? devs.revert() : devs.apply());
   });
 });
