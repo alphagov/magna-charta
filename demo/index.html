@@ -14,14 +14,9 @@
     td{
       border-bottom: 1px solid grey; 
     }
-    .toggle {
-      display: block;
-      padding: 10px;
-      border: 1px solid #111;
-      text-align: center;
-      color: white;
-      background: red;
-      margin-bottom: 50px;
+    caption{
+      font-size: 19px;
+      margin: 20px 0;
     }
   </style>
   <link href="stylesheets/demo.css" media="screen" rel="stylesheet" type="text/css">
@@ -30,7 +25,6 @@
   <script src="demo.js"></script>
 </head>
 <body>
-  <span class="toggle">Toggle between charts and tables (click me)</span>
 
   <table class="chart">
     <caption>The niceness of types of biscuit</caption>
@@ -45,7 +39,7 @@
     </tbody>
   </table>
 
-  <table class="stacked chart2">
+  <table class="stacked chart">
     <caption>Cookies from Sainsburys, rated by taste and size</caption>
     <thead>
       <tr><td>Cookie</td><td>Size Rating out of 5</td><td>Taste Rating out of 5</td><td>Total out of 10</td></tr>
@@ -57,8 +51,9 @@
     </tbody>
   </table>
 
+
   <table class="table">
-    <caption>Most awesome developer names</caption>
+    <caption>Most awesome developer names <br><a href="#" class="toggle">Toggle chart / table view</a></caption>
     <thead>
       <tr><td>Name</td><td>Rating / 10</td></tr>
     </thead>
