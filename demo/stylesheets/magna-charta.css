@@ -13,7 +13,10 @@
   padding: 16px 0;
   position: relative; }
   .mc-table thead {
-    display: table-header-group; }
+    background-color: #fff;
+    display: table-header-group;
+    padding: 0 5px;
+    border: 1px solid #cacac8; }
     .mc-table thead th {
       display: none; }
       .mc-table thead th.mc-key-cell {
@@ -25,16 +28,18 @@
         text-align: left;
         font-weight: normal;
         width: 100%; }
-  .mc-table.right-key thead {
-    background-color: #fff;
-    padding: 0 5px;
-    position: absolute;
-    border: 1px solid #cacac8;
-    right: 21px; }
-    .mc-table.right-key thead .mc-key-cell {
+        .mc-table thead th.mc-key-cell:last-child {
+          margin-bottom: 0; }
+  .mc-table.right-key thead, .mc-table.left-key thead {
+    position: absolute; }
+    .mc-table.right-key thead .mc-key-cell, .mc-table.left-key thead .mc-key-cell {
       margin-left: 0; }
-      .mc-table.right-key thead .mc-key-cell:last-child {
-        margin-bottom: 0; }
+  .mc-table.right-key thead {
+    right: 21px; }
+  .mc-table.left-key thead {
+    left: 21px; }
+  .mc-table.no-key thead {
+    display: none; }
   .mc-table.stacked th:last-child {
     display: none; }
   .mc-table.stacked td:last-child {

@@ -6,35 +6,40 @@
  * Licensed under the MIT license.
  */
 
-// IMPORTED STYLES
-
-@import 'colours';      // Cabinet Office colour palette (feel free to choose your own)
 
 // DEFAULT CHART STYLES
 
-$label-width: 40%;      // Horizontal width taken up by the bar labels
-$font-size: 16px;       // The size of the bar value and label text
-$bar-padding: 8px;      // The padding between the bar values and the edge of the bar
-$bar-spacing: 5px;      // The spacing around the bars
-$stack-spacing: 1px;    // For stacked bars, the spacing between each stack in a bar
-$caption-side: top;     // Caption alignment. Top or bottom.
+$label-width: 40%;          // Horizontal width taken up by the bar labels
+$font-size: 16px;           // The size of the bar value and label text
+$bar-padding: 8px;          // The padding between the bar values and the edge of the bar
+$bar-spacing: 5px;          // The spacing around the bars
+$stack-spacing: 1px;        // For stacked bars, the spacing between each stack in a bar
+$caption-side: top;         // Caption alignment. Top or bottom.
 
-// COLOURS
-// Can be a single colour or a list of colours. 
-// The bars will cycle through the colours in list order.
+// CHART COLOUR SCHEME
 
-$colours: $dark-blue, $blue, $light-blue, $turquoise;
+@import 'colours';          // Cabinet Office colour palette (feel free to choose your own)
+$chart-border: $light-grey; // Chart border colour
+$key-border:   $light-grey; // Key border colour        
+$bar-colours:  $dark-blue,
+               $blue,
+               $light-blue, 
+               $turquoise;  // Bar colours 
 
 
 .mc-table {
   font-size: $font-size;
   border-collapse: separate;
   border-spacing: 0 $bar-spacing;
-  border: 1px solid $light-grey;
+  border: 1px solid $chart-border;
   padding: $font-size 0;
   position: relative;
+  // KEY
   thead {
+    background-color: #fff;
     display: table-header-group;
+    padding: 0 $bar-spacing;
+    border: 1px solid $key-border;
     th{
       display: none;
       &.mc-key-cell {
@@ -46,22 +51,31 @@ $colours: $dark-blue, $blue, $light-blue, $turquoise;
         text-align: left;
         font-weight: normal;
         width: 100%;
+        &:last-child{
+          margin-bottom: 0;
+        }
       }
+    }
+  }
+  // RIGHT AND LEFT-ALIGNED KEYS
+  &.right-key thead,
+  &.left-key thead{
+    position: absolute;
+    .mc-key-cell{   
+      margin-left: 0;
     }
   }
   &.right-key thead{
-    background-color: #fff;
-    .mc-key-cell{   
-      margin-left: 0;
-      &:last-child{
-        margin-bottom: 0;
-      }
-    }
-    padding: 0 $bar-spacing;
-    position: absolute;
-    border: 1px solid $light-grey;
     right: $font-size + $bar-spacing;
   }
+  &.left-key thead{
+    left: $font-size + $bar-spacing;
+  }
+  // HIDE KEY
+  &.no-key thead{
+    display: none;
+  }
+
   &.stacked {
     th:last-child{
       display: none;
@@ -76,10 +90,10 @@ $colours: $dark-blue, $blue, $light-blue, $turquoise;
   }
 
   // Charts with multiple columns get different coloured bars
-  $len: length($colours);
+  $len: length($bar-colours);
   @for $i from 0 to $len {
-    tr td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($colours, $i + 1)}
-    tr th.mc-key-cell:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($colours, $i + 1)}
+    tr td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($bar-colours, $i + 1)}
+    tr th.mc-key-cell:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($bar-colours, $i + 1)}
   }
 
   td, th {
