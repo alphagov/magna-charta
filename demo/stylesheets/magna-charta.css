@@ -47,6 +47,10 @@
     color: #0b0c0c; }
   .mc-table.stacked tbody td.mc-bar-cell {
     display: inline-block; }
+  .mc-table.compact .mc-bar-cell {
+    font-size: 12px;
+    text-indent: 2px;
+    padding: 0; }
   .mc-table tr td.mc-bar-cell:nth-child(4n+2) {
     background-color: #1a2791; }
   .mc-table tr th.mc-key-cell:nth-child(4n+2) {

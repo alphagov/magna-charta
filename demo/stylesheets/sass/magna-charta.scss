@@ -10,7 +10,8 @@
 // DEFAULT CHART STYLES
 
 $label-width: 40%;          // Horizontal width taken up by the bar labels
-$font-size: 16px;           // The size of the bar value and label text
+$font-size: 16px;           // For bar text, label text and related padding
+$compact-font-size: 12px;   // For the 'compact' bar style
 $bar-padding: 8px;          // The padding between the bar values and the edge of the bar
 $bar-spacing: 5px;          // The spacing around the bars
 $stack-spacing: 1px;        // For stacked bars, the spacing between each stack in a bar
@@ -26,6 +27,7 @@ $bar-colours:  $dark-blue,
                $light-blue, 
                $turquoise;  // Bar colours 
 
+// THE STYLES
 
 .mc-table {
   font-size: $font-size;
@@ -76,6 +78,7 @@ $bar-colours:  $dark-blue,
     display: none;
   }
 
+  // STACKED CHARTS
   &.stacked {
     th:last-child{
       display: none;
@@ -86,6 +89,15 @@ $bar-colours:  $dark-blue,
     }
     tbody td.mc-bar-cell{
       display: inline-block;
+    }
+  }
+
+  // COMPACT CHARTS
+  &.compact{
+    .mc-bar-cell{
+      font-size: $compact-font-size;
+      text-indent: 2px;
+      padding: 0;
     }
   }
 
