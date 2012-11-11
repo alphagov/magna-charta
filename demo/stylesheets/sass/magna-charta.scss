@@ -23,7 +23,7 @@ $caption-side: top;     // Caption alignment. Top or bottom.
 // Can be a single colour or a list of colours. 
 // The bars will cycle through the colours in list order.
 
-$colours: $blue, $light-blue, $turquoise;
+$colours: $dark-blue, $blue, $light-blue, $turquoise;
 
 
 .mc-table {
@@ -32,6 +32,7 @@ $colours: $blue, $light-blue, $turquoise;
   border-spacing: 0 $bar-spacing;
   border: 1px solid $light-grey;
   padding: $font-size 0;
+  position: relative;
   thead {
     display: table-header-group;
     th{
@@ -44,14 +45,34 @@ $colours: $blue, $light-blue, $turquoise;
         border-left: $font-size solid;
         text-align: left;
         font-weight: normal;
-      }
-      &.total{
-        display: none;
+        width: 100%;
       }
     }
   }
-  &.stacked tbody td.mc-bar-cell{
-    display: inline-block;
+  &.right-key thead{
+    background-color: #fff;
+    .mc-key-cell{   
+      margin-left: 0;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+    padding: 0 $bar-spacing;
+    position: absolute;
+    border: 1px solid $light-grey;
+    right: $font-size + $bar-spacing;
+  }
+  &.stacked {
+    th:last-child{
+      display: none;
+    }
+    td:last-child{
+      background-color: transparent !important;
+      color: $black;
+    }
+    tbody td.mc-bar-cell{
+      display: inline-block;
+    }
   }
 
   // Charts with multiple columns get different coloured bars
@@ -74,10 +95,6 @@ $colours: $blue, $light-blue, $turquoise;
       margin-bottom: 1px;
       color: $white;
       text-indent: $bar-padding;
-    }
-    &.total{
-      background-color: transparent !important;
-      color: $black;
     }
   }
   caption{

@@ -10,7 +10,8 @@
   border-collapse: separate;
   border-spacing: 0 5px;
   border: 1px solid #cacac8;
-  padding: 16px 0; }
+  padding: 16px 0;
+  position: relative; }
   .mc-table thead {
     display: table-header-group; }
     .mc-table thead th {
@@ -22,22 +23,40 @@
         padding-left: 5px;
         border-left: 16px solid;
         text-align: left;
-        font-weight: normal; }
-      .mc-table thead th.total {
-        display: none; }
+        font-weight: normal;
+        width: 100%; }
+  .mc-table.right-key thead {
+    background-color: #fff;
+    padding: 0 5px;
+    position: absolute;
+    border: 1px solid #cacac8;
+    right: 21px; }
+    .mc-table.right-key thead .mc-key-cell {
+      margin-left: 0; }
+      .mc-table.right-key thead .mc-key-cell:last-child {
+        margin-bottom: 0; }
+  .mc-table.stacked th:last-child {
+    display: none; }
+  .mc-table.stacked td:last-child {
+    background-color: transparent !important;
+    color: #0b0c0c; }
   .mc-table.stacked tbody td.mc-bar-cell {
     display: inline-block; }
-  .mc-table tr td.mc-bar-cell:nth-child(3n+2) {
+  .mc-table tr td.mc-bar-cell:nth-child(4n+2) {
+    background-color: #1a2791; }
+  .mc-table tr th.mc-key-cell:nth-child(4n+2) {
+    border-left-color: #1a2791; }
+  .mc-table tr td.mc-bar-cell:nth-child(4n+3) {
     background-color: #005abb; }
-  .mc-table tr th.mc-key-cell:nth-child(3n+2) {
+  .mc-table tr th.mc-key-cell:nth-child(4n+3) {
     border-left-color: #005abb; }
-  .mc-table tr td.mc-bar-cell:nth-child(3n+3) {
+  .mc-table tr td.mc-bar-cell:nth-child(4n+4) {
     background-color: #5bb4e5; }
-  .mc-table tr th.mc-key-cell:nth-child(3n+3) {
+  .mc-table tr th.mc-key-cell:nth-child(4n+4) {
     border-left-color: #5bb4e5; }
-  .mc-table tr td.mc-bar-cell:nth-child(3n+4) {
+  .mc-table tr td.mc-bar-cell:nth-child(4n+5) {
     background-color: #55bab7; }
-  .mc-table tr th.mc-key-cell:nth-child(3n+4) {
+  .mc-table tr th.mc-key-cell:nth-child(4n+5) {
     border-left-color: #55bab7; }
   .mc-table td, .mc-table th {
     text-align: right;
@@ -52,9 +71,6 @@
       margin-bottom: 1px;
       color: white;
       text-indent: 8px; }
-    .mc-table td.total, .mc-table th.total {
-      background-color: transparent !important;
-      color: #0b0c0c; }
   .mc-table caption {
     caption-side: top; }
   .mc-table .mc-key-cell {
