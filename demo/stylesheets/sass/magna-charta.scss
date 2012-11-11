@@ -23,7 +23,7 @@ $caption-side: top;     // Caption alignment. Top or bottom.
 // Can be a single colour or a list of colours. 
 // The bars will cycle through the colours in list order.
 
-$colours: $blue, $light-blue;
+$colours: $blue, $light-blue, $turquoise;
 
 
 .mc-table {
@@ -32,40 +32,35 @@ $colours: $blue, $light-blue;
   border-spacing: 0 $bar-spacing;
   border: 1px solid $light-grey;
   padding: $font-size 0;
-  thead{
-   display: none;
-  }
-  $len: length($colours);
-  // For single bar charts, colours cycle through rows
-  @for $i from 0 to $len {
-    tr:nth-child(#{$len}n+#{$i + 1}) td.mc-bar-cell{background-color: nth($colours, $i + 1)}
-  }
-  &.stacked{
-    // Stacked bar charts get a key
-    thead {
-      display: table-header-group;
-      th{
+  thead {
+    display: table-header-group;
+    th{
+      display: none;
+      &.mc-key-cell {
+        display: block;
+        margin-bottom: $bar-spacing;
+        margin-left: 100%;
+        padding-left: $bar-spacing;
+        border-left: $font-size solid;
+        text-align: left;
+        font-weight: normal;
+      }
+      &.total{
         display: none;
-        &.mc-key-cell {
-          display: block;
-          margin-bottom: $bar-spacing;
-          margin-left: 100%;
-          padding-left: $bar-spacing;
-          border-left: $font-size solid;
-          text-align: left;
-          font-weight: normal;
-        }
-        &.total{
-          display: none;
-        }
       }
     }
-    // For stacked bar charts, colours cycle through cells
-    @for $i from 0 to $len {
-      tr td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($colours, $i + 1)}
-      tr th.mc-key-cell:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($colours, $i + 1)}
-    }
   }
+  &.stacked tbody td.mc-bar-cell{
+    display: inline-block;
+  }
+
+  // Charts with multiple columns get different coloured bars
+  $len: length($colours);
+  @for $i from 0 to $len {
+    tr td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($colours, $i + 1)}
+    tr th.mc-key-cell:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($colours, $i + 1)}
+  }
+
   td, th {
     text-align: right;
     padding: 0;
@@ -73,9 +68,10 @@ $colours: $blue, $light-blue;
     margin-right: $stack-spacing;
     border: 0 solid; 
     &.mc-bar-cell { 
-      display: inline-block;
+      display: block;
       text-align: left;
       padding: $bar-padding 0;
+      margin-bottom: 1px;
       color: $white;
       text-indent: $bar-padding;
     }

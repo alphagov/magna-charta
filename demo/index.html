@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Magna Charta Examples</title>
+  <title>Magna Charta examples</title>
   <style>
     /* Basic page styles */
 
@@ -38,11 +38,13 @@
   </style>
   <link href="stylesheets/magna-charta.css" media="screen" rel="stylesheet" type="text/css">
   <script src="../libs/jquery-loader.js"></script>
-  <script src="../dist/magna-charta.min.js"></script>
+  <script src="../src/magna-charta.js"></script>
+
   <script src="demo.js"></script>
 </head>
 <body>
-  <h1>Magna Charta Examples</h1>
+  <a href="https://www.github.com/alphagov/magna-charta"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+  <h1>Magna Charta examples</h1>
 
   <table class="chart" id="fig1">
     <caption>Fig. 1: The niceness of types of biscuit</caption>
@@ -57,9 +59,21 @@
     </tbody>
   </table>
 
+  <table class="chart" id="fig2">
+    <caption>Fig. 2: Team biscuit ratings</caption>
+    <thead>
+      <tr><th>Biscuit</th><th>Tim</th><th>Jack</th><th>Roo</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Caramel Digestives</td><td>5</td><td>5</td><td>5</td></tr>
+      <tr><td>Nice biscuits</td><td>4</td><td>4</td><td>4</td></tr>
+      <tr><td>Teacakes</td><td>4</td><td>4</td><td>4</td></tr>
+      <tr><td>Hobnobs</td><td>3</td><td>3</td><td>3</td></tr>
+    </tbody>
+  </table>
 
-  <table class="stacked chart" id="fig2">
-    <caption>Fig. 2: Cookies from Sainsburys, rated by taste and size</caption>
+  <table class="stacked chart" id="fig3">
+    <caption>Fig. 3: Cookies from Sainsburys, rated by taste and size</caption>
     <thead>
       <tr><th>Brand</th><th>Size rating</th><th>Taste rating</th><th class="total">Total</th></tr>
     </thead>
@@ -70,19 +84,6 @@
     </tbody>
   </table>
 
-  <table class="chart" id="fig3">
-    <caption>Fig. 3: Most awesome developer names</caption>
-    <thead>
-      <tr><th>Name</th><th>Rating / 10</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Jack</td><td>10</td></tr>
-      <tr><td>William</td><td>9</td></tr>
-      <tr><td>Michael</td><td>8</td></tr>
-      <tr><td>Steven</td><td>7</td></tr>
-    </tbody>
-  </table>
-  <p>(this one was initialised with <code>applyOnInit</code> set to false)</p>
 </body>
 </html>
 
