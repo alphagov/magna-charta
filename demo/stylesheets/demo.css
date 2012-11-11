@@ -7,23 +7,16 @@
  */
 .mc-table {
   font-size: 16px;
+  border-collapse: separate;
   border-spacing: 0 5px;
   border: 1px solid #cacac8;
   padding: 16px 0; }
   .mc-table thead {
     display: none; }
-  .mc-table tr:nth-child(6n+1) td.mc-bar-cell {
+  .mc-table tr:nth-child(2n+1) td.mc-bar-cell {
     background-color: #005abb; }
-  .mc-table tr:nth-child(6n+2) td.mc-bar-cell {
-    background-color: #a33038; }
-  .mc-table tr:nth-child(6n+3) td.mc-bar-cell {
-    background-color: #cd5a13; }
-  .mc-table tr:nth-child(6n+4) td.mc-bar-cell {
-    background-color: #78256f; }
-  .mc-table tr:nth-child(6n+5) td.mc-bar-cell {
-    background-color: #899635; }
-  .mc-table tr:nth-child(6n+6) td.mc-bar-cell {
-    background-color: #1a2791; }
+  .mc-table tr:nth-child(2n+2) td.mc-bar-cell {
+    background-color: #5bb4e5; }
   .mc-table.stacked thead {
     display: table-header-group; }
     .mc-table.stacked thead th {
@@ -38,32 +31,17 @@
         font-weight: normal; }
       .mc-table.stacked thead th.total {
         display: none; }
-  .mc-table.stacked tr td.mc-bar-cell:nth-child(6n+2) {
+  .mc-table.stacked tr td.mc-bar-cell:nth-child(2n+2) {
     background-color: #005abb; }
-  .mc-table.stacked tr th.mc-key-cell:nth-child(6n+2) {
+  .mc-table.stacked tr th.mc-key-cell:nth-child(2n+2) {
     border-left-color: #005abb; }
-  .mc-table.stacked tr td.mc-bar-cell:nth-child(6n+3) {
-    background-color: #a33038; }
-  .mc-table.stacked tr th.mc-key-cell:nth-child(6n+3) {
-    border-left-color: #a33038; }
-  .mc-table.stacked tr td.mc-bar-cell:nth-child(6n+4) {
-    background-color: #cd5a13; }
-  .mc-table.stacked tr th.mc-key-cell:nth-child(6n+4) {
-    border-left-color: #cd5a13; }
-  .mc-table.stacked tr td.mc-bar-cell:nth-child(6n+5) {
-    background-color: #78256f; }
-  .mc-table.stacked tr th.mc-key-cell:nth-child(6n+5) {
-    border-left-color: #78256f; }
-  .mc-table.stacked tr td.mc-bar-cell:nth-child(6n+6) {
-    background-color: #899635; }
-  .mc-table.stacked tr th.mc-key-cell:nth-child(6n+6) {
-    border-left-color: #899635; }
-  .mc-table.stacked tr td.mc-bar-cell:nth-child(6n+7) {
-    background-color: #1a2791; }
-  .mc-table.stacked tr th.mc-key-cell:nth-child(6n+7) {
-    border-left-color: #1a2791; }
+  .mc-table.stacked tr td.mc-bar-cell:nth-child(2n+3) {
+    background-color: #5bb4e5; }
+  .mc-table.stacked tr th.mc-key-cell:nth-child(2n+3) {
+    border-left-color: #5bb4e5; }
   .mc-table td, .mc-table th {
     text-align: right;
+    padding: 0;
     padding-right: 5px;
     margin-right: 1px;
     border: 0 solid; }

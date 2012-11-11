@@ -6,17 +6,34 @@
     /* Basic page styles */
 
     * { margin: 0; padding: 0; }
-    body { font-family: Helvetica, Arial, sans-serif; padding: 100px; }
+    body { font-family: Helvetica, Arial, sans-serif; padding: 25px 100px; }
+    h1 { margin-bottom: 50px; }
     table {
       margin-bottom: 50px;
       width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ccc;
     }
     td{
-      border-bottom: 1px solid grey; 
+      border-top: 1px solid #ccc;
+      text-align: center;
+    }
+    td, th{
+      padding: 10px;
+    }
+    td:first-child,
+    th:first-child{
+      text-align: left;
     }
     caption{
       font-size: 19px;
       margin: 20px 0;
+    }
+    .toggle{
+      display: block;
+      font-size: 16px;
+      width: 220px;
+      margin: 5px 0;
     }
   </style>
   <link href="stylesheets/demo.css" media="screen" rel="stylesheet" type="text/css">
@@ -25,9 +42,10 @@
   <script src="demo.js"></script>
 </head>
 <body>
+  <h1>Magna Charta Examples</h1>
 
-  <table class="chart">
-    <caption>The niceness of types of biscuit</caption>
+  <table class="chart" id="fig1">
+    <caption>Fig. 1: The niceness of types of biscuit</caption>
     <thead>
       <tr><th>Biscuit</th><th>Niceness</th></tr>
     </thead>
@@ -39,8 +57,9 @@
     </tbody>
   </table>
 
-  <table class="stacked chart">
-    <caption>Cookies from Sainsburys, rated by taste and size</caption>
+
+  <table class="stacked chart" id="fig2">
+    <caption>Fig. 2: Cookies from Sainsburys, rated by taste and size</caption>
     <thead>
       <tr><th>Brand</th><th>Size rating</th><th>Taste rating</th><th class="total">Total</th></tr>
     </thead>
@@ -51,9 +70,8 @@
     </tbody>
   </table>
 
-
-  <table class="table">
-    <caption>Most awesome developer names <br><a href="#" class="toggle">Toggle chart / table view</a></caption>
+  <table class="chart" id="fig3">
+    <caption>Fig. 3: Most awesome developer names</caption>
     <thead>
       <tr><th>Name</th><th>Rating / 10</th></tr>
     </thead>

@@ -1,13 +1,17 @@
-
 $(function() {
-  var charts = [];
-  $(".chart").each(function(i, item) {
-    charts.push($.magnaCharta($(item)));
-  });
-  var table = $.magnaCharta($(".table"), { applyOnInit: false });
+  var tables = {};
+  $("table").each(function(i, item) {
+    var opts = {};
+    if(i == 2) { opts.applyOnInit = false; }
+    tables[item.id] = $.magnaCharta($(item), opts);
 
-  $(".toggle").on("click", function() {
-    (table.$table.hasClass("mc-table") ? table.revert() : table.apply());
-    return false;
+    $(this).find('caption').append('<a href="" class="toggle">Toggle chart / table</a>');
+  });
+
+  $(".toggle").on("click", function(e) {
+    var table = $(this).parents("table");
+    var tableMC = tables[table[0].id];
+    (tableMC.$table.hasClass("mc-table") ? tableMC.revert() : tableMC.apply());
+    e.preventDefault();
   });
 });

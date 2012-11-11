@@ -22,11 +22,12 @@ $caption-side: top;     // Caption alignment. Top or bottom.
 // COLOURS
 // Can be a single colour or a list of colours. 
 // The bars will cycle through the colours in list order.
-$colours: $blue, $red, $orange, $purple, $green, $dark-blue;
+$colours: $blue, $light-blue;
 
 
 .mc-table {
   font-size: $font-size;
+  border-collapse: separate;
   border-spacing: 0 $bar-spacing;
   border: 1px solid $light-grey;
   padding: $font-size 0;
@@ -66,6 +67,7 @@ $colours: $blue, $red, $orange, $purple, $green, $dark-blue;
   }
   td, th {
     text-align: right;
+    padding: 0;
     padding-right: $bar-spacing;
     margin-right: $stack-spacing;
     border: 0 solid; 
