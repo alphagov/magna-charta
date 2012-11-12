@@ -50,9 +50,6 @@
     text-indent: 5px; }
   .mc-table.stacked tbody td.mc-bar-cell {
     display: inline-block; }
-    .mc-table.stacked tbody td.mc-bar-cell:last-child {
-      background-color: transparent;
-      color: #0b0c0c; }
   .mc-table.compact .mc-bar-cell {
     font-size: 12px;
     text-indent: 2px;

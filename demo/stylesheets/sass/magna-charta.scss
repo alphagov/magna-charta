@@ -93,10 +93,6 @@ $bar-colours:  $dark-blue,
     }
     tbody td.mc-bar-cell{
       display: inline-block;
-      &:last-child{
-        background-color: transparent;
-        color: $black;
-      }
     }
   }
 
