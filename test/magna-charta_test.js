@@ -35,14 +35,6 @@
   });
 
 
-  test('adds a class to all rows it affects', function() {
-    // check the thead tr doesnt have the class
-    ok(!this.$singleTable.find("thead tr").hasClass("mc-row"), 'doesnt add class to thead rows');
-    // check the tbody tr do
-    equal(this.$singleTable.find(".mc-row").length, 3);
-    equal(this.$multiTable.find(".mc-row").length, 3);
-  });
-
   test('adds a class to all table cells that become bars', function() {
     equal(this.$singleTable.find(".mc-bar-cell").length, 3);
     equal(this.$multiTable.find(".mc-bar-cell").length, 6);
