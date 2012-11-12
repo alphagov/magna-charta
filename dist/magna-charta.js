@@ -1,4 +1,4 @@
-/*! Magna Charta - v0.1.0 - 2012-11-09
+/*! Magna Charta - v0.1.0 - 2012-11-12
 * https://github.com/alphagov/magna-charta
  */
 
@@ -8,7 +8,8 @@
     this.init = function(table, options) {
       var defaults = {
         outOf: 95,
-        applyOnInit: true
+        applyOnInit: true,
+        stacked: false
       };
       this.options = $.extend({}, defaults, options);
       this.$table = table;
@@ -57,7 +58,6 @@
 
 
     this.addClasses = function() {
-      this.$bodyRows.addClass("mc-row");
       this.$table.addClass("mc-table");
     };
 
@@ -71,16 +71,29 @@
       this.$bodyRows.each(function(i, item) {
         var $this = $(item);
         var $bodyCells = $this.find("td:not(:first)");
+        if(that.options.stacked) {
+          // if it's stacked, the last column is a totals, so we don't want that in our calculations
+          var $stackedTotal = $bodyCells.last().addClass("mc-stacked-total");
+          $bodyCells = $bodyCells.filter(":not(:last)");
+        }
+        var $headCells = $this.find("th:not(:first, .total)").addClass("mc-key-cell");
         $this.find("td:first").addClass("mc-key-cell");
         var cellsTotalValue = 0;
         $bodyCells.each(function(j, cell) {
           var $cell = $(cell).addClass("mc-bar-cell");
           var cellVal = that.utils.stripValue($cell.text());
           if(that.utils.isFloat(cellVal)) {
-            cellsTotalValue += parseFloat(cellVal, 10);
+            var parsedVal = parseFloat(cellVal, 10);
+            if(!that.options.stacked) {
+              cellsTotalValue = parsedVal;
+              values.push(parsedVal);
+            } else {
+              cellsTotalValue += parsedVal;
+            }
           }
         });
-        values.push(cellsTotalValue);
+
+        if(that.options.stacked) { values.push(cellsTotalValue); }
         resp.max = parseFloat(that.utils.returnMax(values), 10);
       });
       resp.single = parseFloat(this.options.outOf/resp.max, 10);
@@ -92,7 +105,7 @@
       var that = this;
       this.$bodyRows.each(function(i, row) {
         var $this = $(row);
-        $this.find("td:not(:first)").each(function(j, cell) {
+        $this.find(".mc-bar-cell").each(function(j, cell) {
           var val = parseFloat(that.utils.stripValue($(cell).text()), 10) * that.dimensions.single;
           $(cell).css({
             "width": val + "%"
