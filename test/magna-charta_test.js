@@ -30,18 +30,20 @@
 
       // now do the same for a table with more rows of data
       this.$multiTable = $("#qunit-fixture").children("#multiple");
-      this.multiMC = $.magnaCharta(this.$multiTable);
+      this.multiMC = $.magnaCharta(this.$multiTable, {
+        stacked: true
+      });
     }
   });
 
 
   test('adds a class to all table cells that become bars', function() {
-    equal(this.$singleTable.find(".mc-bar-cell").length, 3);
-    equal(this.$multiTable.find(".mc-bar-cell").length, 6);
+    equal(this.$singleTable.find(".mc-bar-cell").length, 3, 'single table should have three bars');
+    equal(this.$multiTable.find(".mc-bar-cell").length, 6, 'stacked should have 6 bars');
   });
 
-  test('adds a class to all cells that become keys', function() {
-    equal(this.$singleTable.find(".mc-key-cell").length, 3);
+  test('adds a class to all cells that become keys (including headers)', function() {
+    equal(this.$singleTable.find(".mc-key-cell").length, 4);
   });
 
 
@@ -73,10 +75,10 @@
 
     equal(this.$multiTable.find("tbody td").get(1).style.width, cW(12, 5));
     equal(this.$multiTable.find("tbody td").get(2).style.width, cW(12, 6));
-    equal(this.$multiTable.find("tbody td").get(4).style.width, cW(12, 6));
-    equal(this.$multiTable.find("tbody td").get(5).style.width, cW(12, 2));
-    equal(this.$multiTable.find("tbody td").get(7).style.width, cW(12, 3));
-    equal(this.$multiTable.find("tbody td").get(8).style.width, cW(12, 9));
+    equal(this.$multiTable.find("tbody td").get(5).style.width, cW(12, 6));
+    equal(this.$multiTable.find("tbody td").get(6).style.width, cW(12, 2));
+    equal(this.$multiTable.find("tbody td").get(9).style.width, cW(12, 3));
+    equal(this.$multiTable.find("tbody td").get(10).style.width, cW(12, 9));
   });
 
   test('it can revert back to a regular table', function() {
