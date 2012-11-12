@@ -12,7 +12,8 @@
     this.init = function(table, options) {
       var defaults = {
         outOf: 95,
-        applyOnInit: true
+        applyOnInit: true,
+        stacked: false
       };
       this.options = $.extend({}, defaults, options);
       this.$table = table;
@@ -82,7 +83,12 @@
           var $cell = $(cell).addClass("mc-bar-cell");
           var cellVal = that.utils.stripValue($cell.text());
           if(that.utils.isFloat(cellVal)) {
-            cellsTotalValue += parseFloat(cellVal, 10);
+            var parsedVal = parseFloat(cellVal, 10);
+            if(that.options.stacked) {
+              cellsTotalValue = parsedVal;
+            } else {
+              cellsTotalValue += parsedVal;
+            }
           }
         });
         values.push(cellsTotalValue);

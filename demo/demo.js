@@ -2,7 +2,7 @@ $(function() {
   var tables = {};
   $("table").each(function(i, item) {
     var opts = {};
-    //if(i == 2) { opts.applyOnInit = false; }
+    if(i == 1 || id == 2) { opts.stacked = true; }
     tables[item.id] = $.magnaCharta($(item), opts);
 
     $(this).find('caption').append('<a href="" class="toggle">Toggle chart / table</a>');
