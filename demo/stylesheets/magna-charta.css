@@ -42,9 +42,11 @@
     display: none; }
   .mc-table.stacked th:last-child {
     display: none; }
-  .mc-table.stacked td:last-child {
+  .mc-table.stacked .mc-stacked-total {
     background-color: transparent !important;
-    color: #0b0c0c; }
+    color: #0b0c0c;
+    display: inline-block;
+    text-indent: 5px; }
   .mc-table.stacked tbody td.mc-bar-cell {
     display: inline-block; }
   .mc-table.compact .mc-bar-cell {

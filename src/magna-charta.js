@@ -67,7 +67,6 @@
     };
 
     this.calculateMaxWidth = function() {
-      console.log(this.$table);
       var that = this;
       var resp = {
         max: 0,
@@ -77,6 +76,11 @@
       this.$bodyRows.each(function(i, item) {
         var $this = $(item);
         var $bodyCells = $this.find("td:not(:first)");
+        if(that.options.stacked) {
+          // if it's stacked, the last column is a totals, so we don't want that in our calculations
+          var $stackedTotal = $bodyCells.last().addClass("mc-stacked-total");
+          $bodyCells = $bodyCells.filter(":not(:last)");
+        }
         var $headCells = $this.find("th:not(:first, .total)").addClass("mc-key-cell");
         $this.find("td:first").addClass("mc-key-cell");
         var cellsTotalValue = 0;
@@ -98,7 +102,6 @@
         resp.max = parseFloat(that.utils.returnMax(values), 10);
       });
       resp.single = parseFloat(this.options.outOf/resp.max, 10);
-      console.log( resp, values);
       return resp;
     };
 
@@ -107,7 +110,7 @@
       var that = this;
       this.$bodyRows.each(function(i, row) {
         var $this = $(row);
-        $this.find("td:not(:first)").each(function(j, cell) {
+        $this.find(".mc-bar-cell").each(function(j, cell) {
           var val = parseFloat(that.utils.stripValue($(cell).text()), 10) * that.dimensions.single;
           $(cell).css({
             "width": val + "%"
