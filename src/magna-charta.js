@@ -67,6 +67,7 @@
     };
 
     this.calculateMaxWidth = function() {
+      console.log(this.$table);
       var that = this;
       var resp = {
         max: 0,
@@ -84,17 +85,20 @@
           var cellVal = that.utils.stripValue($cell.text());
           if(that.utils.isFloat(cellVal)) {
             var parsedVal = parseFloat(cellVal, 10);
-            if(that.options.stacked) {
+            if(!that.options.stacked) {
               cellsTotalValue = parsedVal;
+              values.push(parsedVal);
             } else {
               cellsTotalValue += parsedVal;
             }
           }
         });
-        values.push(cellsTotalValue);
+
+        if(that.options.stacked) { values.push(cellsTotalValue); }
         resp.max = parseFloat(that.utils.returnMax(values), 10);
       });
       resp.single = parseFloat(this.options.outOf/resp.max, 10);
+      console.log( resp, values);
       return resp;
     };
 
