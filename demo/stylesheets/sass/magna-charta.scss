@@ -36,6 +36,7 @@ $bar-colours:  $dark-blue,
   border: 1px solid $chart-border;
   padding: $font-size 0;
   position: relative;
+
   // KEY
   thead {
     background-color: #fff;
@@ -63,15 +64,16 @@ $bar-colours:  $dark-blue,
   &.right-key thead,
   &.left-key thead{
     position: absolute;
+    top: 116px;
     .mc-key-cell{   
       margin-left: 0;
     }
   }
   &.right-key thead{
-    right: $font-size + $bar-spacing;
+    right: 26px;
   }
   &.left-key thead{
-    left: $font-size + $bar-spacing;
+    left: 26px;
   }
   // HIDE KEY
   &.no-key thead{
@@ -91,6 +93,10 @@ $bar-colours:  $dark-blue,
     }
     tbody td.mc-bar-cell{
       display: inline-block;
+      &:last-child{
+        background-color: transparent;
+        color: $black;
+      }
     }
   }
 

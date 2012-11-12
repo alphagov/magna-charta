@@ -31,13 +31,14 @@
         .mc-table thead th.mc-key-cell:last-child {
           margin-bottom: 0; }
   .mc-table.right-key thead, .mc-table.left-key thead {
-    position: absolute; }
+    position: absolute;
+    top: 116px; }
     .mc-table.right-key thead .mc-key-cell, .mc-table.left-key thead .mc-key-cell {
       margin-left: 0; }
   .mc-table.right-key thead {
-    right: 21px; }
+    right: 26px; }
   .mc-table.left-key thead {
-    left: 21px; }
+    left: 26px; }
   .mc-table.no-key thead {
     display: none; }
   .mc-table.stacked th:last-child {
@@ -49,6 +50,9 @@
     text-indent: 5px; }
   .mc-table.stacked tbody td.mc-bar-cell {
     display: inline-block; }
+    .mc-table.stacked tbody td.mc-bar-cell:last-child {
+      background-color: transparent;
+      color: #0b0c0c; }
   .mc-table.compact .mc-bar-cell {
     font-size: 12px;
     text-indent: 2px;
