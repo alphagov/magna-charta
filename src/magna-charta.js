@@ -11,7 +11,7 @@
   var MagnaCharta = function() {
     this.init = function(table, options) {
       var defaults = {
-        outOf: 95,
+        outOf: 65,
         applyOnInit: true,
         stacked: false
       };
