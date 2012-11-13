@@ -41,16 +41,16 @@
     left: 26px; }
   .mc-table.no-key thead {
     display: none; }
-  .mc-table.stacked th:last-child {
+  .mc-table.mc-stacked th:last-child {
     display: none; }
-  .mc-table.stacked th:nth-last-child(2) {
+  .mc-table.mc-stacked th:nth-last-child(2) {
     margin-bottom: 0; }
-  .mc-table.stacked .mc-stacked-total {
+  .mc-table.mc-stacked .mc-stacked-total {
     background-color: transparent !important;
     color: #0b0c0c;
     display: inline-block;
     text-indent: 5px; }
-  .mc-table.stacked tbody td.mc-bar-cell {
+  .mc-table.mc-stacked tbody td.mc-bar-cell {
     display: inline-block; }
   .mc-table.compact .mc-bar-cell {
     font-size: 12px;
