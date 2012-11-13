@@ -85,6 +85,9 @@ $bar-colours:  $dark-blue,
     th:last-child{
       display: none;
     }
+    th:nth-last-child(2){
+      margin-bottom: 0;
+    }
     .mc-stacked-total{
       background-color: transparent !important;
       color: $black;
