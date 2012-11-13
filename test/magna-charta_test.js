@@ -30,9 +30,7 @@
 
       // now do the same for a table with more rows of data
       this.$multiTable = $("#qunit-fixture").children("#multiple");
-      this.multiMC = $.magnaCharta(this.$multiTable, {
-        stacked: true
-      });
+      this.multiMC = $.magnaCharta(this.$multiTable);
     }
   });
 

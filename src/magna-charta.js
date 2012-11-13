@@ -17,6 +17,10 @@
       };
       this.options = $.extend({}, defaults, options);
       this.$table = table;
+
+
+      // set the stacked option based on giving the table a class of mc-stacked
+      this.options.stacked = this.$table.hasClass("mc-stacked");
       this.$bodyRows = this.$table.find("tr");
 
       if(this.options.applyOnInit) {
