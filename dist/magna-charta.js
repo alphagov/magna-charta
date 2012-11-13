@@ -1,4 +1,4 @@
-/*! Magna Charta - v0.1.0 - 2012-11-12
+/*! Magna Charta - v0.1.0 - 2012-11-13
 * https://github.com/alphagov/magna-charta
  */
 
@@ -7,12 +7,16 @@
   var MagnaCharta = function() {
     this.init = function(table, options) {
       var defaults = {
-        outOf: 95,
+        outOf: 65,
         applyOnInit: true,
         stacked: false
       };
       this.options = $.extend({}, defaults, options);
       this.$table = table;
+
+
+      // set the stacked option based on giving the table a class of mc-stacked
+      this.options.stacked = this.$table.hasClass("mc-stacked");
       this.$bodyRows = this.$table.find("tr");
 
       if(this.options.applyOnInit) {
