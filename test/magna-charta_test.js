@@ -55,19 +55,19 @@
   test('calulateMaxWidth returns object with right max value in', function() {
     deepEqual(this.singleMC.calculateMaxWidth(), {
       max: parseFloat(5, 10),
-      single: parseFloat(95/5, 10)
+      single: parseFloat(65/5, 10)
     });
 
     deepEqual(this.multiMC.calculateMaxWidth(), {
       max: parseFloat(12, 10),
-      single: parseFloat(95/12, 10)
+      single: parseFloat(65/12, 10)
     });
   });
 
   test('applying the calculated widths correctly', function() {
-    //widths are 95/max * val
+    //widths are 65/max * val (65 by default)
     var cW = function(max, val) {
-      return (95/max)*val+"%";
+      return (65/max)*val+"%";
     };
     equal(this.$singleTable.find("tbody td").get(1).style.width, cW(5, 5));
     equal(this.$singleTable.find("tbody td").get(3).style.width, cW(5, 4));
@@ -96,7 +96,7 @@
     equal(this.$singleTable.find(".mc-row").length, 0);
     equal(this.$singleTable.find("tbody td").get(1).style.width, "");
     this.singleMC.apply();
-    equal(this.$singleTable.find("tbody td").get(1).style.width, (95/5)*5 + "%");
+    equal(this.$singleTable.find("tbody td").get(1).style.width, (65/5)*5 + "%");
     equal(this.$singleTable.find(".mc-bar-cell").length, 3);
   });
 
