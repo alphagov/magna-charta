@@ -58,6 +58,8 @@
   test('you can set options by applying classes', function() {
     ok(this.negMC.options.negative);
     ok(this.multiMC.options.stacked);
+    ok(!this.singleMC.options.negative);
+    ok(!this.multiMC.options.negative);
   });
 
 
@@ -72,11 +74,14 @@
       single: parseFloat(65/12, 10)
     });
 
+    // need to restore the text to use negative values
+    this.negMC.restoreText();
     deepEqual(this.negMC.calculateMaxWidth(), {
       max: parseFloat(10, 10),
       single: parseFloat(65/10, 10),
-      marginLeft: parseFloat(10, 10) * parseFloat(65/10, 10)
-    });
+      marginLeft: parseFloat(10, 10) * parseFloat(65/10, 10),
+      maxNegative: parseFloat(10, 10)
+    }, "Gives back extra info for the negative charts");
   });
 
   test('applying the calculated widths correctly', function() {

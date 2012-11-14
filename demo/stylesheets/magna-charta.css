@@ -85,6 +85,10 @@
       margin-bottom: 1px;
       color: white;
       text-indent: 8px; }
+    .mc-table td.mc-bar-cell.mc-bar-negative, .mc-table th.mc-bar-cell.mc-bar-negative {
+      text-align: right;
+      text-indent: 8px;
+      direction: rtl; }
   .mc-table caption {
     caption-side: top; }
   .mc-table .mc-key-cell {

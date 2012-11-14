@@ -108,6 +108,7 @@ $bar-colours:  $dark-blue,
     }
   }
 
+
   // Charts with multiple columns get different coloured bars
   $len: length($bar-colours);
   @for $i from 0 to $len {
@@ -128,6 +129,12 @@ $bar-colours:  $dark-blue,
       margin-bottom: 1px;
       color: $white;
       text-indent: $bar-padding;
+    }
+    // NEGATIVE BARS
+    &.mc-bar-cell.mc-bar-negative {
+      text-align: right;
+      text-indent: 8px;
+      direction: rtl;
     }
   }
   caption{
