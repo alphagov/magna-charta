@@ -25,5 +25,12 @@ You're going to need Node, npm and Grunt (`npm install -g grunt`) to work on Mag
 
 ## Release History
 
+__V0.5.0__
+- supports negative values in bar charts. See the [demo graphs](http://alphagov.github.com/magna-charta/).
+- CSS rewritten by [Tim](http://github.com/timpaul), using SASS, to provide much nicer examples.
+- We add many more useful classes to the chart to help you with CSS styling. Again, see the [documentation](http://alphagov.github.com/magna-charta).
+- Added CSS that turns the table header into a legend / key, through purely CSS.
+
 __V0.1.0__
 - initial release!
+
