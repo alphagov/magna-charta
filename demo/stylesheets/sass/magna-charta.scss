@@ -10,6 +10,7 @@
 // DEFAULT CHART STYLES
 
 $label-width: 40%;          // Horizontal width taken up by the bar labels
+$label-align: right;        // Label alignment
 $font-size: 16px;           // For bar text, label text and related padding
 $compact-font-size: 12px;   // For the 'compact' bar style
 $bar-padding: 8px;          // The padding between the bar values and the edge of the bar
@@ -151,7 +152,6 @@ $bar-colours:  $dark-blue,
   }
 
   td, th {
-    text-align: right;
     padding: 0;
     padding-right: $bar-spacing;
     margin-right: $stack-spacing;
@@ -174,8 +174,10 @@ $bar-colours:  $dark-blue,
   caption{
     caption-side: $caption-side;
   }
-  .mc-key-cell {
+  td.mc-key-cell {
     width: $label-width;
+    text-indent: 26px;
+    text-align: $label-align;
   }
 
 }

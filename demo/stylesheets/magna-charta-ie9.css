@@ -73,7 +73,6 @@
   .mc-table tr th.mc-key-cell:nth-child(4n+5) {
     border-left-color: #55bab7; }
   .mc-table td, .mc-table th {
-    text-align: right;
     padding: 0;
     padding-right: 5px;
     margin-right: 1px;
@@ -87,5 +86,7 @@
       text-indent: 8px; }
   .mc-table caption {
     caption-side: top; }
-  .mc-table .mc-key-cell {
-    width: 40%; }
+  .mc-table td.mc-key-cell {
+    width: 40%;
+    text-indent: 26px;
+    text-align: right; }
