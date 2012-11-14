@@ -72,6 +72,22 @@
     background-color: #55bab7; }
   .mc-table tr th.mc-key-cell:nth-child(4n+5) {
     border-left-color: #55bab7; }
+  .mc-table tr td.mc-bar-cell {
+    background-color: #1a2791; }
+  .mc-table tr th.mc-key-cell {
+    border-left-color: #1a2791; }
+  .mc-table tr td.mc-bar-cell + td.mc-bar-cell {
+    background-color: #005abb; }
+  .mc-table tr th.mc-key-cell + th.mc-key-cell {
+    border-left-color: #005abb; }
+  .mc-table tr td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell {
+    background-color: #5bb4e5; }
+  .mc-table tr th.mc-key-cell + th.mc-key-cell + th.mc-key-cell {
+    border-left-color: #5bb4e5; }
+  .mc-table tr td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell {
+    background-color: #55bab7; }
+  .mc-table tr th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell {
+    border-left-color: #55bab7; }
   .mc-table td, .mc-table th {
     text-align: right;
     padding: 0;

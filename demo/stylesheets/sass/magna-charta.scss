@@ -114,8 +114,40 @@ $bar-colours:  $dark-blue,
   // Charts with multiple columns get different coloured bars
   $len: length($bar-colours);
   @for $i from 0 to $len {
-    tr td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($bar-colours, $i + 1)}
-    tr th.mc-key-cell:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($bar-colours, $i + 1)}
+   tr td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($bar-colours, $i + 1)}
+   tr th.mc-key-cell:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($bar-colours, $i + 1)}
+  }
+
+  @include ie-lte(8) {
+    // IE 7 and 8 compatible version of the above
+    // It uses adjascent sibling selectors instead of nth-child
+    // If you want to handle more than ten colours you'll need to add rows to the variables below
+    $ie-bars: 'td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell';
+
+    $ie-keys: 'th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell';
+
+    @for $i from 0 to $len {
+      tr #{nth($ie-bars, $i + 1)}{background-color: nth($bar-colours, $i + 1)}
+      tr #{nth($ie-keys, $i + 1)}{border-left-color: nth($bar-colours, $i + 1)}
+    }
   }
 
   td, th {
