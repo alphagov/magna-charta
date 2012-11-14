@@ -55,6 +55,11 @@
     equal(this.$singleTable.find(".mc-key-cell").length, 4);
   });
 
+  test('you can set options by applying classes', function() {
+    ok(this.negMC.options.negative);
+    ok(this.multiMC.options.stacked);
+  });
+
 
   test('calulateMaxWidth returns object with right max value in', function() {
     deepEqual(this.singleMC.calculateMaxWidth(), {
@@ -69,7 +74,8 @@
 
     deepEqual(this.negMC.calculateMaxWidth(), {
       max: parseFloat(10, 10),
-      single: parseFloat(65/10, 10)
+      single: parseFloat(65/10, 10),
+      marginLeft: parseFloat(10, 10) * parseFloat(65/10, 10)
     });
   });
 

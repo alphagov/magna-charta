@@ -82,6 +82,10 @@
       // so we can figure out the maximum value later
       var values = [];
 
+
+      // var to store the maximum negative value, (used only for negative charts)
+      var maxNegativeValue = 0;
+
       // loop through every tr in the table
       this.$bodyRows.each(function(i, item) {
         var $this = $(item);
@@ -104,9 +108,6 @@
         // for anything but stacked, this is just the value of one <td>
         var cellsTotalValue = 0;
 
-        // var to store the maximum negative value, (used only for negative charts)
-        var maxNegativeValue = 0;
-
         $bodyCells.each(function(j, cell) {
 
           var $cell = $(cell).addClass("mc-bar-cell");
@@ -122,6 +123,9 @@
 
               if(that.utils.isNegative(parsedVal)) {
                 $cell.addClass("mc-bar-negative");
+                if(absParsedVal > maxNegativeValue) {
+                  maxNegativeValue = absParsedVal;
+                }
               } else {
                 $cell.addClass("mc-bar-positive");
               }
@@ -147,6 +151,9 @@
       var resp = {};
       resp.max = parseFloat(that.utils.returnMax(values), 10);
       resp.single = parseFloat(this.options.outOf/resp.max, 10);
+      if(this.options.negative) {
+        resp.marginLeft = parseFloat(maxNegativeValue, 10) * resp.single;
+      }
 
       return resp;
     };
@@ -163,9 +170,22 @@
 
         $this.find(".mc-bar-cell").each(function(j, cell) {
 
-          var val = Math.abs(parseFloat(that.utils.stripValue($(cell).text()), 10)) * that.dimensions.single;
+          var $cell = $(cell);
 
-          $(cell).css("width", val + "%");
+          var parsedVal = parseFloat(that.utils.stripValue($cell.text()), 10) * that.dimensions.single;
+
+          var absParsedVal = Math.abs(parsedVal);
+
+          // apply the left margin to the positive bars
+          if(that.options.negative) {
+            if($cell.hasClass("mc-bar-positive")) {
+              $(cell).css("margin-left", that.dimensions.marginLeft + "%");
+            }
+          }
+
+
+
+          $(cell).css("width", absParsedVal + "%");
         });
       });
     };
