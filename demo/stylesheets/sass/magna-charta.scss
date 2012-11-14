@@ -29,6 +29,8 @@ $bar-colours:  $dark-blue,
 
 // THE STYLES
 
+@import 'conditionals';     // Mixins for IE and device-type conditionals 
+
 .mc-table {
   font-size: $font-size;
   border-collapse: separate;
