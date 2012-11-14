@@ -1,191 +1,114 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>The Magna Charta Documentation and Examples</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-    <script src="magna-charta.min.js" type="text/javascript"></script>
-    <script src="demo.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="magna-charta.css" type="text/css" />
-    <style>
-      /* Basic page styles */
+<head>
+  <title>Magna Charta examples</title>
+  <style>
+    /* Basic page styles */
 
-      * { margin: 0; padding: 0; }
-      .container { width: 80%; margin: 0 auto; }
-      body { font-family: Helvetica, Arial, sans-serif; padding: 25px 100px; }
-      h1 { margin-bottom: 50px; }
-      h2 { margin: 15px 0; }
-      code { font-size: 16px; }
-      p, li { line-height: 25px; margin: 10px 0; }
-      ul { margin: 10px 0; }
-      table {
-        margin-bottom: 50px;
-        width: 100%;
-        border-collapse: collapse;
-        border: 1px solid #ccc;
-      }
-      td{
-        border-top: 1px solid #ccc;
-        text-align: center;
-      }
-      td, th{
-        padding: 10px;
-      }
-      td:first-child,
-      th:first-child{
-        text-align: left;
-      }
-      caption{
-        font-size: 19px;
-        margin: 20px 0;
-      }
-      .toggle{
-        display: block;
-        font-size: 16px;
-        width: 220px;
-        margin: 5px 0;
-      }
+    * { margin: 0; padding: 0; }
+    body { font-family: Helvetica, Arial, sans-serif; padding: 25px 100px; }
+    h1 { margin-bottom: 50px; }
+    table {
+      margin-bottom: 50px;
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ccc;
+    }
+    td{
+      border-top: 1px solid #ccc;
+      text-align: center;
+    }
+    td, th{
+      padding: 10px;
+    }
+    td:first-child,
+    th:first-child{
+      text-align: left;
+    }
+    caption{
+      font-size: 19px;
+      margin: 20px 0;
+    }
+    .toggle{
+      display: block;
+      font-size: 16px;
+      width: 220px;
+      margin: 5px 0;
+    }
+  </style>
+  <link href="magna-charta.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="jquery.min.js"></script>
+  <script src="magna-charta.min.js"></script>
+  <script src="demo.js"></script>
+</head>
+<body>
+  <a href="https://www.github.com/alphagov/magna-charta"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+  <h1>Magna Charta examples</h1>
 
-      .mc-key-cell { text-indent: 10px; }
-    </style>
-  </head>
-  <body>
-    <a href="https://www.github.com/alphagov/magna-charta"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
-    <div class="container">
-      <h1>Magna Charta</h1>
+  <table class="chart no-key" id="fig1">
+    <caption>Fig. 1: The niceness of types of biscuit (according to Jack)</caption>
+    <thead>
+      <tr><th>Biscuit</th><th>Niceness</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Caramel Digestives</td><td>9</td></tr>
+      <tr><td>Teacakes</td><td>4</td></tr>
+      <tr><td>Nice biscuits</td><td>3</td></tr>
+      <tr><td>Hobnobs</td><td>3</td></tr>
+    </tbody>
+  </table>
 
-      <p>Magna Charter is a jQuery plugin used to create accessible and lovely looking bar charts.</p>
+  <table class="chart left-key" id="fig2">
+    <caption>Fig. 2: Team biscuit preferences (out of 10)</caption>
+    <thead>
+      <tr><th>Biscuit</th><th>Tim</th><th>Jack</th><th>Roo</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Caramel Digestives</td><td>8</td><td>9</td><td>7</td></tr>
+      <tr><td>Nice biscuits</td><td>7</td><td>3</td><td>5</td></tr>
+      <tr><td>Teacakes</td><td>4</td><td>4</td><td>7</td></tr>
+      <tr><td>Hobnobs</td><td>5</td><td>3</td><td>2</td></tr>
+    </tbody>
+  </table>
 
-      <h2>How it works</h2>
+  <table class="stacked chart right-key" id="fig3">
+    <caption>Fig. 3: Combined team biscuit preferences</caption>
+    <thead>
+      <tr><th>Biscuit</th><th>Tim</th><th>Jack</th><th>Roo</th><th>Total</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Caramel Digestives</td><td>8</td><td>9</td><td>7</td><td>24</td></tr>
+      <tr><td>Nice biscuits</td><td>7</td><td>3</td><td>5</td><td>15</td></tr>
+      <tr><td>Teacakes</td><td>4</td><td>4</td><td>7</td><td>15</td></tr>
+      <tr><td>Hobnobs</td><td>5</td><td>3</td><td>2</td><td>10</td></tr>
+    </tbody>
+  </table>
 
-      <p>It works by applying some styling to regular HTML tables, to enable cells to be given a certain width. The Magna Charta then calculates and applies the widths to each cell with a value in, creating the graphs. Keep reading for some examples.</p>
+  <table class="compact chart left-key" id="fig4">
+    <caption>Fig. 4: Team biscuit preferences (out of 10)</caption>
+    <thead>
+      <tr><th>Person</th><th>Caramel Digestives</th><th>Nice biscuits</th><th>Teacakes</th><th>Hobnobs</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Tim</td><td>8</td><td>7</td><td>4</td><td>5</td></tr>
+      <tr><td>Jack</td><td>9</td><td>3</td><td>4</td><td>3</td></tr>
+      <tr><td>Roo</td><td>7</td><td>5</td><td>7</td><td>2</td></tr>
+    </tbody>
+  </table>
 
-      <h2>How to use it</h2>
-      <p>Grab yourself a copy of jQuery and the <a href="https://raw.github.com/alphagov/magna-charta/master/dist/magna-charta.min.js">Magna Charta source</a>.
-
-      <p>Then you'll want to simply call <code>$.magnaCharta</code> on some tables:</p>
-      <pre>
-        <code>
-          var chart = $.magnaCharta($("#table1"));
-        </code>
-      </pre>
-      <p>Once you instantiate the chart, the Magna Charta object is returned to you. This means you can programatically update the table cell values and then redo the bar charts, if you need to:</p>
-
-      <pre><code>
-        // code here that updates the table cell values
-        chart.applyWidths();
-        // chart is now updated with new values
-      </code></pre>
-
-      <p>It's also possible to easily add a button to revert the chart to a table, and vice-versa. There are two methods that do this:</p>
-
-      <ul>
-        <li><code>chart.revert()</code> - completely reverts the effects of Magna Charta. Removes widths, classes, and so on.</li>
-        <li><code>chart.apply()</code> - recreates the chart, re-adds all the classes and applies the widths again.</li>
-      </ul>
-
-      <p>There are a couple of options you can pass into the magnaCharta on init:</p>
-
-      <pre>
-        <code>
-        var chart = $.magnaCharta($("table"), {
-          outOf: 65,
-          applyOnInit: true
-        });
-        </code>
-      </pre>
-
-      <p>The values assigned above are the defaults.</p>
-      <ul>
-        <li><code>outOf</code> means what total % to divide by to calculate the percentages. 95 means that the biggest bar will take up 95% of the width of the table. This is useful as it leaves you room to add some margins, or perhaps some text that hangs off the edge of the chart.</li>
-        <li><code>applyOnInit</code> turns the tables into charts as soon as they are initialised. If you set this to false, you'll need to manually apply the charts with: <code>chart.apply();</code>.</li>
-      </ul>
-
-      <p>MC doesn't add any CSS at all. We don't like plugins that dictate appearances too much. What we do is add some really useful CSS classes to things to easily let you style things. Here are the classes we add:</p>
-      <ul>
-        <li><code>.mc-table</code> on any table that's been turned into a chart.</li>
-        <li><code>.mc-key-cell</code> to any table cell that's not been turned into bar.</li>
-        <li><code>.mc-bar-cell</code> to any table cell that's been turned into a bar.</li>
-        <li><code>.mc-row</code> to any row that has bars within.</li>
-      </ul>
-
-      <p>There are two really important bits of styling that you need to add:</p>
-      <pre>
-        <code>
-          .mc-table { border-collapse: separate; }
-          .mc-bar-cell { display: inline-block; }
-        </code>
-      </pre>
-
-      <p>All the code here is within the <code>demo</code> folder of the repository, for you to download and try out.</p>
-
-
-      <h1>Magna Charta examples</h1>
-
-      <table class="chart no-key" id="fig1">
-        <caption>Fig. 1: The niceness of types of biscuit (according to Jack)</caption>
-        <thead>
-          <tr><th>Biscuit</th><th>Niceness</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Caramel Digestives</td><td>9</td></tr>
-          <tr><td>Teacakes</td><td>4</td></tr>
-          <tr><td>Nice biscuits</td><td>3</td></tr>
-          <tr><td>Hobnobs</td><td>3</td></tr>
-        </tbody>
-      </table>
-
-      <table class="chart right-key" id="fig2">
-        <caption>Fig. 2: Team biscuit preferences (out of 10)</caption>
-        <thead>
-          <tr><th>Biscuit</th><th>Tim</th><th>Jack</th><th>Roo</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Caramel Digestives</td><td>8</td><td>9</td><td>7</td></tr>
-          <tr><td>Nice biscuits</td><td>7</td><td>3</td><td>5</td></tr>
-          <tr><td>Teacakes</td><td>4</td><td>4</td><td>7</td></tr>
-          <tr><td>Hobnobs</td><td>5</td><td>3</td><td>2</td></tr>
-        </tbody>
-      </table>
-
-      <table class="mc-stacked chart right-key" id="fig3">
-        <caption>Fig. 3: Combined team biscuit preferences</caption>
-        <thead>
-          <tr><th>Biscuit</th><th>Tim</th><th>Jack</th><th>Roo</th><th>Total</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Caramel Digestives</td><td>8</td><td>9</td><td>7</td><td>24</td></tr>
-          <tr><td>Nice biscuits</td><td>7</td><td>3</td><td>5</td><td>15</td></tr>
-          <tr><td>Teacakes</td><td>4</td><td>4</td><td>7</td><td>15</td></tr>
-          <tr><td>Hobnobs</td><td>5</td><td>3</td><td>2</td><td>10</td></tr>
-        </tbody>
-      </table>
-
-      <table class="compact chart right-key" id="fig4">
-        <caption>Fig. 4: Team biscuit preferences (out of 10)</caption>
-        <thead>
-          <tr><th>Person</th><th>Caramel Digestives</th><th>Nice biscuits</th><th>Teacakes</th><th>Hobnobs</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Tim</td><td>8</td><td>7</td><td>4</td><td>5</td></tr>
-          <tr><td>Jack</td><td>9</td><td>3</td><td>4</td><td>3</td></tr>
-          <tr><td>Roo</td><td>7</td><td>5</td><td>7</td><td>2</td></tr>
-        </tbody>
-      </table>
-
-      <!--<table class="chart no-key" id="fig5">
-        <caption>Fig. 5: Negative values test</caption>
-        <thead>
-          <tr><th>Biscuit</th><th>Niceness</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Caramel Digestives</td><td style="margin-left: 14.45%">9</td></tr>
-          <tr><td>Nice biscuits</td><td style="margin-left: 14.45%">3</td></tr>
-          <tr><td>Hobnobs</td><td style="margin-left: 14.45%">3</td></tr>
-          <tr><td>Bourbons</td><td style="margin-left: 7.2%;">1</td></tr>
-          <tr><td>Teacakes</td><td>2</td></tr>
-        </tbody>
-      </table>-->
-    </div>
+  <table class="chart no-key mc-negative" id="fig5">
+    <caption>Fig. 5: Negative values test</caption>
+    <thead>
+      <tr><th>Biscuit</th><th>Niceness</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Caramel Digestives</td><td>9</td></tr>
+      <tr><td>Nice biscuits</td><td>3</td></tr>
+      <tr><td>Hobnobs</td><td>3</td></tr>
+      <tr><td>Kitkats</td><td>-1</td></tr>
+      <tr><td>Rich Tea</td><td>-2</td></tr>
+    </tbody>
+  </table>
 
 </body>
 </html>
