@@ -1,4 +1,4 @@
-/*! Magna Charta - v0.1.0 - 2012-11-14
+/*! Magna Charta - v0.5.0 - 2012-11-14
 * https://github.com/alphagov/magna-charta
  */
 

@@ -1,6 +1,6 @@
 {
-  "name": "jquery-plugin",
-  "version": "0.0.0-ignored",
+  "name": "The Magna Charta",
+  "version": "0.5.0",
   "engines": {
     "node": ">= 0.6.0"
   },
