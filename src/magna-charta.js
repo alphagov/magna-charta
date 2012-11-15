@@ -181,7 +181,7 @@
     };
 
     this.restoreText = function() {
-      $(".mc-bar-cell").each(function(i, item) {
+      this.$table.find(".mc-bar-cell").each(function(i, item) {
         var $cell = $(item);
         var oldText = $cell.data("oldText");
         if(oldText) {
