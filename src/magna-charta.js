@@ -15,6 +15,12 @@
         applyOnInit: true
       };
       this.options = $.extend({}, defaults, options);
+
+      // if it's IE8 or less, we just show the plain tables
+      // the CSS used to turn them into charts is too much for poor IE to handle
+      // detection of <IE9 is done via HTML conditional comment to add a class to the html element
+      this.DISABLED = !!$("html.lte-ie8").length;
+
       this.$table = table;
 
 
@@ -25,7 +31,7 @@
       this.options.negative = this.$table.hasClass("mc-negative");
       this.$bodyRows = this.$table.find("tr");
 
-      if(this.options.applyOnInit) {
+      if(!this.DISABLED && this.options.applyOnInit) {
         this.apply();
       }
 
@@ -33,14 +39,18 @@
     };
 
     this.apply = function() {
-      this.addClasses();
-      this.applyWidths();
+      if(!this.DISABLED) {
+        this.addClasses();
+        this.applyWidths();
+      }
     };
 
     this.revert = function() {
-      this.restoreText();
-      this.removeWidths();
-      this.removeClasses();
+      if(!this.DISABLED) {
+        this.restoreText();
+        this.removeWidths();
+        this.removeClasses();
+      }
     };
 
     this.removeClasses = function() {

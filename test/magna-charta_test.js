@@ -35,6 +35,12 @@
       // negative table
       this.$negTable = $("#qunit-fixture").children("#negative");
       this.negMC = $.magnaCharta(this.$negTable);
+
+      // one that should be disabled
+      $("html").addClass("lte-ie8");
+      this.$disabledTable = $("table").first(); // doesn't matter
+      this.disableMC = $.magnaCharta(this.$disabledTable);
+      $("html").removeClass("lte-ie8");
     }
   });
 
@@ -43,6 +49,10 @@
   var cW = function(max, val) {
     return (65/max)*val+"%";
   };
+
+  test('magna charta is disabled with lte-ie8 class on html element', function() {
+    ok(this.disableMC.DISABLED);
+  });
 
 
   test('adds a class to all table cells that become bars', function() {
