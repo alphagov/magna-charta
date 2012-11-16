@@ -17,6 +17,7 @@ $bar-padding: 8px;          // The padding between the bar values and the edge o
 $bar-spacing: 5px;          // The spacing around the bars
 $stack-spacing: 1px;        // For stacked bars, the spacing between each stack in a bar
 $caption-side: top;         // Caption alignment. Top or bottom.
+$key-width: 160px;           // Only used by IE. Other browsers get smallest width that fits content
 
 // CHART COLOUR SCHEME
 
@@ -46,6 +47,9 @@ $bar-colours:  $dark-blue,
     display: table-header-group;
     padding: 0 $bar-spacing;
     border: 1px solid $key-border;
+    @include ie-lte(9) {
+      width: $key-width;
+    }
     th{
       display: none;
       &.mc-key-cell {

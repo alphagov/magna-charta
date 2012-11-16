@@ -16,7 +16,8 @@
     background-color: #fff;
     display: table-header-group;
     padding: 0 5px;
-    border: 1px solid #cacac8; }
+    border: 1px solid #cacac8;
+    width: 160px; }
     .mc-table thead th {
       display: none; }
       .mc-table thead th.mc-key-cell {
