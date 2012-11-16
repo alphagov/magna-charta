@@ -46,6 +46,7 @@
   .mc-table.mc-stacked th:nth-last-child(2) {
     margin-bottom: 0; }
   .mc-table.mc-stacked .mc-stacked-total {
+    padding: 8px 0;
     background-color: transparent !important;
     color: #0b0c0c;
     display: inline-block;
@@ -84,13 +85,13 @@
       margin-bottom: 1px;
       color: white;
       text-indent: 8px; }
-    .mc-table td.mc-bar-cell.mc-bar-negative, .mc-table th.mc-bar-cell.mc-bar-negative {
+    .mc-table td.mc-bar-negative, .mc-table th.mc-bar-negative {
       text-align: right;
-      text-indent: 8px;
-      direction: rtl; }
+      text-indent: 8px; }
   .mc-table caption {
     caption-side: top; }
   .mc-table td.mc-key-cell {
     width: 40%;
     text-indent: 26px;
-    text-align: right; }
+    text-align: right;
+    display: table-cell; }

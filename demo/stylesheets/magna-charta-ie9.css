@@ -21,6 +21,7 @@
       display: none; }
       .mc-table thead th.mc-key-cell {
         display: block;
+        float: left;
         margin-bottom: 5px;
         margin-left: 100%;
         padding-left: 5px;
@@ -41,17 +42,20 @@
     left: 26px; }
   .mc-table.no-key thead {
     display: none; }
-  .mc-table.stacked th:last-child {
+  .mc-table.mc-stacked th:last-child {
     display: none; }
-  .mc-table.stacked th:nth-last-child(2) {
+  .mc-table.mc-stacked th:nth-last-child(2) {
     margin-bottom: 0; }
-  .mc-table.stacked .mc-stacked-total {
+  .mc-table.mc-stacked .mc-stacked-total {
+    padding: 8px 0;
     background-color: transparent !important;
     color: #0b0c0c;
     display: inline-block;
-    text-indent: 5px; }
-  .mc-table.stacked tbody td.mc-bar-cell {
-    display: inline-block; }
+    text-indent: 5px;
+    float: left; }
+  .mc-table.mc-stacked tbody td.mc-bar-cell {
+    display: inline-block;
+    margin-right: 0; }
   .mc-table.compact .mc-bar-cell {
     font-size: 12px;
     text-indent: 2px;
@@ -82,11 +86,17 @@
       text-align: left;
       padding: 8px 0;
       margin-bottom: 1px;
+      float: left;
+      margin-right: 100%;
       color: white;
+      text-indent: 8px; }
+    .mc-table td.mc-bar-negative, .mc-table th.mc-bar-negative {
+      text-align: right;
       text-indent: 8px; }
   .mc-table caption {
     caption-side: top; }
   .mc-table td.mc-key-cell {
     width: 40%;
     text-indent: 26px;
-    text-align: right; }
+    text-align: right;
+    display: table-cell; }

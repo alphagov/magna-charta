@@ -50,6 +50,9 @@ $bar-colours:  $dark-blue,
       display: none;
       &.mc-key-cell {
         display: block;
+        @include ie-lte(9) {
+          float: left;
+        }
         margin-bottom: $bar-spacing;
         margin-left: 100%;
         padding-left: $bar-spacing;
@@ -92,13 +95,20 @@ $bar-colours:  $dark-blue,
       margin-bottom: 0;
     }
     .mc-stacked-total{
+      padding: $bar-padding 0;
       background-color: transparent !important;
       color: $black;
       display: inline-block;
-      text-indent: 5px;
+      text-indent: 5px;      
+      @include ie-lte(9) {
+        float: left;
+      }
     }
     tbody td.mc-bar-cell{
       display: inline-block;
+      @include ie-lte(9) {
+        margin-right: 0;
+      }
     }
   }
 
@@ -161,14 +171,17 @@ $bar-colours:  $dark-blue,
       text-align: left;
       padding: $bar-padding 0;
       margin-bottom: 1px;
+      @include ie-lte(9) {
+        float: left;
+        margin-right: 100%;
+      }
       color: $white;
       text-indent: $bar-padding;
     }
     // NEGATIVE BARS
-    &.mc-bar-cell.mc-bar-negative {
+    &.mc-bar-negative {
       text-align: right;
       text-indent: 8px;
-      direction: rtl;
     }
   }
   caption{
@@ -178,6 +191,7 @@ $bar-colours:  $dark-blue,
     width: $label-width;
     text-indent: 26px;
     text-align: $label-align;
+    display: table-cell;
   }
 
 }
