@@ -13,7 +13,8 @@
       };
       this.options = $.extend({}, defaults, options);
 
-      /* detecting IE versions
+      // detecting IE
+      /*
        * taken from James Padolsey: https://gist.github.com/527683
        */
       var ie = (function(){
@@ -21,13 +22,18 @@
         v = 3,
         div = document.createElement('div'),
         all = div.getElementsByTagName('i');
-        while (div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->', all[0])
-          return v > 4 ? v : undef;
+        while (
+          div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
+            all[0]
+        );
+        return v > 4 ? v : undef;
       }());
+
       // if it's IE8 or less, we just show the plain tables
       // the CSS used to turn them into charts is too much for poor IE to handle
       // detection of <IE9 is done via HTML conditional comment to add a class to the html element
       this.DISABLED = (ie && ie < 8);
+      alert(ie);
 
       this.$table = table;
 
@@ -256,4 +262,3 @@
 
 
 }(jQuery));
-
