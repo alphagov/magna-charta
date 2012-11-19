@@ -16,11 +16,13 @@
     background-color: #fff;
     display: table-header-group;
     padding: 0 5px;
-    border: 1px solid #cacac8; }
+    border: 1px solid #cacac8;
+    width: 160px; }
     .mc-table thead th {
       display: none; }
       .mc-table thead th.mc-key-cell {
         display: block;
+        float: left;
         margin-bottom: 5px;
         margin-left: 100%;
         padding-left: 5px;
@@ -46,12 +48,15 @@
   .mc-table.mc-stacked th:nth-last-child(2) {
     margin-bottom: 0; }
   .mc-table.mc-stacked .mc-stacked-total {
+    padding: 8px 0;
     background-color: transparent !important;
     color: #0b0c0c;
     display: inline-block;
-    text-indent: 5px; }
+    text-indent: 5px;
+    float: left; }
   .mc-table.mc-stacked tbody td.mc-bar-cell {
-    display: inline-block; }
+    display: inline-block;
+    margin-right: 0; }
   .mc-table.compact .mc-bar-cell {
     font-size: 12px;
     text-indent: 2px;
@@ -72,8 +77,23 @@
     background-color: #55bab7; }
   .mc-table tr th.mc-key-cell:nth-child(4n+5) {
     border-left-color: #55bab7; }
+  .mc-table tr td.mc-bar-cell {
+    background-color: #1a2791; }
+  .mc-table tr th.mc-key-cell {
+    border-left-color: #1a2791; }
+  .mc-table tr td.mc-bar-cell + td.mc-bar-cell {
+    background-color: #005abb; }
+  .mc-table tr th.mc-key-cell + th.mc-key-cell {
+    border-left-color: #005abb; }
+  .mc-table tr td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell {
+    background-color: #5bb4e5; }
+  .mc-table tr th.mc-key-cell + th.mc-key-cell + th.mc-key-cell {
+    border-left-color: #5bb4e5; }
+  .mc-table tr td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell {
+    background-color: #55bab7; }
+  .mc-table tr th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell {
+    border-left-color: #55bab7; }
   .mc-table td, .mc-table th {
-    text-align: right;
     padding: 0;
     padding-right: 5px;
     margin-right: 1px;
@@ -83,13 +103,17 @@
       text-align: left;
       padding: 8px 0;
       margin-bottom: 1px;
+      float: left;
+      margin-right: 100%;
       color: white;
       text-indent: 8px; }
-    .mc-table td.mc-bar-cell.mc-bar-negative, .mc-table th.mc-bar-cell.mc-bar-negative {
+    .mc-table td.mc-bar-negative, .mc-table th.mc-bar-negative {
       text-align: right;
-      text-indent: 8px;
-      direction: rtl; }
+      text-indent: 8px; }
   .mc-table caption {
     caption-side: top; }
-  .mc-table .mc-key-cell {
-    width: 40%; }
+  .mc-table td.mc-key-cell {
+    width: 40%;
+    text-indent: 26px;
+    text-align: right;
+    display: table-cell; }
