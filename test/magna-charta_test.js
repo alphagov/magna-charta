@@ -22,20 +22,10 @@
       raises(block, [expected], [message])
   */
 
-  module('jQuery.magnaCharta', {
+  module('jQuery.magnaCharta SINGLE', {
     setup: function() {
-      // get a plugin instance
       this.$singleTable = $("#qunit-fixture").children("#single");
       this.singleMC = $.magnaCharta(this.$singleTable);
-
-      // now do the same for a table with more rows of data
-      this.$multiTable = $("#qunit-fixture").children("#multiple");
-      this.multiMC = $.magnaCharta(this.$multiTable);
-
-      // negative table
-      this.$negTable = $("#qunit-fixture").children("#negative");
-      this.negMC = $.magnaCharta(this.$negTable);
-
     }
   });
 
@@ -45,94 +35,138 @@
     return (65/max)*val+"%";
   };
 
-
-  test('adds a class to all table cells that become bars', function() {
-    equal(this.$singleTable.find(".mc-bar-cell").length, 3, 'single table should have three bars');
-    equal(this.$multiTable.find(".mc-bar-cell").length, 6, 'stacked should have 6 bars');
-    equal(this.$negTable.find(".mc-bar-cell").length, 4, 'negative should have 4 bars');
+  test('creates a new div containing the chart', function() {
+    equal(this.singleMC.$graph.length, 1);
+  });
+  test('the new chart div has a class mc-chart', function() {
+    ok(this.singleMC.$graph.hasClass("mc-chart"));
   });
 
-  test('adds a class to all cells that become keys (including headers)', function() {
-    equal(this.$singleTable.find(".mc-key-cell").length, 4);
+  test('the new chart copies over any other classes', function() {
+    ok(this.singleMC.$graph.hasClass("no-key"));
   });
 
-  test('you can set options by applying classes', function() {
-    ok(this.negMC.options.negative);
-    ok(this.multiMC.options.stacked);
-    ok(!this.singleMC.options.negative);
-    ok(!this.multiMC.options.negative);
+  test('new chart div contains all table bits as divs', function() {
+    ok(this.singleMC.$graph.find(".mc-thead").length);
+    equal(this.singleMC.$graph.find(".mc-tr").length, 4);
+    equal(this.singleMC.$graph.find(".mc-th").length, 2);
+    equal(this.singleMC.$graph.find(".mc-td").length, 6);
   });
 
+  test('new chart divs contain the right values', function() {
+    var cells = this.singleMC.$graph.find(".mc-td");
+    equal(cells.eq(0).text(), "Testing One");
+    equal(cells.eq(1).text(), 5);
+    equal(this.singleMC.$graph.find(".mc-th").eq(0).text(), "Some Data");
+  });
 
-  test('calulateMaxWidth returns object with right max value in', function() {
+  test('figures out the maximum graph value', function() {
     deepEqual(this.singleMC.calculateMaxWidth(), {
       max: parseFloat(5, 10),
       single: parseFloat(65/5, 10)
     });
-
-    deepEqual(this.multiMC.calculateMaxWidth(), {
-      max: parseFloat(12, 10),
-      single: parseFloat(65/12, 10)
-    });
-
-    // need to restore the text to use negative values
-    this.negMC.restoreText();
-    deepEqual(this.negMC.calculateMaxWidth(), {
-      max: parseFloat(10, 10),
-      single: parseFloat(65/10, 10),
-      marginLeft: parseFloat(10, 10) * parseFloat(65/10, 10),
-      maxNegative: parseFloat(10, 10)
-    }, "Gives back extra info for the negative charts");
   });
 
-  test('applying the calculated widths correctly', function() {
-    equal(this.$singleTable.find("tbody td").get(1).style.width, cW(5, 5));
-    equal(this.$singleTable.find("tbody td").get(3).style.width, cW(5, 4));
-    equal(this.$singleTable.find("tbody td").get(5).style.width, cW(5, 3));
-
-    equal(this.$multiTable.find("tbody td").get(1).style.width, cW(12, 5));
-    equal(this.$multiTable.find("tbody td").get(2).style.width, cW(12, 6));
-    equal(this.$multiTable.find("tbody td").get(5).style.width, cW(12, 6));
-    equal(this.$multiTable.find("tbody td").get(6).style.width, cW(12, 2));
-    equal(this.$multiTable.find("tbody td").get(9).style.width, cW(12, 3));
-    equal(this.$multiTable.find("tbody td").get(10).style.width, cW(12, 9));
+  test('divs that are bars or keys are given correct classes', function() {
+    equal(this.singleMC.$graph.find(".mc-key-cell").length, 3);
+    equal(this.singleMC.$graph.find(".mc-bar-cell").length, 3);
   });
 
-  test('it can revert back to a regular table', function() {
-    this.singleMC.revert();
-    equal(this.$singleTable.find(".mc-key-cell").length, 0);
-    equal(this.$singleTable.find(".mc-bar-cell").length, 0);
-    equal(this.$singleTable.find(".mc-row").length, 0);
-    equal(this.$singleTable.find("tbody td").get(1).style.width, "");
+  test('bars are given the correct width', function() {
+    var bars = this.singleMC.$graph.find(".mc-bar-cell");
+    equal(bars.get(0).style.width, cW(5,5));
+    equal(bars.get(1).style.width, cW(5, 4));
+    equal(bars.get(2).style.width, cW(5, 3));
   });
 
-  test('it can revert back to a regular table and then back to chart', function() {
-    this.singleMC.revert();
-    equal(this.$singleTable.find(".mc-key-cell").length, 0);
-    equal(this.$singleTable.find(".mc-bar-cell").length, 0);
-    equal(this.$singleTable.find(".mc-row").length, 0);
-    equal(this.$singleTable.find("tbody td").get(1).style.width, "");
-    this.singleMC.apply();
-    equal(this.$singleTable.find("tbody td").get(1).style.width, (65/5)*5 + "%");
-    equal(this.$singleTable.find(".mc-bar-cell").length, 3);
+  test('new chart is inserted into DOM after table', function() {
+    ok(this.singleMC.$table.next().hasClass("mc-chart"));
   });
 
-  test('for negative charts, it adds extra classes', function() {
-    equal(this.$negTable.find(".mc-bar-positive").length, 2);
-    equal(this.$negTable.find(".mc-bar-negative").length, 2);
-  });
 
-  test('for negative charts, it adds margins to the positive bars equal to the width of the negative bar', function() {
-    equal(this.$negTable.find(".mc-bar-positive")[0].style.marginLeft, cW(10, 10));
-    equal(this.$negTable.find(".mc-bar-positive")[1].style.marginLeft, cW(10, 10));
-  });
+  // test('adds a class to all table cells that become bars', function() {
+  //   equal(this.$singleTable.find(".mc-bar-cell").length, 3, 'single table should have three bars');
+  //   equal(this.$multiTable.find(".mc-bar-cell").length, 6, 'stacked should have 6 bars');
+  //   equal(this.$negTable.find(".mc-bar-cell").length, 4, 'negative should have 4 bars');
+  // });
 
-  test('for negative charts, it applies the right widths', function() {
-    equal(this.$negTable.find(".mc-bar-positive")[0].style.width, cW(10, 10));
-    equal(this.$negTable.find(".mc-bar-positive")[1].style.width, cW(10, 5));
-    equal(this.$negTable.find(".mc-bar-negative")[0].style.width, cW(10, 5));
-    equal(this.$negTable.find(".mc-bar-negative")[1].style.width, cW(10, 10));
-  });
+  // test('adds a class to all cells that become keys (including headers)', function() {
+  //   equal(this.$singleTable.find(".mc-key-cell").length, 4);
+  // });
+
+  // test('you can set options by applying classes', function() {
+  //   ok(this.negMC.options.negative);
+  //   ok(this.multiMC.options.stacked);
+  //   ok(!this.singleMC.options.negative);
+  //   ok(!this.multiMC.options.negative);
+  // });
+
+
+  // test('calulateMaxWidth returns object with right max value in', function() {
+
+  //   deepEqual(this.multiMC.calculateMaxWidth(), {
+  //     max: parseFloat(12, 10),
+  //     single: parseFloat(65/12, 10)
+  //   });
+
+  //   // need to restore the text to use negative values
+  //   this.negMC.restoreText();
+  //   deepEqual(this.negMC.calculateMaxWidth(), {
+  //     max: parseFloat(10, 10),
+  //     single: parseFloat(65/10, 10),
+  //     marginLeft: parseFloat(10, 10) * parseFloat(65/10, 10),
+  //     maxNegative: parseFloat(10, 10)
+  //   }, "Gives back extra info for the negative charts");
+  // });
+
+  // test('applying the calculated widths correctly', function() {
+  //   equal(this.$singleTable.find("tbody td").get(1).style.width, cW(5, 5));
+  //   equal(this.$singleTable.find("tbody td").get(3).style.width, cW(5, 4));
+  //   equal(this.$singleTable.find("tbody td").get(5).style.width, cW(5, 3));
+
+  //   equal(this.$multiTable.find("tbody td").get(1).style.width, cW(12, 5));
+  //   equal(this.$multiTable.find("tbody td").get(2).style.width, cW(12, 6));
+  //   equal(this.$multiTable.find("tbody td").get(5).style.width, cW(12, 6));
+  //   equal(this.$multiTable.find("tbody td").get(6).style.width, cW(12, 2));
+  //   equal(this.$multiTable.find("tbody td").get(9).style.width, cW(12, 3));
+  //   equal(this.$multiTable.find("tbody td").get(10).style.width, cW(12, 9));
+  // });
+
+  // test('it can revert back to a regular table', function() {
+  //   this.singleMC.revert();
+  //   equal(this.$singleTable.find(".mc-key-cell").length, 0);
+  //   equal(this.$singleTable.find(".mc-bar-cell").length, 0);
+  //   equal(this.$singleTable.find(".mc-row").length, 0);
+  //   equal(this.$singleTable.find("tbody td").get(1).style.width, "");
+  // });
+
+  // test('it can revert back to a regular table and then back to chart', function() {
+  //   this.singleMC.revert();
+  //   equal(this.$singleTable.find(".mc-key-cell").length, 0);
+  //   equal(this.$singleTable.find(".mc-bar-cell").length, 0);
+  //   equal(this.$singleTable.find(".mc-row").length, 0);
+  //   equal(this.$singleTable.find("tbody td").get(1).style.width, "");
+  //   this.singleMC.apply();
+  //   equal(this.$singleTable.find("tbody td").get(1).style.width, (65/5)*5 + "%");
+  //   equal(this.$singleTable.find(".mc-bar-cell").length, 3);
+  // });
+
+  // test('for negative charts, it adds extra classes', function() {
+  //   equal(this.$negTable.find(".mc-bar-positive").length, 2);
+  //   equal(this.$negTable.find(".mc-bar-negative").length, 2);
+  // });
+
+  // test('for negative charts, it adds margins to the positive bars equal to the width of the negative bar', function() {
+  //   equal(this.$negTable.find(".mc-bar-positive")[0].style.marginLeft, cW(10, 10));
+  //   equal(this.$negTable.find(".mc-bar-positive")[1].style.marginLeft, cW(10, 10));
+  // });
+
+  // test('for negative charts, it applies the right widths', function() {
+  //   equal(this.$negTable.find(".mc-bar-positive")[0].style.width, cW(10, 10));
+  //   equal(this.$negTable.find(".mc-bar-positive")[1].style.width, cW(10, 5));
+  //   equal(this.$negTable.find(".mc-bar-negative")[0].style.width, cW(10, 5));
+  //   equal(this.$negTable.find(".mc-bar-negative")[1].style.width, cW(10, 10));
+  // });
 
   test('utils.isFloat', function() {
     ok(this.singleMC.utils.isFloat(4.56), "4.56 is a float");

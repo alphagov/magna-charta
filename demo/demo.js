@@ -4,13 +4,23 @@ $(function() {
     var opts = {};
     //tables[item.id] = $.magnaCharta($(item), {applyOnInit: false});
     tables[item.id] = $.magnaCharta($(item));
-    $(this).find('caption').append('<a href="" class="toggle">Toggle chart / table</a>');
+    if(!tables[item.id].DISABLED) {
+      tables[item.id].$table.hide();
+    } else {
+      tables[item.id].$table.find("caption a").hide();
+    }
   });
 
   $(".toggle").on("click", function(e) {
-    var table = $(this).parents("table");
-    var tableMC = tables[table[0].id];
-    (tableMC.$table.hasClass("mc-table") ? tableMC.revert() : tableMC.apply());
+    var $this = $(this);
+    var chart = $this.parents(".mc-chart");
+    if(chart.length) {
+      // this toggle button is within the chart
+      chart.hide().prev().show();
+    } else {
+      //toggle is within table
+      $this.parents("table").hide().next().show();
+    }
     e.preventDefault();
   });
 

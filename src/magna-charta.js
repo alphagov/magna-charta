@@ -25,8 +25,11 @@
         v = 3,
         div = document.createElement('div'),
         all = div.getElementsByTagName('i');
-        while (div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->', all[0])
-          return v > 4 ? v : undef;
+        while (
+          div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
+          all[0]
+        );
+        return v > 4 ? v : undef;
       }());
       // if it's IE8 or less, we just show the plain tables
       // the CSS used to turn them into charts is too much for poor IE to handle
@@ -35,13 +38,17 @@
 
       this.$table = table;
 
+      // lets make what will become the new graph
+      this.$graph = $(document.createElement("div"));
+
+      this.$graph.attr("class", this.$table.attr("class")).addClass("mc-chart");
+
 
       // set the stacked option based on giving the table a class of mc-stacked
       this.options.stacked = this.$table.hasClass("mc-stacked");
 
       // set the negative option based on giving the table a class of mc-negative
       this.options.negative = this.$table.hasClass("mc-negative");
-      this.$bodyRows = this.$table.find("tr");
 
       if(!this.DISABLED && this.options.applyOnInit) {
         this.apply();
@@ -50,10 +57,73 @@
       return this;
     };
 
+    // methods for constructing the chart
+    this.construct = {};
+    this.construct.thead = function() {
+      var thead = $("<div />", {
+        "class" : "mc-thead"
+      });
+
+      var tr = $("<div />", { "class" : "mc-tr" });
+      var output = "";
+      this.$table.find("th").each(function(i, item) {
+        output += '<div class="mc-th">';
+        output += $(item).html();
+        output += '</div>';
+      });
+      tr.append(output);
+      thead.append(tr);
+
+      return thead;
+    };
+
+    this.construct.tbody = function() {
+      var tbody = $("<div />", {
+        "class" : "mc-tbody"
+      });
+
+      var output = "";
+      this.$table.find("tbody tr").each(function(i, item) {
+        var tr = $("<div />", { "class" : "mc-tr" });
+        var cellsOutput = "";
+        $(item).find("td").each(function(j, cell) {
+          cellsOutput += '<div class="mc-td">';
+          cellsOutput += $(cell).html();
+          cellsOutput += '</div>';
+        });
+        tr.append(cellsOutput);
+        tbody.append(tr);
+      });
+      return tbody;
+    };
+
+    this.construct.caption = function() {
+      var cap = this.$table.find("caption");
+      if(cap.length) {
+        var caption = $("<caption />").html(cap.html());
+        return caption;
+      }
+    };
+
+
+
+    this.constructChart = function() {
+      // turn every element in the table into divs with appropriate classes
+      var thead = this.construct.thead.call(this);
+      var tbody = this.construct.tbody.call(this);
+      var caption = this.construct.caption.call(this);
+      this.$graph.append(caption);
+      this.$graph.append(thead);
+      this.$graph.append(tbody);
+    };
+
+
     this.apply = function() {
       if(!this.DISABLED) {
-        this.addClasses();
+        this.constructChart();
+        this.calculateMaxWidth();
         this.applyWidths();
+        this.insert();
       }
     };
 
@@ -61,12 +131,7 @@
       if(!this.DISABLED) {
         this.restoreText();
         this.removeWidths();
-        this.removeClasses();
       }
-    };
-
-    this.removeClasses = function() {
-      this.$table.removeClass("mc-table").find(".mc-key-cell, .mc-row, .mc-bar-cell, .mc-bar-negative, .mc-bar-positive").removeClass("mc-key-cell mc-row mc-bar-cell .mc-bar-negative .mc-bar-positive");
     };
 
     this.removeWidths = function() {
@@ -93,10 +158,6 @@
     };
 
 
-    this.addClasses = function() {
-      this.$table.addClass("mc-table");
-    };
-
     this.calculateMaxWidth = function() {
 
 
@@ -112,11 +173,11 @@
       var maxNegativeValue = 0;
 
       // loop through every tr in the table
-      this.$bodyRows.each(function(i, item) {
+      this.$graph.find(".mc-tr").each(function(i, item) {
         var $this = $(item);
 
         // the first td is going to be the key, so ignore it
-        var $bodyCells = $this.find("td:not(:first)");
+        var $bodyCells = $this.find(".mc-td:not(:first)");
 
         // if it's stacked, the last column is a totals, so we don't want that in our calculations
         if(that.options.stacked) {
@@ -124,10 +185,8 @@
           $bodyCells = $bodyCells.filter(":not(:last)");
         }
 
-        // find all the header ccells and give them the right classes
-        var $headCells = $this.find("th:not(:first, .total)").addClass("mc-key-cell");
-        // do the same with the first td in each row
-        $this.find("td:first").addClass("mc-key-cell");
+        // first td in each row is key
+        $this.find(".mc-td:first").addClass("mc-key-cell");
 
         // store the total value of the bar cells in a row
         // for anything but stacked, this is just the value of one <td>
@@ -208,7 +267,7 @@
 
       var that = this;
 
-      this.$bodyRows.each(function(i, row) {
+      this.$graph.find(".mc-tr").each(function(i, row) {
 
         var $this = $(row);
 
@@ -239,8 +298,6 @@
 
           }
 
-
-
           $cell.css("width", absParsedVal + "%");
 
           // set the text to be the absolute value
@@ -251,8 +308,13 @@
       });
     };
 
+    this.insert = function() {
+      this.$table.after(this.$graph);
+    };
+
 
   };
+
 
   $.magnaCharta = function(table, options) {
     return new MagnaCharta().init(table, options);
