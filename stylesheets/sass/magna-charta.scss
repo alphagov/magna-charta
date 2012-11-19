@@ -1,0 +1,202 @@
+/*
+ * magna-charta example stylesheet
+ * https://github.com/alphagov/magna-charta
+ *
+ * Author: Tim Paul
+ * Licensed under the MIT license.
+ */
+
+
+// DEFAULT CHART STYLES
+
+$label-width: 40%;          // Horizontal width taken up by the bar labels
+$label-align: right;        // Label alignment
+$font-size: 16px;           // For bar text, label text and related padding
+$compact-font-size: 12px;   // For the 'compact' bar style
+$bar-padding: 8px;          // The padding between the bar values and the edge of the bar
+$bar-spacing: 5px;          // The spacing around the bars
+$stack-spacing: 1px;        // For stacked bars, the spacing between each stack in a bar
+$caption-side: top;         // Caption alignment. Top or bottom.
+$key-width: 160px;           // Only used by IE. Other browsers get smallest width that fits content
+
+// CHART COLOUR SCHEME
+
+@import 'colours';          // Cabinet Office colour palette (feel free to choose your own)
+$chart-border: $light-grey; // Chart border colour
+$key-border:   $light-grey; // Key border colour        
+$bar-colours:  $dark-blue,
+               $blue,
+               $light-blue, 
+               $turquoise;  // Bar colours 
+
+// THE STYLES
+
+@import 'conditionals';     // Mixins for IE and device-type conditionals 
+
+.mc-table {
+  font-size: $font-size;
+  border-collapse: separate;
+  border-spacing: 0 $bar-spacing;
+  border: 1px solid $chart-border;
+  padding: $font-size 0;
+  position: relative;
+
+  // KEY
+  thead {
+    background-color: #fff;
+    display: table-header-group;
+    padding: 0 $bar-spacing;
+    border: 1px solid $key-border;
+    @include ie-lte(9) {
+      width: $key-width;
+    }
+    th{
+      display: none;
+      &.mc-key-cell {
+        display: block;
+        @include ie-lte(9) {
+          float: left;
+        }
+        margin-bottom: $bar-spacing;
+        margin-left: 100%;
+        padding-left: $bar-spacing;
+        border-left: $font-size solid;
+        text-align: left;
+        font-weight: normal;
+        width: 100%;
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  // RIGHT AND LEFT-ALIGNED KEYS
+  &.right-key thead,
+  &.left-key thead{
+    position: absolute;
+    top: 116px;
+    .mc-key-cell{   
+      margin-left: 0;
+    }
+  }
+  &.right-key thead{
+    right: 26px;
+  }
+  &.left-key thead{
+    left: 26px;
+  }
+  // HIDE KEY
+  &.no-key thead{
+    display: none;
+  }
+
+  // STACKED CHARTS
+  &.mc-stacked {
+    th:last-child{
+      display: none;
+    }
+    th:nth-last-child(2){
+      margin-bottom: 0;
+    }
+    .mc-stacked-total{
+      padding: $bar-padding 0;
+      background-color: transparent !important;
+      color: $black;
+      display: inline-block;
+      text-indent: 5px;      
+      @include ie-lte(9) {
+        float: left;
+      }
+    }
+    tbody td.mc-bar-cell{
+      display: inline-block;
+      @include ie-lte(9) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  // COMPACT CHARTS
+  &.compact{
+    .mc-bar-cell{
+      font-size: $compact-font-size;
+      text-indent: 2px;
+      padding: 0;
+    }
+  }
+
+
+  // Charts with multiple columns get different coloured bars
+  $len: length($bar-colours);
+  @for $i from 0 to $len {
+   tr td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($bar-colours, $i + 1)}
+   tr th.mc-key-cell:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($bar-colours, $i + 1)}
+  }
+
+  @include ie-lte(8) {
+    // IE 7 and 8 compatible version of the above
+    // It uses adjascent sibling selectors instead of nth-child
+    // If you want to handle more than ten colours you'll need to add rows to the variables below
+    $ie-bars: 'td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
+              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell';
+
+    $ie-keys: 'th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
+              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell';
+
+    @for $i from 0 to $len {
+      tr #{nth($ie-bars, $i + 1)}{background-color: nth($bar-colours, $i + 1)}
+      tr #{nth($ie-keys, $i + 1)}{border-left-color: nth($bar-colours, $i + 1)}
+    }
+  }
+
+  td, th {
+    padding: 0;
+    padding-right: $bar-spacing;
+    margin-right: $stack-spacing;
+    border: 0 solid; 
+    &.mc-bar-cell { 
+      display: block;
+      text-align: left;
+      padding: $bar-padding 0;
+      margin-bottom: 1px;
+      @include ie-lte(9) {
+        float: left;
+        margin-right: 100%;
+      }
+      color: $white;
+      text-indent: $bar-padding;
+    }
+    // NEGATIVE BARS
+    &.mc-bar-negative {
+      text-align: right;
+      text-indent: 8px;
+    }
+  }
+  caption{
+    caption-side: $caption-side;
+  }
+  td.mc-key-cell {
+    width: $label-width;
+    text-indent: 26px;
+    text-align: $label-align;
+    display: table-cell;
+  }
+
+}
+

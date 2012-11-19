@@ -3,6 +3,7 @@
 <!--<![endif]-->
 <head>
   <title>Magna Charta examples</title>
+
   <style>
     /* Basic page styles */
 
@@ -37,10 +38,13 @@
       margin: 5px 0;
     }
   </style>
-      <!--[if gt IE 9]><!--><link href="stylesheets/magna-charta.css" rel="stylesheet" type="text/css" media="screen">
+    <!--[if gt IE 9]><!--><link href="stylesheets/magna-charta.css" rel="stylesheet" type="text/css" media="screen">
 <!--<![endif]--><!--<![endif]--><!--[if IE 6]><link href="stylesheets/magna-charta-ie6.css" rel="stylesheet" type="text/css" media="screen"><![endif]--><!--[if IE 7]><link href="stylesheets/magna-charta-ie7.css" rel="stylesheet" type="text/css" media="screen"><![endif]--><!--[if IE 8]><link href="stylesheets/magna-charta-ie8.css" rel="stylesheet" type="text/css" media="screen"><![endif]--><!--[if IE 9]><link href="stylesheets/magna-charta-ie9.css" rel="stylesheet" type="text/css" media="screen"><![endif]-->
-  <script src="jquery.min.js"></script>
-  <script src="magna-charta.min.js"></script>
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="magna-charta.js"></script>
+
   <script src="demo.js"></script>
 </head>
 <body>
@@ -60,20 +64,20 @@
     </tbody>
   </table>
 
-  <table class="chart left-key mc-stacked" id="fig2">
-    <caption>Fig. 2: Cookies rated by size and taste</caption>
+  <table class="chart left-key" id="fig2">
+    <caption>Fig. 2: Team biscuit preferences (out of 10)</caption>
     <thead>
-      <tr><th>Biscuit</th><th>Size</th><th>Taste</th><th>Total</th></tr>
+      <tr><th>Biscuit</th><th>Tim</th><th>Jack</th><th>Roo</th></tr>
     </thead>
     <tbody>
-      <tr><td>Caramel Digestives</td><td>8</td><td>9</td><td>17</td></tr>
-      <tr><td>Nice biscuits</td><td>7</td><td>3</td><td>10</td></tr>
-      <tr><td>Teacakes</td><td>4</td><td>4</td><td>8</td></tr>
-      <tr><td>Hobnobs</td><td>5</td><td>3</td><td>8</td></tr>
+      <tr><td>Caramel Digestives</td><td>8</td><td>9</td><td>7</td></tr>
+      <tr><td>Nice biscuits</td><td>7</td><td>3</td><td>5</td></tr>
+      <tr><td>Teacakes</td><td>4</td><td>4</td><td>7</td></tr>
+      <tr><td>Hobnobs</td><td>5</td><td>3</td><td>2</td></tr>
     </tbody>
   </table>
 
-  <table class="stacked chart right-key" id="fig3">
+  <table class="mc-stacked chart right-key" id="fig3">
     <caption>Fig. 3: Combined team biscuit preferences</caption>
     <thead>
       <tr><th>Biscuit</th><th>Tim</th><th>Jack</th><th>Roo</th><th>Total</th></tr>
