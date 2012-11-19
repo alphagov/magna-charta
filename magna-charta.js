@@ -33,7 +33,6 @@
       // the CSS used to turn them into charts is too much for poor IE to handle
       // detection of <IE9 is done via HTML conditional comment to add a class to the html element
       this.DISABLED = (ie && ie < 8);
-      alert(ie);
 
       this.$table = table;
 
