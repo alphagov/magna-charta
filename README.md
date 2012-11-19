@@ -12,6 +12,21 @@ Download the [production version][min] or the [development version][max].
 
 Documentation is on Github Pages, which means we can show you live graphs, rather than screenshots. [Read the documentation and examples](http://alphagov.github.com/magna-charta/).
 
+## Browser Support
+
+Working in:
+
+- Safari 6
+- Chrome
+- Firefox
+- IE9
+- IE8
+- Opera
+- iPad Safari ( toggle functionality doesn't work )
+- Chrome, Android 4.2 ( toggle functionality doesn't work )
+
+By default, we disable the plugin and revert to standard tables for IE<8.
+
 ## Contributing
 
 You're going to need Node, npm and Grunt (`npm install -g grunt`) to work on Magna Charta.
