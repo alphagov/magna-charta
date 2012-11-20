@@ -44,6 +44,10 @@ You're going to need Node, npm and Grunt (`npm install -g grunt`) to work on Mag
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
 
+__1.1.1__
+- change to make the outdented text option to be set through a class on the table, by adding `mc-outdented`, as an alternative to setting it as an option through the JS. Both work, adding a class is preferred.
+
+
 __1.1.0__
 - added options to allow the text to be outdented, so it sits outside the bar, just to the right.
 - To do this, set `outdentText` option to `true`. The default amount to allow is the bar width + 3%, but you can set the value `outdentTextLevel` to something new.

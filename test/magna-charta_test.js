@@ -30,7 +30,7 @@
   module('jQuery.magnaCharta SINGLE', {
     setup: function() {
       this.$singleTable = $("#qunit-fixture").children("#single");
-      this.singleMC = $.magnaCharta(this.$singleTable, { outdentText: true });
+      this.singleMC = $.magnaCharta(this.$singleTable);
     }
   });
 
@@ -91,6 +91,7 @@
   });
 
   test('setting the outdentText option pushes the text out of the bar', function() {
+    ok(this.singleMC.options.outdentText);
     this.singleMC.$graph.find(".mc-bar-cell").each(function(i, item) {
       var $item = $(item);
       var val = parseFloat($item.text(), 10);

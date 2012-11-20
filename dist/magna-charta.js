@@ -1,4 +1,4 @@
-/*! Magna Charta - v1.1.0 - 2012-11-20
+/*! Magna Charta - v1.1.1 - 2012-11-20
 * https://github.com/alphagov/magna-charta
  */
 
@@ -10,7 +10,6 @@
       var defaults = {
         outOf: 65,
         applyOnInit: true,
-        outdentText: false,
         outdentTextLevel: 3
       };
       this.options = $.extend({}, defaults, options);
@@ -44,6 +43,8 @@
 
       // set the stacked option based on giving the table a class of mc-stacked
       this.options.stacked = this.$table.hasClass("mc-stacked");
+
+      this.options.outdentText = (this.options.outdentText === true ? true : this.$table.hasClass("mc-outdented"));
 
       // set the negative option based on giving the table a class of mc-negative
       this.options.negative = this.$table.hasClass("mc-negative");
