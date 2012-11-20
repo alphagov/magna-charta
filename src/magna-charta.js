@@ -127,13 +127,6 @@
       }
     };
 
-    this.revert = function() {
-      if(!this.DISABLED) {
-        this.restoreText();
-        this.removeWidths();
-      }
-    };
-
     this.removeWidths = function() {
       this.$table.find(".mc-bar-cell").css("width", "").css("margin-left", "");
     };
@@ -194,7 +187,7 @@
 
         $bodyCells.each(function(j, cell) {
 
-          var $cell = $(cell).addClass("mc-bar-cell");
+          var $cell = $(cell).addClass("mc-bar-cell").addClass("mc-bar-" + (j+1));
 
           var cellVal = that.utils.stripValue($cell.text());
 
@@ -252,7 +245,7 @@
     };
 
     this.restoreText = function() {
-      this.$table.find(".mc-bar-cell").each(function(i, item) {
+      this.$graph.find(".mc-bar-cell").each(function(i, item) {
         var $cell = $(item);
         var oldText = $cell.data("oldText");
         if(oldText) {
