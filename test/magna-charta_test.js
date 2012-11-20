@@ -118,7 +118,7 @@
   });
 
   test('the bar cells are given classes denoting their index', function() {
-    var rows = this.stackedMC.$graph.find(".mc-tbody .mc-tr")
+    var rows = this.stackedMC.$graph.find(".mc-tbody .mc-tr");
     rows.each(function(_, row) {
       var cells = $(row).find(".mc-bar-cell");
       cells.each(function(i, cell) {

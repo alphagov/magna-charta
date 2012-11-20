@@ -16,16 +16,17 @@ Documentation is on Github Pages, which means we can show you live graphs, rathe
 
 Working in:
 
+- Safari 5
 - Safari 6
 - Chrome
 - Firefox
 - IE9
 - IE8
 - Opera
-- iPad Safari ( toggle functionality doesn't work )
-- Chrome, Android 4.2 ( toggle functionality doesn't work )
+- iPhone, iPad
+- Chrome, Android 4.2
 
-By default, we disable the plugin and revert to standard tables for IE<8.
+By default, we disable the plugin and revert to standard tables for IE < 8.
 
 ## Contributing
 
@@ -38,14 +39,13 @@ You're going to need Node, npm and Grunt (`npm install -g grunt`) to work on Mag
 - Get all tests passing.
 - Push up to your fork, and then make a pull request.
 
-## Release History
+## Release History / Changelist
 
-__V0.5.0__
-- supports negative values in bar charts. See the [demo graphs](http://alphagov.github.com/magna-charta/).
-- CSS rewritten by [Tim](http://github.com/timpaul), using SASS, to provide much nicer examples.
-- We add many more useful classes to the chart to help you with CSS styling. Again, see the [documentation](http://alphagov.github.com/magna-charta).
-- Added CSS that turns the table header into a legend / key, through purely CSS.
+_We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
-__V0.1.0__
-- initial release!
+__1.0.0__
+- we completely rewrote Magna Charta, and are "re-releasing" as V1.0.0. From now on we'll use proper semantic versioning to manage releases.
+- instead of applying CSS and styling to a table, we duplicate the table as a large amount of `div`s, that are styled. Doing this instead of styling a table means we end up not fighting browser's interpretations of table styling.
+
+
 

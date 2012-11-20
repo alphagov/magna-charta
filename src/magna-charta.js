@@ -17,32 +17,32 @@
       };
       this.options = $.extend({}, defaults, options);
 
-      /* detecting IE versions
-       * taken from James Padolsey: https://gist.github.com/527683
+      /* detecting IE version
+       * original from James Padolsey: https://gist.github.com/527683
+       * and then rewritten to pass our JSHint
        */
-      var ie = (function(){
+      var ie = (function() {
         var undef,
-        v = 3,
-        div = document.createElement('div'),
-        all = div.getElementsByTagName('i');
-        while (
-          div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
-          all[0]
-        );
-        return v > 4 ? v : undef;
-      }());
-      // if it's IE8 or less, we just show the plain tables
-      // the CSS used to turn them into charts is too much for poor IE to handle
-      // detection of <IE9 is done via HTML conditional comment to add a class to the html element
-      this.DISABLED = (ie && ie < 8);
+            v = 3,
+            div = document.createElement('div'),
+            all = div.getElementsByTagName('i');
+        do {
+          div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->';
+        } while(v < 10 && all[0]);
+
+        return (v > 4) ? v : undef;
+      })();
+
+      // if it's IE7 or less, we just show the plain tables
+      this.ENABLED = !(ie && ie < 8);
 
       this.$table = table;
 
       // lets make what will become the new graph
       this.$graph = $(document.createElement("div"));
 
+      // copy over classes from the table, and add the extra one
       this.$graph.attr("class", this.$table.attr("class")).addClass("mc-chart");
-
 
       // set the stacked option based on giving the table a class of mc-stacked
       this.options.stacked = this.$table.hasClass("mc-stacked");
@@ -50,7 +50,7 @@
       // set the negative option based on giving the table a class of mc-negative
       this.options.negative = this.$table.hasClass("mc-negative");
 
-      if(!this.DISABLED && this.options.applyOnInit) {
+      if(this.ENABLED && this.options.applyOnInit) {
         this.apply();
       }
 
@@ -119,16 +119,12 @@
 
 
     this.apply = function() {
-      if(!this.DISABLED) {
+      if(this.ENABLED) {
         this.constructChart();
         this.calculateMaxWidth();
         this.applyWidths();
         this.insert();
       }
-    };
-
-    this.removeWidths = function() {
-      this.$table.find(".mc-bar-cell").css("width", "").css("margin-left", "");
     };
 
     this.utils = {
@@ -152,7 +148,6 @@
 
 
     this.calculateMaxWidth = function() {
-
 
       // JS scoping sucks
       var that = this;
