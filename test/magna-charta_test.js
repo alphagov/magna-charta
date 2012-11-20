@@ -22,6 +22,11 @@
       raises(block, [expected], [message])
   */
 
+  //widths are 65/max * val (65 by default)
+  var cW = function(max, val) {
+    return (65/max)*val+"%";
+  };
+
   module('jQuery.magnaCharta SINGLE', {
     setup: function() {
       this.$singleTable = $("#qunit-fixture").children("#single");
@@ -30,10 +35,6 @@
   });
 
 
-  //widths are 65/max * val (65 by default)
-  var cW = function(max, val) {
-    return (65/max)*val+"%";
-  };
 
   test('creates a new div containing the chart', function() {
     equal(this.singleMC.$graph.length, 1);
@@ -83,91 +84,108 @@
     ok(this.singleMC.$table.next().hasClass("mc-chart"));
   });
 
+  test('bars are given classes to track what number they are', function() {
+    this.singleMC.$graph.find(".mc-bar-cell").each(function(i, item) {
+      ok($(item).hasClass("mc-bar-1"));
+    });
+  });
 
-  // test('adds a class to all table cells that become bars', function() {
-  //   equal(this.$singleTable.find(".mc-bar-cell").length, 3, 'single table should have three bars');
-  //   equal(this.$multiTable.find(".mc-bar-cell").length, 6, 'stacked should have 6 bars');
-  //   equal(this.$negTable.find(".mc-bar-cell").length, 4, 'negative should have 4 bars');
-  // });
+  module('jQuery.magnaCharta STACKED', {
+    setup: function() {
+      this.$stackedTable = $("#qunit-fixture").children("#multiple");
+      this.stackedMC = $.magnaCharta(this.$stackedTable);
+    }
+  });
 
-  // test('adds a class to all cells that become keys (including headers)', function() {
-  //   equal(this.$singleTable.find(".mc-key-cell").length, 4);
-  // });
+  test('having the class of mc-stacked sets stacked to true', function() {
+    ok(this.stackedMC.options.stacked);
+  });
 
-  // test('you can set options by applying classes', function() {
-  //   ok(this.negMC.options.negative);
-  //   ok(this.multiMC.options.stacked);
-  //   ok(!this.singleMC.options.negative);
-  //   ok(!this.multiMC.options.negative);
-  // });
+  test('the cells that become bars are given the right classes', function() {
+    equal(this.stackedMC.$graph.find(".mc-bar-cell").length, 6, 'bar cells');
+    equal(this.stackedMC.$graph.find(".mc-key-cell").length, 3, 'key cells');
+    equal(this.stackedMC.$graph.find(".mc-stacked-total").length, 3, 'total cells');
+  });
+
+  test('the bar cells are given the right widths', function() {
+    var cells = this.stackedMC.$graph.find(".mc-bar-cell");
+    equal(cells.get(0).style.width, cW(12, 5));
+    equal(cells.get(1).style.width, cW(12, 6));
+    equal(cells.get(2).style.width, cW(12, 6));
+    equal(cells.get(3).style.width, cW(12, 2));
+    equal(cells.get(4).style.width, cW(12, 3));
+    equal(cells.get(5).style.width, cW(12, 9));
+  });
+
+  test('the bar cells are given classes denoting their index', function() {
+    var rows = this.stackedMC.$graph.find(".mc-tbody .mc-tr")
+    rows.each(function(_, row) {
+      var cells = $(row).find(".mc-bar-cell");
+      cells.each(function(i, cell) {
+        ok($(cell).hasClass("mc-bar-" + (i+1)));
+      });
+    });
+  });
+
+  test('calulateMaxWidth returns object with right max value in', function() {
+    deepEqual(this.stackedMC.calculateMaxWidth(), {
+      max: parseFloat(12, 10),
+      single: parseFloat(65/12, 10)
+    });
+  });
 
 
-  // test('calulateMaxWidth returns object with right max value in', function() {
+  module('jQuery.magnaCharta NEGATIVE', {
+    setup: function() {
+      this.$negTable = $("#qunit-fixture").children("#negative");
+      this.negMC = $.magnaCharta(this.$negTable);
+    }
+  });
 
-  //   deepEqual(this.multiMC.calculateMaxWidth(), {
-  //     max: parseFloat(12, 10),
-  //     single: parseFloat(65/12, 10)
-  //   });
+  test('class mc-negative sets negative option to true', function() {
+    ok(this.negMC.options.negative);
+  });
 
-  //   // need to restore the text to use negative values
-  //   this.negMC.restoreText();
-  //   deepEqual(this.negMC.calculateMaxWidth(), {
-  //     max: parseFloat(10, 10),
-  //     single: parseFloat(65/10, 10),
-  //     marginLeft: parseFloat(10, 10) * parseFloat(65/10, 10),
-  //     maxNegative: parseFloat(10, 10)
-  //   }, "Gives back extra info for the negative charts");
-  // });
+  test('cells are given positive and negative classes', function() {
+    equal(this.negMC.$graph.find(".mc-bar-negative").length, 2);
+    equal(this.negMC.$graph.find(".mc-bar-positive").length, 2);
+  });
 
-  // test('applying the calculated widths correctly', function() {
-  //   equal(this.$singleTable.find("tbody td").get(1).style.width, cW(5, 5));
-  //   equal(this.$singleTable.find("tbody td").get(3).style.width, cW(5, 4));
-  //   equal(this.$singleTable.find("tbody td").get(5).style.width, cW(5, 3));
+  test('cells are given the right width', function() {
+    var cells = this.negMC.$graph.find(".mc-bar-cell");
+    equal(cells.get(0).style.width, cW(10, 5));
+    equal(cells.get(1).style.width, cW(10, 10));
+    equal(cells.get(2).style.width, cW(10, 10));
+    equal(cells.get(3).style.width, cW(10, 5));
+  });
 
-  //   equal(this.$multiTable.find("tbody td").get(1).style.width, cW(12, 5));
-  //   equal(this.$multiTable.find("tbody td").get(2).style.width, cW(12, 6));
-  //   equal(this.$multiTable.find("tbody td").get(5).style.width, cW(12, 6));
-  //   equal(this.$multiTable.find("tbody td").get(6).style.width, cW(12, 2));
-  //   equal(this.$multiTable.find("tbody td").get(9).style.width, cW(12, 3));
-  //   equal(this.$multiTable.find("tbody td").get(10).style.width, cW(12, 9));
-  // });
+  test('positive cells are given a left margin to align them with negative cells', function() {
+    var cells = this.negMC.$graph.find(".mc-bar-positive");
+    equal(cells.get(0).style.marginLeft, cW(10, 10));
+  });
 
-  // test('it can revert back to a regular table', function() {
-  //   this.singleMC.revert();
-  //   equal(this.$singleTable.find(".mc-key-cell").length, 0);
-  //   equal(this.$singleTable.find(".mc-bar-cell").length, 0);
-  //   equal(this.$singleTable.find(".mc-row").length, 0);
-  //   equal(this.$singleTable.find("tbody td").get(1).style.width, "");
-  // });
+  test('calculateMaxWidth() returns extra info on negative chart', function() {
+    // need to restore the text to use negative values
+    this.negMC.restoreText();
+    deepEqual(this.negMC.calculateMaxWidth(), {
+      max: parseFloat(10, 10),
+      single: parseFloat(65/10, 10),
+      marginLeft: parseFloat(10, 10) * parseFloat(65/10, 10),
+      maxNegative: parseFloat(10, 10)
+    }, "Gives back extra info for the negative charts");
+  });
 
-  // test('it can revert back to a regular table and then back to chart', function() {
-  //   this.singleMC.revert();
-  //   equal(this.$singleTable.find(".mc-key-cell").length, 0);
-  //   equal(this.$singleTable.find(".mc-bar-cell").length, 0);
-  //   equal(this.$singleTable.find(".mc-row").length, 0);
-  //   equal(this.$singleTable.find("tbody td").get(1).style.width, "");
-  //   this.singleMC.apply();
-  //   equal(this.$singleTable.find("tbody td").get(1).style.width, (65/5)*5 + "%");
-  //   equal(this.$singleTable.find(".mc-bar-cell").length, 3);
-  // });
 
-  // test('for negative charts, it adds extra classes', function() {
-  //   equal(this.$negTable.find(".mc-bar-positive").length, 2);
-  //   equal(this.$negTable.find(".mc-bar-negative").length, 2);
-  // });
 
-  // test('for negative charts, it adds margins to the positive bars equal to the width of the negative bar', function() {
-  //   equal(this.$negTable.find(".mc-bar-positive")[0].style.marginLeft, cW(10, 10));
-  //   equal(this.$negTable.find(".mc-bar-positive")[1].style.marginLeft, cW(10, 10));
-  // });
 
-  // test('for negative charts, it applies the right widths', function() {
-  //   equal(this.$negTable.find(".mc-bar-positive")[0].style.width, cW(10, 10));
-  //   equal(this.$negTable.find(".mc-bar-positive")[1].style.width, cW(10, 5));
-  //   equal(this.$negTable.find(".mc-bar-negative")[0].style.width, cW(10, 5));
-  //   equal(this.$negTable.find(".mc-bar-negative")[1].style.width, cW(10, 10));
-  // });
 
+
+  module('jQuery.magnaCharta utils', {
+    setup: function() {
+      this.$singleTable = $("#qunit-fixture").children("#single");
+      this.singleMC = $.magnaCharta(this.$singleTable);
+    }
+  });
   test('utils.isFloat', function() {
     ok(this.singleMC.utils.isFloat(4.56), "4.56 is a float");
     ok(this.singleMC.utils.isFloat(7), "7 is a float");
