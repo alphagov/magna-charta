@@ -31,7 +31,6 @@ $bar-colours:  $dark-blue,
 
 // THE STYLES
 
-@import 'conditionals';     // Mixins for IE and device-type conditionals 
 
 .mc-chart {
   font-size: $font-size;
@@ -126,40 +125,13 @@ $bar-colours:  $dark-blue,
   // Charts with multiple columns get different coloured bars
   $len: length($bar-colours);
   @for $i from 0 to $len {
-   .mc-tr .mc-td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($bar-colours, $i + 1)}
-   .mc-tr .mc-th:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($bar-colours, $i + 1)}
-  }
+   .mc-tr .mc-td.mc-bar-cell.mc-bar-#{$i+1} {
+     background-color: nth($bar-colours, $i + 1);
+   }
+   .mc-tr .mc-th.mc-key-#{$i+1} {
+     border-left-color: nth($bar-colours, $i+1);
+   }
 
-  @include ie-lte(8) {
-    // IE 7 and 8 compatible version of the above
-    // It uses adjascent sibling selectors instead of nth-child
-    // If you want to handle more than ten colours you'll need to add rows to the variables below
-    $ie-bars: '.mc-bar-cell',
-              '.mc-bar-cell + .mc-bar-cell',
-              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
-              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
-              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
-              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
-              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
-              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
-              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
-              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell';
-
-    $ie-keys: '.mc-key-cell',
-              '.mc-key-cell + .mc-key-cell',
-              '.mc-key-cell + .mc-key-cell + .mc-key-cell',
-              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
-              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
-              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
-              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
-              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
-              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
-              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell';
-
-    @for $i from 0 to $len {
-      .mc-tr #{nth($ie-bars, $i + 1)}{background-color: nth($bar-colours, $i + 1)}
-      .mc-tr #{nth($ie-keys, $i + 1)}{border-left-color: nth($bar-colours, $i + 1)}
-    }
   }
 
   .mc-td, .mc-th {

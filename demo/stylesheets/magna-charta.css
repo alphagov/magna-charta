@@ -62,21 +62,21 @@
     font-size: 12px;
     text-indent: 2px;
     padding: 0; }
-  .mc-chart .mc-tr .mc-td.mc-bar-cell:nth-child(4n+2) {
+  .mc-chart .mc-tr .mc-td.mc-bar-cell.mc-bar-1 {
     background-color: #1a2791; }
-  .mc-chart .mc-tr .mc-th:nth-child(4n+2) {
+  .mc-chart .mc-tr .mc-th.mc-key-1 {
     border-left-color: #1a2791; }
-  .mc-chart .mc-tr .mc-td.mc-bar-cell:nth-child(4n+3) {
+  .mc-chart .mc-tr .mc-td.mc-bar-cell.mc-bar-2 {
     background-color: #005abb; }
-  .mc-chart .mc-tr .mc-th:nth-child(4n+3) {
+  .mc-chart .mc-tr .mc-th.mc-key-2 {
     border-left-color: #005abb; }
-  .mc-chart .mc-tr .mc-td.mc-bar-cell:nth-child(4n+4) {
+  .mc-chart .mc-tr .mc-td.mc-bar-cell.mc-bar-3 {
     background-color: #5bb4e5; }
-  .mc-chart .mc-tr .mc-th:nth-child(4n+4) {
+  .mc-chart .mc-tr .mc-th.mc-key-3 {
     border-left-color: #5bb4e5; }
-  .mc-chart .mc-tr .mc-td.mc-bar-cell:nth-child(4n+5) {
+  .mc-chart .mc-tr .mc-td.mc-bar-cell.mc-bar-4 {
     background-color: #55bab7; }
-  .mc-chart .mc-tr .mc-th:nth-child(4n+5) {
+  .mc-chart .mc-tr .mc-th.mc-key-4 {
     border-left-color: #55bab7; }
   .mc-chart .mc-td, .mc-chart .mc-th {
     padding: 0;
