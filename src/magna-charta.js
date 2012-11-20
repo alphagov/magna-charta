@@ -152,12 +152,13 @@
       var headerCells = this.$graph.find(".mc-th");
       if(this.options.stacked) {
         headerCells.last().addClass("mc-stacked-header");
-      };
+      }
       headerCells = headerCells.filter(":not(:first)").addClass("mc-key-header");
       headerCells.filter(":not(.mc-stacked-header)").each(function(i, item) {
         $(item).addClass("mc-key-" + (i+1));
       });
-    }
+    };
+
     this.calculateMaxWidth = function() {
 
       // JS scoping sucks
