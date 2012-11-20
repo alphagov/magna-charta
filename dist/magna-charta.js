@@ -1,4 +1,4 @@
-/*! Magna Charta - v1.0.0 - 2012-11-20
+/*! Magna Charta - v1.1.0 - 2012-11-20
 * https://github.com/alphagov/magna-charta
  */
 
@@ -9,7 +9,9 @@
     this.init = function(table, options) {
       var defaults = {
         outOf: 65,
-        applyOnInit: true
+        applyOnInit: true,
+        outdentText: false,
+        outdentTextLevel: 3
       };
       this.options = $.extend({}, defaults, options);
 
@@ -295,6 +297,10 @@
           }
 
           $cell.css("width", absParsedVal + "%");
+
+          if(that.options.outdentText) {
+            $cell.css("text-indent", (absParsedVal + that.options.outdentTextLevel) + "%");
+          }
 
           // set the text to be the absolute value
           // but first save the old value

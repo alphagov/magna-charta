@@ -30,7 +30,7 @@
   module('jQuery.magnaCharta SINGLE', {
     setup: function() {
       this.$singleTable = $("#qunit-fixture").children("#single");
-      this.singleMC = $.magnaCharta(this.$singleTable);
+      this.singleMC = $.magnaCharta(this.$singleTable, { outdentText: true });
     }
   });
 
@@ -87,6 +87,14 @@
   test('bars are given classes to track what number they are', function() {
     this.singleMC.$graph.find(".mc-bar-cell").each(function(i, item) {
       ok($(item).hasClass("mc-bar-1"));
+    });
+  });
+
+  test('setting the outdentText option pushes the text out of the bar', function() {
+    this.singleMC.$graph.find(".mc-bar-cell").each(function(i, item) {
+      var $item = $(item);
+      var val = parseFloat($item.text(), 10);
+      equal($item[0].style.textIndent, parseFloat($item[0].style.width, 10) + 3 + "%");
     });
   });
 
