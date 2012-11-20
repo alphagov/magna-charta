@@ -22,6 +22,11 @@
       raises(block, [expected], [message])
   */
 
+  //widths are 65/max * val (65 by default)
+  var cW = function(max, val) {
+    return (65/max)*val+"%";
+  };
+
   module('jQuery.magnaCharta SINGLE', {
     setup: function() {
       this.$singleTable = $("#qunit-fixture").children("#single");
@@ -30,10 +35,6 @@
   });
 
 
-  //widths are 65/max * val (65 by default)
-  var cW = function(max, val) {
-    return (65/max)*val+"%";
-  };
 
   test('creates a new div containing the chart', function() {
     equal(this.singleMC.$graph.length, 1);
@@ -83,23 +84,34 @@
     ok(this.singleMC.$table.next().hasClass("mc-chart"));
   });
 
+  module('jQuery.magnaCharta STACKED', {
+    setup: function() {
+      this.$stackedTable = $("#qunit-fixture").children("#multiple");
+      this.stackedMC = $.magnaCharta(this.$stackedTable);
+    }
+  });
 
-  // test('adds a class to all table cells that become bars', function() {
-  //   equal(this.$singleTable.find(".mc-bar-cell").length, 3, 'single table should have three bars');
-  //   equal(this.$multiTable.find(".mc-bar-cell").length, 6, 'stacked should have 6 bars');
-  //   equal(this.$negTable.find(".mc-bar-cell").length, 4, 'negative should have 4 bars');
-  // });
+  test('having the class of mc-stacked sets stacked to true', function() {
+    ok(this.stackedMC.options.stacked);
+  });
 
-  // test('adds a class to all cells that become keys (including headers)', function() {
-  //   equal(this.$singleTable.find(".mc-key-cell").length, 4);
-  // });
+  test('the cells that become bars are given the right classes', function() {
+    equal(this.stackedMC.$graph.find(".mc-bar-cell").length, 6, 'bar cells');
+    equal(this.stackedMC.$graph.find(".mc-key-cell").length, 3, 'key cells');
+    equal(this.stackedMC.$graph.find(".mc-stacked-total").length, 3, 'total cells');
+  });
 
-  // test('you can set options by applying classes', function() {
-  //   ok(this.negMC.options.negative);
-  //   ok(this.multiMC.options.stacked);
-  //   ok(!this.singleMC.options.negative);
-  //   ok(!this.multiMC.options.negative);
-  // });
+  test('the bar cells are given the right widths', function() {
+    var cells = this.stackedMC.$graph.find(".mc-bar-cell");
+    equal(cells.get(0).style.width, cW(12, 5));
+    equal(cells.get(1).style.width, cW(12, 6));
+    equal(cells.get(2).style.width, cW(12, 6));
+    equal(cells.get(3).style.width, cW(12, 2));
+    equal(cells.get(4).style.width, cW(12, 3));
+    equal(cells.get(5).style.width, cW(12, 9));
+  });
+
+
 
 
   // test('calulateMaxWidth returns object with right max value in', function() {
@@ -168,6 +180,12 @@
   //   equal(this.$negTable.find(".mc-bar-negative")[1].style.width, cW(10, 10));
   // });
 
+  module('jQuery.magnaCharta utils', {
+    setup: function() {
+      this.$singleTable = $("#qunit-fixture").children("#single");
+      this.singleMC = $.magnaCharta(this.$singleTable);
+    }
+  });
   test('utils.isFloat', function() {
     ok(this.singleMC.utils.isFloat(4.56), "4.56 is a float");
     ok(this.singleMC.utils.isFloat(7), "7 is a float");
