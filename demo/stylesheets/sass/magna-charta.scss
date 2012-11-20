@@ -33,69 +33,72 @@ $bar-colours:  $dark-blue,
 
 @import 'conditionals';     // Mixins for IE and device-type conditionals 
 
-.mc-table {
+.mc-chart {
   font-size: $font-size;
-  border-collapse: separate;
+  display: table;
+  width: 100%;
   border-spacing: 0 $bar-spacing;
   border: 1px solid $chart-border;
   padding: $font-size 0;
   position: relative;
 
   // KEY
-  thead {
+  .mc-thead {
     background-color: #fff;
     display: table-header-group;
-    padding: 0 $bar-spacing;
+    padding: $bar-spacing;
     border: 1px solid $key-border;
-    @include ie-lte(9) {
-      width: $key-width;
-    }
-    th{
-      display: none;
-      &.mc-key-cell {
-        display: block;
-        @include ie-lte(9) {
-          float: left;
-        }
-        margin-bottom: $bar-spacing;
-        margin-left: 100%;
-        padding-left: $bar-spacing;
-        border-left: $font-size solid;
-        text-align: left;
-        font-weight: normal;
-        width: 100%;
-        &:last-child{
-          margin-bottom: 0;
-        }
+    .mc-th{
+      display: block;
+      margin-bottom: $bar-spacing;
+      padding-left: $bar-spacing;
+      border-left: $font-size solid;
+      text-align: left;
+      font-weight: normal;
+      width: 100%;
+      &:first-child{
+        display: none;
+      }
+      &:last-child{
+        margin-bottom: 0;
       }
     }
   }
+
+  .mc-tbody{
+    display: table-row-group;
+    .mc-tr{
+      display: table-row;
+    }
+  }
+
   // RIGHT AND LEFT-ALIGNED KEYS
-  &.right-key thead,
-  &.left-key thead{
+  &.right-key .mc-thead,
+  &.left-key .mc-thead{
     position: absolute;
     top: 116px;
     .mc-key-cell{   
       margin-left: 0;
+      display: table-cell;
     }
   }
-  &.right-key thead{
+  &.right-key .mc-thead{
     right: 26px;
   }
-  &.left-key thead{
+  &.left-key .mc-thead{
     left: 26px;
   }
   // HIDE KEY
-  &.no-key thead{
+  &.no-key .mc-thead{
     display: none;
   }
 
   // STACKED CHARTS
   &.mc-stacked {
-    th:last-child{
+    .mc-th:last-child{
       display: none;
     }
-    th:nth-last-child(2){
+    .mc-th:nth-last-child(2){
       margin-bottom: 0;
     }
     .mc-stacked-total{
@@ -103,16 +106,10 @@ $bar-colours:  $dark-blue,
       background-color: transparent !important;
       color: $black;
       display: inline-block;
-      text-indent: 5px;      
-      @include ie-lte(9) {
-        float: left;
-      }
+      text-indent: 5px;
     }
-    tbody td.mc-bar-cell{
+    .mc-tbody .mc-td.mc-bar-cell{
       display: inline-block;
-      @include ie-lte(9) {
-        margin-right: 0;
-      }
     }
   }
 
@@ -129,56 +126,53 @@ $bar-colours:  $dark-blue,
   // Charts with multiple columns get different coloured bars
   $len: length($bar-colours);
   @for $i from 0 to $len {
-   tr td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($bar-colours, $i + 1)}
-   tr th.mc-key-cell:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($bar-colours, $i + 1)}
+   .mc-tr .mc-td.mc-bar-cell:nth-child(#{$len}n+#{$i + 2}){background-color: nth($bar-colours, $i + 1)}
+   .mc-tr .mc-th:nth-child(#{$len}n+#{$i + 2}){border-left-color: nth($bar-colours, $i + 1)}
   }
 
   @include ie-lte(8) {
     // IE 7 and 8 compatible version of the above
     // It uses adjascent sibling selectors instead of nth-child
     // If you want to handle more than ten colours you'll need to add rows to the variables below
-    $ie-bars: 'td.mc-bar-cell',
-              'td.mc-bar-cell + td.mc-bar-cell',
-              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
-              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
-              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
-              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
-              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
-              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
-              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell',
-              'td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell + td.mc-bar-cell';
+    $ie-bars: '.mc-bar-cell',
+              '.mc-bar-cell + .mc-bar-cell',
+              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
+              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
+              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
+              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
+              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
+              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
+              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell',
+              '.mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell + .mc-bar-cell';
 
-    $ie-keys: 'th.mc-key-cell',
-              'th.mc-key-cell + th.mc-key-cell',
-              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
-              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
-              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
-              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
-              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
-              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
-              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell',
-              'th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell + th.mc-key-cell';
+    $ie-keys: '.mc-key-cell',
+              '.mc-key-cell + .mc-key-cell',
+              '.mc-key-cell + .mc-key-cell + .mc-key-cell',
+              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
+              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
+              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
+              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
+              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
+              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell',
+              '.mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell + .mc-key-cell';
 
     @for $i from 0 to $len {
-      tr #{nth($ie-bars, $i + 1)}{background-color: nth($bar-colours, $i + 1)}
-      tr #{nth($ie-keys, $i + 1)}{border-left-color: nth($bar-colours, $i + 1)}
+      .mc-tr #{nth($ie-bars, $i + 1)}{background-color: nth($bar-colours, $i + 1)}
+      .mc-tr #{nth($ie-keys, $i + 1)}{border-left-color: nth($bar-colours, $i + 1)}
     }
   }
 
-  td, th {
+  .mc-td, .mc-th {
     padding: 0;
     padding-right: $bar-spacing;
     margin-right: $stack-spacing;
     border: 0 solid; 
     &.mc-bar-cell { 
       display: block;
+      background-color: #ebebeb; // Just for testing
       text-align: left;
       padding: $bar-padding 0;
       margin-bottom: 1px;
-      @include ie-lte(9) {
-        float: left;
-        margin-right: 100%;
-      }
       color: $white;
       text-indent: $bar-padding;
     }
@@ -191,11 +185,12 @@ $bar-colours:  $dark-blue,
   caption{
     caption-side: $caption-side;
   }
-  td.mc-key-cell {
+  .mc-td.mc-key-cell {
     width: $label-width;
     text-indent: 26px;
     text-align: $label-align;
     display: table-cell;
+    vertical-align: middle;
   }
 
 }
