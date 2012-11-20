@@ -13,7 +13,8 @@
     this.init = function(table, options) {
       var defaults = {
         outOf: 65,
-        applyOnInit: true
+        applyOnInit: true,
+        outdentTextLevel: 3
       };
       this.options = $.extend({}, defaults, options);
 
@@ -46,6 +47,8 @@
 
       // set the stacked option based on giving the table a class of mc-stacked
       this.options.stacked = this.$table.hasClass("mc-stacked");
+
+      this.options.outdentText = (this.options.outdentText === true ? true : this.$table.hasClass("mc-outdented"));
 
       // set the negative option based on giving the table a class of mc-negative
       this.options.negative = this.$table.hasClass("mc-negative");
@@ -251,18 +254,7 @@
       return resp;
     };
 
-    this.restoreText = function() {
-      this.$graph.find(".mc-bar-cell").each(function(i, item) {
-        var $cell = $(item);
-        var oldText = $cell.data("oldText");
-        if(oldText) {
-          $cell.text(oldText);
-        }
-      });
-    };
-
     this.applyWidths = function() {
-      this.restoreText();
       this.dimensions = this.calculateMaxWidth();
 
       var that = this;
@@ -283,9 +275,12 @@
 
           // apply the left margin to the positive bars
           if(that.options.negative) {
+            // if we have to outdent the text, all bars need a small extra left margin
+
             if($cell.hasClass("mc-bar-positive")) {
               $(cell).css("margin-left", that.dimensions.marginLeft + "%");
             } else {
+
               // if its negative but not the maximum negative
               // we need to give it enough margin to push it further right to align
               if(absParsedCellVal < that.dimensions.maxNegative ) {
@@ -294,16 +289,29 @@
                 var leftMarg = (that.dimensions.maxNegative - absParsedCellVal) * that.dimensions.single;
                 $cell.css("margin-left", leftMarg + "%");
               }
+
+              // set the text indent to negative to pull values just out of the bar
+              if(that.options.outdentText) {
+                $cell.css("text-indent", -(that.options.outdentTextLevel) + "%");
+              }
             }
 
+            // there's text to the left of some of the bars
+            // so what we do is push all the bars to the right slightly
+            // to give room for the text to the left of the negative bars
+            if(that.options.outdentText) {
+              // for some unknown reason, $cell.css("margin-left") doesn't work here
+              // hence the use of [0].style.marginLeft
+              var curLeft = parseFloat($cell[0].style.marginLeft || 0, 10);
+              $cell.css("margin-left", curLeft + that.options.outdentTextLevel + "%");
+            }
           }
 
           $cell.css("width", absParsedVal + "%");
 
-          // set the text to be the absolute value
-          // but first save the old value
-          $cell.data("oldText", $cell.text());
-          $cell.text(absParsedCellVal);
+          if(that.options.outdentText && ($cell.hasClass("mc-bar-positive") || !that.options.negative)) {
+            $cell.css("text-indent", (absParsedVal + that.options.outdentTextLevel) + "%");
+          }
         });
       });
     };
