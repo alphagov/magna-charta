@@ -37,6 +37,11 @@
       width: 220px;
       margin: 5px 0;
     }
+    pre { margin: 10px 0; padding: 5px; }
+
+    h2, h1, ul { margin: 15px 0; }
+    p, li { margin 10px 0; line-height: 24px; font-size: 16px;}
+    code { font-size: 16px; line-height: 25px;}
   </style>
   <link rel="stylesheet" type="text/css" href="demo/stylesheets/magna-charta.css" />
 
@@ -47,6 +52,54 @@
 </head>
 <body>
   <a href="https://www.github.com/alphagov/magna-charta"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+    <div class="container">
+      <h1>Magna Charta</h1>
+
+      <p>Magna Charter is a jQuery plugin used to create accessible and lovely looking bar charts.</p>
+
+      <h2>How it works</h2>
+
+      <p>It works by duplicating the table into a <code>div</code>, containing more <code>div</code>s, which are given various classes to be styled. We provide a sample stylesheet, but none of the styles are applied through the JS. The styling is entirely up to you. The JavaScript is used to give each "bar" within the chart a width, relative to the value within it. </p>
+
+      <h2>How to use it</h2>
+      <p>Grab yourself a copy of jQuery and the <a href="https://raw.github.com/alphagov/magna-charta/master/dist/magna-charta.min.js">Magna Charta source</a>.
+
+      <p>Then you'll want to simply call <code>$.magnaCharta</code> on some tables:</p>
+      <pre>
+        <code>
+          var chart = $.magnaCharta($("#table1"));
+        </code>
+      </pre>
+      <p>Once you instantiate the chart, the Magna Charta object is returned to you.</p>
+
+      <p>There are a couple of options you can pass into the magnaCharta on init:</p>
+      <pre>
+        <code>
+        var chart = $.magnaCharta($("table"), {
+          outOf: 65,
+          applyOnInit: true
+        });
+        </code>
+      </pre>
+
+      <p>The values assigned above are the defaults.</p>
+      <ul>
+       <li><code>outOf</code> means what total % to divide by to calculate the percentages. 95 means that the biggest bar will take up 95% of the width of the table. This is useful as it leaves you room to add some margins, or perhaps some text that hangs off the edge of the chart.</li>
+       <li><code>applyOnInit</code> turns the tables into charts as soon as they are initialised. If you set this to false, you'll need to manually apply the charts with: <code>chart.apply();</code>.</li>
+     </ul>
+
+     <p>MC doesn't add any CSS at all. We don't like plugins that dictate appearances too much. What we do is add some really useful CSS classes to things to easily let you style things. As the graph is created by using <code>div</code>s to recreate the table structure, a lot of the classes map directly to their table counterparts. For example, we have these classes: <code>.mc-thead, .mc-tbody, .mc-th, .mc-td</code>. There's also a few more useful ones:</p>
+      <ul>
+        <li><code>.mc-chart</code> given to the div containing the new graph.</li>
+        <li><code>.mc-bar-cell</code> given to a cell that is turned into a bar</li>
+        <li><code>.mc-key-cell</code> given to a cell that is a key, denoting what the bars represent.</li>
+      </ul>
+
+      <p>Bars are also given numbered values to help you colour them. For example, in a <code>div.mc-tr</code>, if there are four <code>.mc-bar-cell</code>, each will receieve an extra class of <code>.mc-bar-i</code>, where i is a number 1-4.</p>
+
+      <p>We suggest you look at the sample stylesheet provided to see how we use these classes, and what other ones exist.</p>
+
+
   <h1>Magna Charta examples</h1>
 
   <table class="chart no-key" id="fig1">
