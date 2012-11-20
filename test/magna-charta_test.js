@@ -112,6 +112,36 @@
   });
 
 
+  module('jQuery.magnaCharta NEGATIVE', {
+    setup: function() {
+      this.$negTable = $("#qunit-fixture").children("#negative");
+      this.negMC = $.magnaCharta(this.$negTable);
+    }
+  });
+
+  test('class mc-negative sets negative option to true', function() {
+    ok(this.negMC.options.negative);
+  });
+
+  test('cells are given positive and negative classes', function() {
+    equal(this.negMC.$graph.find(".mc-bar-negative").length, 2);
+    equal(this.negMC.$graph.find(".mc-bar-positive").length, 2);
+  });
+
+  test('cells are given the right width', function() {
+    var cells = this.negMC.$graph.find(".mc-bar-cell");
+    equal(cells.get(0).style.width, cW(10, 5));
+    equal(cells.get(1).style.width, cW(10, 10));
+    equal(cells.get(2).style.width, cW(10, 10));
+    equal(cells.get(3).style.width, cW(10, 5));
+  });
+
+  test('positive cells are given a left margin to align them with negative cells', function() {
+    var cells = this.negMC.$graph.find(".mc-bar-positive");
+    equal(cells.get(0).style.marginLeft, cW(10, 10));
+  });
+
+
 
 
   // test('calulateMaxWidth returns object with right max value in', function() {
