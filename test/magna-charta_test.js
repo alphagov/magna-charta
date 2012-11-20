@@ -174,8 +174,6 @@
   });
 
   test('calculateMaxWidth() returns extra info on negative chart', function() {
-    // need to restore the text to use negative values
-    this.negMC.restoreText();
     deepEqual(this.negMC.calculateMaxWidth(), {
       max: parseFloat(10, 10),
       single: parseFloat(65/10, 10),
