@@ -72,7 +72,7 @@
       </pre>
       <p>Once you instantiate the chart, the Magna Charta object is returned to you.</p>
 
-      <p>There are a couple of options you can pass into the magnaCharta on init:</p>
+      <p>There are some options you can pass into the magnaCharta on init:</p>
       <pre>
         <code>
         var chart = $.magnaCharta($("table"), {
@@ -87,6 +87,14 @@
       <ul>
        <li><code>outOf</code> means what total % to divide by to calculate the percentages. 95 means that the biggest bar will take up 95% of the width of the table. This is useful as it leaves you room to add some margins, or perhaps some text that hangs off the edge of the chart.</li>
        <li><code>applyOnInit</code> turns the tables into charts as soon as they are initialised. If you set this to false, you'll need to manually apply the charts with: <code>chart.apply();</code>.</li>
+       <li><code>outdentTextLevel</code> is the amount (in %) that the text will be pushed away from the edge of the bar, if <code>outdentText</code> is set to true (this is done through adding a class of <code>mc-outdented</code> to your table).</li>
+     </ul>
+
+     <p>There's also some options which are set via a class on your <code>table</code>. These are:</p>
+     <ul>
+       <li><code>mc-stacked</code> creates a stacked bar chart (See Figure 3)</li>
+       <li><code>mc-negative</code> denotes that the chart may have negative values (See Figure 5)</li>
+       <li><code>mc-outdented</code> denotes that the text for each bar should sit just outside the bar (See Figure 1 and 5)</li>
      </ul>
 
      <p>MC doesn't add any CSS at all. We don't like plugins that dictate appearances too much. What we do is add some really useful CSS classes to things to easily let you style things. As the graph is created by using <code>div</code>s to recreate the table structure, a lot of the classes map directly to their table counterparts. For example, we have these classes: <code>.mc-thead, .mc-tbody, .mc-th, .mc-td</code>. There's also a few more useful ones:</p>
