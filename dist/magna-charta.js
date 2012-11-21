@@ -1,4 +1,4 @@
-/*! Magna Charta - v1.1.2 - 2012-11-20
+/*! Magna Charta - v1.1.3 - 2012-11-21
 * https://github.com/alphagov/magna-charta
  */
 
@@ -36,7 +36,7 @@
       this.$table = table;
 
       // lets make what will become the new graph
-      this.$graph = $(document.createElement("div"));
+      this.$graph = $('<div/>').attr('aria-hidden', 'true');
 
       // copy over classes from the table, and add the extra one
       this.$graph.attr("class", this.$table.attr("class")).addClass("mc-chart");
@@ -124,6 +124,7 @@
         this.calculateMaxWidth();
         this.applyWidths();
         this.insert();
+        this.$table.addClass('visually-hidden');
       }
     };
 

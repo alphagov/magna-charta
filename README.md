@@ -43,6 +43,9 @@ You're going to need Node, npm and Grunt (`npm install -g grunt`) to work on Mag
 
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
+__1.1.3__
+- fixed bug that meant screen-reader users did not have access to the tables and instead had to try to understand the div chart
+
 __1.1.2__
 - fixed bug that broke negative bar charts when using outdented text, extra margins are now applied to deal with this. Some CSS styling also required ( see the sample stylesheet within `demo`).
 - removed functionality that removes negative sign from negative values within chart. Decided it was misleading and not entirely clear (hat-tip @rooreynolds).

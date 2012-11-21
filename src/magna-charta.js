@@ -40,7 +40,7 @@
       this.$table = table;
 
       // lets make what will become the new graph
-      this.$graph = $(document.createElement("div"));
+      this.$graph = $('<div/>').attr('aria-hidden', 'true');
 
       // copy over classes from the table, and add the extra one
       this.$graph.attr("class", this.$table.attr("class")).addClass("mc-chart");
@@ -128,6 +128,7 @@
         this.calculateMaxWidth();
         this.applyWidths();
         this.insert();
+        this.$table.addClass('visually-hidden');
       }
     };
 

@@ -4,11 +4,6 @@ $(function() {
     var opts = {};
     //tables[item.id] = $.magnaCharta($(item), {applyOnInit: false});
     tables[item.id] = $.magnaCharta($(item));
-    if(!tables[item.id].DISABLED) {
-      tables[item.id].$table.hide();
-    } else {
-      tables[item.id].$table.find("caption a").hide();
-    }
   });
 
   $(".toggle").on("click", function(e) {
