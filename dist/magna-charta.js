@@ -12,7 +12,8 @@
         applyOnInit: true,
         outdentText: false,
         outdentTextLevel: 3,
-        toggleText: "Toggle between chart and table"
+        toggleText: "Toggle between chart and table",
+        barPadding: 0
       };
 
       this.options = $.extend({}, defaults, options);
@@ -316,7 +317,7 @@
             // if we have to outdent the text, all bars need a small extra left margin
 
             if($cell.hasClass("mc-bar-positive")) {
-              $(cell).css("margin-left", that.dimensions.marginLeft + "%");
+              $cell.css("margin-left", that.dimensions.marginLeft + "%");
             } else {
 
               // if its negative but not the maximum negative
@@ -349,6 +350,14 @@
 
           if(that.options.outdentText && ($cell.hasClass("mc-bar-positive") || !that.options.negative)) {
             $cell.css("text-indent", (absParsedVal + that.options.outdentTextLevel) + "%");
+          }
+
+          // apply the extra padding, but not if it's a negative chart with outdent on
+          // if the cell value is 0, we dont want to add padding
+          if( !(that.options.outdentText && that.options.negative) && absParsedCellVal !== 0 ) {
+
+            var curWidth = parseFloat($cell[0].style.width || 0, 10);
+            $cell.css("width", ( curWidth + that.options.barPadding ) + "%");
           }
         });
       });
