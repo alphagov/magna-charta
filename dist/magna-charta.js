@@ -1,4 +1,4 @@
-/*! Magna Charta - v1.1.3 - 2012-11-21
+/*! Magna Charta - v1.2.0 - 2012-11-21
 * https://github.com/alphagov/magna-charta
  */
 
@@ -10,13 +10,16 @@
       var defaults = {
         outOf: 65,
         applyOnInit: true,
-        outdentTextLevel: 3
+        outdentText: false,
+        outdentTextLevel: 3,
+        toggleText: "Toggle between chart and table"
       };
+
       this.options = $.extend({}, defaults, options);
 
       /* detecting IE version
        * original from James Padolsey: https://gist.github.com/527683
-       * and then rewritten to pass our JSHint
+       * and then rewritten by Jack Franklin to pass JSHint
        */
       var ie = (function() {
         var undef,
@@ -58,6 +61,8 @@
 
     // methods for constructing the chart
     this.construct = {};
+
+    //constructs the header
     this.construct.thead = function() {
       var thead = $("<div />", {
         "class" : "mc-thead"
@@ -104,13 +109,36 @@
       }
     };
 
+    // construct a link to allow the user to toggle between chart and table
+    this.construct.toggleLink = function() {
+      var that = this;
+      return $("<a />", {
+        "href" : "#",
+        "class" : "mc-toggle-link",
+        "text" : this.options.toggleText
+      }).on("click", function(e) {
+        that.toggle(e);
+      });
+    };
+
 
 
     this.constructChart = function() {
       // turn every element in the table into divs with appropriate classes
+      // call them and define this as scope so it's easier to get at options and properties
       var thead = this.construct.thead.call(this);
       var tbody = this.construct.tbody.call(this);
       var caption = this.construct.caption.call(this);
+
+      // this will be added to the div chart
+      var toggleLink = this.construct.toggleLink.call(this);
+      // clone the new toggle link to add to the initial table
+      var tableToggleLink = toggleLink.clone(true);
+      // also add the toggleLink to the table's caption too
+      this.$table.find("caption").append(tableToggleLink);
+      // add it to the chart caption too
+      caption.append(toggleLink);
+
       this.$graph.append(caption);
       this.$graph.append(thead);
       this.$graph.append(tbody);
@@ -126,6 +154,13 @@
         this.insert();
         this.$table.addClass('visually-hidden');
       }
+    };
+
+    // toggles between showing the table and showing the chart
+    this.toggle = function(e) {
+      this.$graph.toggle();
+      this.$table.toggleClass("visually-hidden");
+      e.preventDefault();
     };
 
     this.utils = {
