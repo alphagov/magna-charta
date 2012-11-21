@@ -23,8 +23,9 @@
   */
 
   //widths are 65/max * val (65 by default)
-  var cW = function(max, val) {
-    return (65/max)*val+"%";
+  var cW = function(max, val, padding) {
+    padding = padding || 0;
+    return (65/max)*val+padding+"%";
   };
 
   module('jQuery.magnaCharta SINGLE', {
@@ -183,6 +184,20 @@
   });
 
 
+  module('jQuery.magnaCharta stacked with small values', {
+    setup: function() {
+      this.$stackTable = $("#qunit-fixture").children("#zerovalues");
+      this.stackMC = $.magnaCharta(this.$stackTable, { barPadding: 3 });
+    }
+  });
+
+  test('it adds the extra padding but not to 0 value cells', function() {
+    var bars = this.stackMC.$graph.find(".mc-bar-cell");
+    equal(bars.get(0).style.width, "0%");
+    equal(bars.get(1).style.width, cW(14, 1, 3));
+    equal(bars.get(5).style.width, "0%");
+    equal(bars.get(4).style.width, cW(14, 4, 3));
+  });
 
 
 
