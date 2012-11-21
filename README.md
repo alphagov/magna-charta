@@ -43,6 +43,11 @@ You're going to need Node, npm and Grunt (`npm install -g grunt`) to work on Mag
 
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
+__1.2.0__
+- "toggle" link is now automatically added to both the table and the graph. Has class of `mc-toggle-link`.
+- new option, `toggleText`, defining what text the toggle link should contain.
+- new method, `magnaCharta#toggle`, that shows/hides the graph and toggles the class `visually-hidden` on the table, which is styled to hide the table in a more accessible way.
+
 __1.1.3__
 - fixed bug that meant screen-reader users did not have access to the tables and instead had to try to understand the div chart
 
