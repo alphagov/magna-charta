@@ -43,6 +43,9 @@ You're going to need Node, npm and Grunt (`npm install -g grunt`) to work on Mag
 
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
+__1.2.1__
+- fixed bug that meant it would break with tables that didn't have a `caption` tag
+
 __1.2.0__
 - "toggle" link is now automatically added to both the table and the graph. Has class of `mc-toggle-link`.
 - new option, `toggleText`, defining what text the toggle link should contain.
