@@ -91,14 +91,6 @@
     });
   });
 
-  test('setting the outdentText option pushes the text out of the bar', function() {
-    ok(this.singleMC.options.outdentText);
-    this.singleMC.$graph.find(".mc-bar-cell").each(function(i, item) {
-      var $item = $(item);
-      var val = parseFloat($item.text(), 10);
-      equal($item[0].style.textIndent, parseFloat($item[0].style.width, 10) + 3 + "%");
-    });
-  });
 
   module('jQuery.magnaCharta STACKED', {
     setup: function() {
@@ -182,23 +174,6 @@
       maxNegative: parseFloat(10, 10)
     }, "Gives back extra info for the negative charts");
   });
-
-
-  module('jQuery.magnaCharta stacked with small values', {
-    setup: function() {
-      this.$stackTable = $("#qunit-fixture").children("#zerovalues");
-      this.stackMC = $.magnaCharta(this.$stackTable, { barPadding: 3 });
-    }
-  });
-
-  test('it adds the extra padding but not to 0 value cells', function() {
-    var bars = this.stackMC.$graph.find(".mc-bar-cell");
-    equal(bars.get(0).style.width, "0%");
-    equal(bars.get(1).style.width, cW(14, 1, 3));
-    equal(bars.get(5).style.width, "0%");
-    equal(bars.get(4).style.width, cW(14, 4, 3));
-  });
-
 
 
 

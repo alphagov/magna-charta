@@ -14,10 +14,7 @@
       var defaults = {
         outOf: 65,
         applyOnInit: true,
-        outdentText: false,
-        outdentTextLevel: 3,
-        toggleText: "Toggle between chart and table",
-        barPadding: 0
+        toggleText: "Toggle between chart and table"
       };
 
       this.options = $.extend({}, defaults, options);
@@ -51,8 +48,6 @@
 
       // set the stacked option based on giving the table a class of mc-stacked
       this.options.stacked = this.$table.hasClass("mc-stacked");
-
-      this.options.outdentText = (this.options.outdentText === true ? true : this.$table.hasClass("mc-outdented"));
 
       // set the negative option based on giving the table a class of mc-negative
       this.options.negative = this.$table.hasClass("mc-negative");
@@ -174,6 +169,7 @@
       e.preventDefault();
     };
 
+    // some handy utility methods
     this.utils = {
       isFloat: function(val) {
         return !isNaN(parseFloat(val));
@@ -318,10 +314,11 @@
 
           // apply the left margin to the positive bars
           if(that.options.negative) {
-            // if we have to outdent the text, all bars need a small extra left margin
 
             if($cell.hasClass("mc-bar-positive")) {
+
               $cell.css("margin-left", that.dimensions.marginLeft + "%");
+
             } else {
 
               // if its negative but not the maximum negative
@@ -332,50 +329,10 @@
                 var leftMarg = (that.dimensions.maxNegative - absParsedCellVal) * that.dimensions.single;
                 $cell.css("margin-left", leftMarg + "%");
               }
-
-              // set the text indent to negative to pull values just out of the bar
-              if(that.options.outdentText) {
-                $cell.css("text-indent", -(that.options.outdentTextLevel) + "%");
-              }
-            }
-
-            // there's text to the left of some of the bars
-            // so what we do is push all the bars to the right slightly
-            // to give room for the text to the left of the negative bars
-            if(that.options.outdentText) {
-              // for some unknown reason, $cell.css("margin-left") doesn't work here
-              // hence the use of [0].style.marginLeft
-              var curLeft = parseFloat($cell[0].style.marginLeft || 0, 10);
-              $cell.css("margin-left", curLeft + that.options.outdentTextLevel + "%");
             }
           }
 
           $cell.css("width", absParsedVal + "%");
-          $cell.attr("rel", parsedCellVal);
-
-          if(that.options.outdentText && ($cell.hasClass("mc-bar-positive") || !that.options.negative)) {
-            $cell.css("text-indent", (absParsedVal + that.options.outdentTextLevel) + "%");
-          }
-
-          // apply the extra padding, but not if it's a negative chart with outdent on
-          // if the cell value is 0, we dont want to add padding
-          if( !(that.options.outdentText && that.options.negative) && absParsedCellVal !== 0 ) {
-
-            var curWidth = parseFloat($cell[0].style.width || 0, 10);
-            $cell.css("width", ( curWidth + that.options.barPadding ) + "%");
-          }
-          // if it's negative and has bar padding
-          // we need to push the left margin of all the positive bars
-          // over by the padding to keep everything lined up
-          if( that.options.negative && $cell.hasClass("mc-bar-positive") && that.options.barPadding > 0 ) {
-
-            var curMargLeft = parseFloat($cell[0].style.marginLeft || 0, 10);
-
-            if(curMargLeft > 0) {
-              $cell.css("margin-left", curMargLeft + that.options.barPadding + "%");
-              $cell.attr("title", "added extra margin to current " + curMargLeft);
-            }
-          }
 
         });
       });
