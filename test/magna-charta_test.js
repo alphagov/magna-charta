@@ -74,6 +74,10 @@
     equal(this.singleMC.$graph.find(".mc-bar-cell").length, 3);
   });
 
+  test('bar cells have their values wrapped in a span tag', function() {
+    equal(this.singleMC.$graph.find(".mc-bar-cell span").length, 3);
+  });
+
   test('bars are given the correct width', function() {
     var bars = this.singleMC.$graph.find(".mc-bar-cell");
     equal(bars.get(0).style.width, cW(5,5));

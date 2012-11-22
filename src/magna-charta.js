@@ -14,7 +14,8 @@
       var defaults = {
         outOf: 65,
         applyOnInit: true,
-        toggleText: "Toggle between chart and table"
+        toggleText: "Toggle between chart and table",
+        barPadding: 0
       };
 
       this.options = $.extend({}, defaults, options);
@@ -159,6 +160,9 @@
         this.applyWidths();
         this.insert();
         this.$table.addClass('visually-hidden');
+        if(!this.options.stacked) {
+          this.applyOutdent();
+        }
       }
     };
 
@@ -307,7 +311,7 @@
           var $cell = $(cell);
 
           var parsedCellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
-          var parsedVal = parsedCellVal * that.dimensions.single;
+          var parsedVal = parsedCellVal * that.dimensions.single + ( parsedCellVal === 0 ? 0 : that.options.barPadding);
 
           var absParsedCellVal = Math.abs(parsedCellVal);
           var absParsedVal = Math.abs(parsedVal);
@@ -332,6 +336,8 @@
             }
           }
 
+          // wrap the cell value in a span tag
+          $cell.wrapInner("<span />");
           $cell.css("width", absParsedVal + "%");
 
         });
@@ -340,6 +346,42 @@
 
     this.insert = function() {
       this.$table.after(this.$graph);
+    };
+
+    this.applyOutdent = function() {
+      /*
+       * this figures out if a cell needs an outdent and applies it
+       * it needs an outdent if the width of the text is greater than the width of the bar
+       * if this is the case, wrap the value in a span, and use absolute positioning
+       * to push it out (the bar is styled to be relative)
+       * unfortunately this has to be done once the chart has been inserted
+       */
+      var that = this;
+      var cells = this.$graph.find(".mc-bar-cell");
+      this.$graph.find(".mc-bar-cell").each(function(i, cell) {
+        var $cell = $(cell);
+        var $cellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
+        var $cellSpan = $cell.children("span");
+        var spanWidth = $cellSpan.width() + 10; //+10 just for extra padding
+        var cellWidth = $cell.width();
+        var cellPercentWidth = parseFloat($cell[0].style.width, 10);
+
+
+        // if it's 0, it is effectively outdented
+        if($cellVal === 0) {
+          $cell.addClass("mc-bar-outdented");
+        }
+
+        if(spanWidth > cellWidth) {
+          $cell.addClass("mc-bar-outdented");
+          $cellSpan.css("", cellPercentWidth + 1 + "%");
+          $cellSpan.css({
+            "margin-left": "100%",
+            "display": "inline-block"
+          });
+        }
+      });
+
     };
 
 

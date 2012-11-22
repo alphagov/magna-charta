@@ -146,13 +146,11 @@ $bar-colours:  $dark-blue,
       padding: $bar-padding 0;
       margin-bottom: 1px;
       color: $white;
-      text-indent: $bar-padding;
+      text-indent: 4px;
     }
-    // NEGATIVE BARS
-    &.mc-bar-negative {
-      text-align: right;
-      text-indent: 8px;
-    }
+  }
+  .mc-bar-outdented {
+    span { color: #111; }
   }
   caption{
     caption-side: $caption-side;
@@ -167,9 +165,6 @@ $bar-colours:  $dark-blue,
 
 }
 
-.mc-chart.mc-outdented .mc-td.mc-bar-cell {
-  color: #111;
-}
 
 .mc-outdented .mc-bar-cell.mc-bar-negative {
   text-align: left;

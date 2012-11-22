@@ -90,10 +90,9 @@
       padding: 8px 0;
       margin-bottom: 1px;
       color: white;
-      text-indent: 8px; }
-    .mc-chart .mc-td.mc-bar-negative, .mc-chart .mc-th.mc-bar-negative {
-      text-align: right;
-      text-indent: 8px; }
+      text-indent: 4px; }
+  .mc-chart .mc-bar-outdented span {
+    color: #111; }
   .mc-chart caption {
     caption-side: top; }
   .mc-chart .mc-td.mc-key-cell {
@@ -102,9 +101,6 @@
     text-align: right;
     display: table-cell;
     vertical-align: middle; }
-
-.mc-chart.mc-outdented .mc-td.mc-bar-cell {
-  color: #111; }
 
 .mc-outdented .mc-bar-cell.mc-bar-negative {
   text-align: left; }
