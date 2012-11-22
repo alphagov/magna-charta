@@ -43,6 +43,9 @@ You're going to need Node, npm and Grunt (`npm install -g grunt`) to work on Mag
 
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
+__1.2.3__
+- copy the caption over as a div, not as a caption, as that's invalid
+
 __1.2.2__
 - added option to add padding to cells with small values, to make sure it's always wide enough for the value to be visible
 

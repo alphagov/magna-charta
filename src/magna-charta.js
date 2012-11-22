@@ -111,7 +111,7 @@
     this.construct.caption = function() {
       var cap = this.$table.find("caption");
       if(cap.length) {
-        var caption = $("<caption />").html(cap.html());
+        var caption = $("<div />").addClass("mc-caption").html(cap.html());
         return caption;
       }
     };

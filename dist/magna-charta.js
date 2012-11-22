@@ -1,4 +1,4 @@
-/*! Magna Charta - v1.2.2 - 2012-11-21
+/*! Magna Charta - v1.2.3 - 2012-11-22
 * https://github.com/alphagov/magna-charta
  */
 
@@ -107,7 +107,7 @@
     this.construct.caption = function() {
       var cap = this.$table.find("caption");
       if(cap.length) {
-        var caption = $("<caption />").html(cap.html());
+        var caption = $("<div />").addClass("mc-caption").html(cap.html());
         return caption;
       }
     };
