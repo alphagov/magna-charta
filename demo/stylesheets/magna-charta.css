@@ -12,41 +12,86 @@
   border-spacing: 0 5px;
   border: 1px solid #cacac8;
   padding: 16px 0;
-  position: relative; }
+  position: relative;
+  margin-bottom: 16px; }
+  .mc-chart .mc-caption {
+    display: table-caption;
+    font-size: 16px;
+    text-align: center;
+    caption-side: top;
+    margin: 16px 0; }
   .mc-chart .mc-thead {
     background-color: #fff;
     display: table-header-group;
     padding: 5px;
     border: 1px solid #cacac8; }
     .mc-chart .mc-thead .mc-th {
+      display: none; }
+    .mc-chart .mc-thead .mc-key-header {
       display: block;
       margin-bottom: 5px;
+      margin-left: 100%;
       padding-left: 5px;
       border-left: 16px solid;
       text-align: left;
       font-weight: normal;
       width: 100%; }
-      .mc-chart .mc-thead .mc-th:first-child {
-        display: none; }
-      .mc-chart .mc-thead .mc-th:last-child {
+      .mc-chart .mc-thead .mc-key-header:last-child {
         margin-bottom: 0; }
-  .mc-chart .mc-tbody {
-    display: table-row-group; }
-    .mc-chart .mc-tbody .mc-tr {
-      display: table-row; }
+    .mc-chart .mc-thead .mc-key-1 {
+      border-left-color: #1a2791; }
+    .mc-chart .mc-thead .mc-key-2 {
+      border-left-color: #005abb; }
+    .mc-chart .mc-thead .mc-key-3 {
+      border-left-color: #5bb4e5; }
+    .mc-chart .mc-thead .mc-key-4 {
+      border-left-color: #55bab7; }
   .mc-chart.right-key .mc-thead, .mc-chart.left-key .mc-thead {
     position: absolute;
-    top: 116px; }
-    .mc-chart.right-key .mc-thead .mc-key-cell, .mc-chart.left-key .mc-thead .mc-key-cell {
-      margin-left: 0;
-      display: table-cell; }
+    top: 100px; }
+    .mc-chart.right-key .mc-thead .mc-key-header, .mc-chart.left-key .mc-thead .mc-key-header {
+      margin-left: 0; }
   .mc-chart.right-key .mc-thead {
     right: 26px; }
   .mc-chart.left-key .mc-thead {
     left: 26px; }
   .mc-chart.no-key .mc-thead {
     display: none; }
-  .mc-chart.mc-stacked .mc-th:last-child {
+  .mc-chart .mc-tbody {
+    display: table-row-group; }
+    .mc-chart .mc-tbody .mc-tr {
+      display: table-row; }
+      .mc-chart .mc-tbody .mc-tr .mc-bar-cell,
+      .mc-chart .mc-tbody .mc-tr .mc-key-cell {
+        padding-right: 5px;
+        margin-right: 1px;
+        box-sizing: border-box;
+        border: 0 solid; }
+      .mc-chart .mc-tbody .mc-tr .mc-bar-cell {
+        display: block;
+        text-align: left;
+        padding: 8px 0;
+        margin-bottom: 1px;
+        color: white;
+        text-indent: 8px; }
+      .mc-chart .mc-tbody .mc-tr .mc-bar-1 {
+        background-color: #1a2791; }
+      .mc-chart .mc-tbody .mc-tr .mc-bar-2 {
+        background-color: #005abb; }
+      .mc-chart .mc-tbody .mc-tr .mc-bar-3 {
+        background-color: #5bb4e5; }
+      .mc-chart .mc-tbody .mc-tr .mc-bar-4 {
+        background-color: #55bab7; }
+      .mc-chart .mc-tbody .mc-tr .mc-bar-negative {
+        text-align: right;
+        padding-right: 8px; }
+      .mc-chart .mc-tbody .mc-tr .mc-key-cell {
+        width: 40%;
+        text-indent: 26px;
+        text-align: right;
+        display: table-cell;
+        vertical-align: middle; }
+  .mc-chart.mc-stacked .mc-stacked-header {
     display: none; }
   .mc-chart.mc-stacked .mc-th:nth-last-child(2) {
     margin-bottom: 0; }
@@ -56,63 +101,24 @@
     color: #0b0c0c;
     display: inline-block;
     text-indent: 5px; }
-  .mc-chart.mc-stacked .mc-tbody .mc-td.mc-bar-cell {
+  .mc-chart.mc-stacked .mc-tbody .mc-bar-cell {
     display: inline-block; }
-  .mc-chart.compact .mc-bar-cell {
+  .mc-chart.compact .mc-td.mc-bar-cell {
     font-size: 12px;
     text-indent: 2px;
     padding: 0; }
-  .mc-chart .mc-tr .mc-td.mc-bar-cell.mc-bar-1 {
-    background-color: #1a2791; }
-  .mc-chart .mc-tr .mc-th.mc-key-1 {
-    border-left-color: #1a2791; }
-  .mc-chart .mc-tr .mc-td.mc-bar-cell.mc-bar-2 {
-    background-color: #005abb; }
-  .mc-chart .mc-tr .mc-th.mc-key-2 {
-    border-left-color: #005abb; }
-  .mc-chart .mc-tr .mc-td.mc-bar-cell.mc-bar-3 {
-    background-color: #5bb4e5; }
-  .mc-chart .mc-tr .mc-th.mc-key-3 {
-    border-left-color: #5bb4e5; }
-  .mc-chart .mc-tr .mc-td.mc-bar-cell.mc-bar-4 {
-    background-color: #55bab7; }
-  .mc-chart .mc-tr .mc-th.mc-key-4 {
-    border-left-color: #55bab7; }
-  .mc-chart .mc-td, .mc-chart .mc-th {
-    padding: 0;
-    padding-right: 5px;
-    margin-right: 1px;
-    border: 0 solid; }
-    .mc-chart .mc-td.mc-bar-cell, .mc-chart .mc-th.mc-bar-cell {
-      display: block;
-      background-color: #ebebeb;
-      text-align: left;
-      padding: 8px 0;
-      margin-bottom: 1px;
-      color: white;
-      text-indent: 8px; }
-    .mc-chart .mc-td.mc-bar-negative, .mc-chart .mc-th.mc-bar-negative {
-      text-align: right;
-      text-indent: 8px; }
-  .mc-chart caption {
-    caption-side: top; }
-  .mc-chart .mc-td.mc-key-cell {
-    width: 40%;
-    text-indent: 26px;
-    text-align: right;
-    display: table-cell;
-    vertical-align: middle; }
+  .mc-chart.mc-outdented .mc-tbody .mc-tr .mc-bar-cell {
+    color: #111; }
+  .mc-chart.mc-outdented .mc-tbody .mc-tr .mc-bar-negative {
+    text-align: left; }
+  .mc-chart.mc-negative .mc-td.mc-key-cell {
+    padding-right: 25px; }
 
-.mc-chart.mc-outdented .mc-td.mc-bar-cell {
-  color: #111; }
+.mc-toggle-link {
+  display: block; }
 
-.mc-outdented .mc-bar-cell.mc-bar-negative {
-  text-align: left; }
-
-.mc-chart.mc-negative .mc-td.mc-key-cell {
-  padding-right: 25px; }
-
-.visually-hidden {
+.visually-hidden,
+.visually-hidden caption {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px);
   /* IE6, IE7 */

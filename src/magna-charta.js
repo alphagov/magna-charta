@@ -15,7 +15,7 @@
         outOf: 65,
         applyOnInit: true,
         outdentText: false,
-        outdentTextLevel: 3,
+        outdentTextLevel: 1,
         toggleText: "Toggle between chart and table",
         barPadding: 0
       };
