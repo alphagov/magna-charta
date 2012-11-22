@@ -1,4 +1,4 @@
-/*! Magna Charta - v1.2.3 - 2012-11-22
+/*! Magna Charta - v1.2.4 - 2012-11-22
 * https://github.com/alphagov/magna-charta
  */
 
@@ -347,6 +347,7 @@
           }
 
           $cell.css("width", absParsedVal + "%");
+          $cell.attr("rel", parsedCellVal);
 
           if(that.options.outdentText && ($cell.hasClass("mc-bar-positive") || !that.options.negative)) {
             $cell.css("text-indent", (absParsedVal + that.options.outdentTextLevel) + "%");
@@ -359,6 +360,19 @@
             var curWidth = parseFloat($cell[0].style.width || 0, 10);
             $cell.css("width", ( curWidth + that.options.barPadding ) + "%");
           }
+          // if it's negative and has bar padding
+          // we need to push the left margin of all the positive bars
+          // over by the padding to keep everything lined up
+          if( that.options.negative && $cell.hasClass("mc-bar-positive") && that.options.barPadding > 0 ) {
+
+            var curMargLeft = parseFloat($cell[0].style.marginLeft || 0, 10);
+
+            if(curMargLeft > 0) {
+              $cell.css("margin-left", curMargLeft + that.options.barPadding + "%");
+              $cell.attr("title", "added extra margin to current " + curMargLeft);
+            }
+          }
+
         });
       });
     };
