@@ -16,7 +16,8 @@
         applyOnInit: true,
         toggleText: "Toggle between chart and table",
         barPadding: 0,
-        autoOutdent: false
+        autoOutdent: false,
+        outdentAll: false
       };
 
       this.options = $.extend({}, defaults, options);
@@ -57,6 +58,13 @@
 
       // set the negative option based on giving the table a class of mc-negative
       this.options.negative = this.$table.hasClass("mc-negative");
+
+      // set the outdent options
+      // which can be set via classes or overriden by setting the value to true
+      // in the initial options object that's passed in
+      this.options.autoOutdent = this.options.autoOutdent || this.$table.hasClass("mc-auto-outdent");
+
+      this.options.outdentAll = this.options.outdentAll || this.$table.hasClass("mc-outdented");
 
       // add a mc-multiple class if it is
       if(this.options.multiple) { this.$graph.addClass("mc-multiple"); }
@@ -380,7 +388,7 @@
           $cell.addClass("mc-bar-outdented");
         }
 
-        if(spanWidth > cellWidth) {
+        if( (that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
           $cell.addClass("mc-bar-outdented");
           $cellSpan.css("", cellPercentWidth + 1 + "%");
           $cellSpan.css({
