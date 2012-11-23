@@ -28,8 +28,11 @@
       text-align: left;
     }
     caption{
-      font-size: 19px;
-      margin: 20px 0;
+      font-size: 16px;
+      margin: 16px 0;
+    }
+    caption a{
+      display: block;
     }
     .toggle{
       display: block;
@@ -57,62 +60,12 @@
 
       <p>Magna Charter is a jQuery plugin used to create accessible and lovely looking bar charts.</p>
 
-      <h2>How it works</h2>
-
-      <p>It works by duplicating the table into a <code>div</code>, containing more <code>div</code>s, which are given various classes to be styled. We provide a sample stylesheet, but none of the styles are applied through the JS. The styling is entirely up to you. The JavaScript is used to give each "bar" within the chart a width, relative to the value within it. </p>
-
-      <h2>How to use it</h2>
-      <p>Grab yourself a copy of jQuery and the <a href="https://raw.github.com/alphagov/magna-charta/master/dist/magna-charta.min.js">Magna Charta source</a>.
-
-      <p>Then you'll want to simply call <code>$.magnaCharta</code> on some tables:</p>
-      <pre>
-        <code>
-          var chart = $.magnaCharta($("#table1"));
-        </code>
-      </pre>
-      <p>Once you instantiate the chart, the Magna Charta object is returned to you.</p>
-
-      <p>There are some options you can pass into the magnaCharta on init:</p>
-      <pre>
-        <code>
-        var chart = $.magnaCharta($("table"), {
-          outOf: 65,
-          applyOnInit: true,
-          outdentTextLevel: 3
-        });
-        </code>
-      </pre>
-
-      <p>The values assigned above are the defaults.</p>
-      <ul>
-       <li><code>outOf</code> means what total % to divide by to calculate the percentages. 95 means that the biggest bar will take up 95% of the width of the table. This is useful as it leaves you room to add some margins, or perhaps some text that hangs off the edge of the chart.</li>
-       <li><code>applyOnInit</code> turns the tables into charts as soon as they are initialised. If you set this to false, you'll need to manually apply the charts with: <code>chart.apply();</code>.</li>
-       <li><code>outdentTextLevel</code> is the amount (in %) that the text will be pushed away from the edge of the bar, if <code>outdentText</code> is set to true (this is done through adding a class of <code>mc-outdented</code> to your table).</li>
-     </ul>
-
-     <p>There's also some options which are set via a class on your <code>table</code>. These are:</p>
-     <ul>
-       <li><code>mc-stacked</code> creates a stacked bar chart (See Figure 3)</li>
-       <li><code>mc-negative</code> denotes that the chart may have negative values (See Figure 5)</li>
-       <li><code>mc-outdented</code> denotes that the text for each bar should sit just outside the bar (See Figure 1 and 5)</li>
-     </ul>
-
-     <p>MC doesn't add any CSS at all. We don't like plugins that dictate appearances too much. What we do is add some really useful CSS classes to things to easily let you style things. As the graph is created by using <code>div</code>s to recreate the table structure, a lot of the classes map directly to their table counterparts. For example, we have these classes: <code>.mc-thead, .mc-tbody, .mc-th, .mc-td</code>. There's also a few more useful ones:</p>
-      <ul>
-        <li><code>.mc-chart</code> given to the div containing the new graph.</li>
-        <li><code>.mc-bar-cell</code> given to a cell that is turned into a bar</li>
-        <li><code>.mc-key-cell</code> given to a cell that is a key, denoting what the bars represent.</li>
-      </ul>
-
-      <p>Bars are also given numbered values to help you colour them. For example, in a <code>div.mc-tr</code>, if there are four <code>.mc-bar-cell</code>, each will receieve an extra class of <code>.mc-bar-i</code>, where i is a number 1-4.</p>
-
-      <p>We suggest you look at the sample stylesheet provided to see how we use these classes, and what other ones exist.</p>
 
 
   <h1>Magna Charta examples</h1>
 
-  <table class="chart no-key mc-outdented" id="fig1">
-    <caption>Fig. 1: The niceness of types of biscuit (according to Jack)<a href="" class="toggle">Toggle Chart / Table</a></caption>
+  <table class="chart mc-outdented" id="fig1">
+    <caption>Fig. 1: The niceness of types of biscuit (according to Jack)</caption>
     <thead>
       <tr><th>Biscuit</th><th>Niceness</th></tr>
     </thead>
@@ -121,11 +74,13 @@
       <tr><td>Teacakes</td><td>4</td></tr>
       <tr><td>Nice biscuits</td><td>3</td></tr>
       <tr><td>Hobnobs</td><td>3</td></tr>
+      <tr><td>Kitkat</td><td>1.567778910101</td></tr>
+      <tr><td>Rich Tea</td><td>0</td></tr>
     </tbody>
   </table>
 
   <table class="chart left-key" id="fig2">
-    <caption>Fig. 2: Team biscuit preferences (out of 10)<a href="" class="toggle">Toggle Chart / Table</a></caption>
+    <caption>Fig. 2: Team biscuit preferences (out of 10)</caption>
     <thead>
       <tr><th>Biscuit</th><th>Tim</th><th>Jack</th><th>Roo</th></tr>
     </thead>
@@ -138,7 +93,7 @@
   </table>
 
   <table class="mc-stacked chart right-key" id="fig3">
-    <caption>Fig. 3: Combined team biscuit preferences<a href="" class="toggle">Toggle Chart / Table</a></caption>
+    <caption>Fig. 3: Combined team biscuit preferences</caption>
     <thead>
       <tr><th>Biscuit</th><th>Tim</th><th>Jack</th><th>Roo</th><th>Total</th></tr>
     </thead>
@@ -151,7 +106,7 @@
   </table>
 
   <table class="compact chart left-key" id="fig4">
-    <caption>Fig. 4: Team biscuit preferences (out of 10)<a href="" class="toggle">Toggle Chart / Table</a></caption>
+    <caption>Fig. 4: Team biscuit preferences (out of 10)</caption>
     <thead>
       <tr><th>Person</th><th>Caramel Digestives</th><th>Nice biscuits</th><th>Teacakes</th><th>Hobnobs</th></tr>
     </thead>
@@ -162,19 +117,35 @@
     </tbody>
   </table>
 
-  <table class="chart no-key mc-negative mc-outdented" id="fig5">
-    <caption>Fig. 5: Negative values test<a href="" class="toggle">Toggle Chart / Table</a></caption>
+  <table class="chart no-key mc-negative mc-auto-outdent" id="fig5">
+    <caption>Fig. 5: Negative values test</caption>
     <thead>
       <tr><th>Biscuit</th><th>Niceness</th></tr>
     </thead>
     <tbody>
       <tr><td>Caramel Digestives</td><td>9</td></tr>
       <tr><td>Nice biscuits</td><td>3</td></tr>
-      <tr><td>Hobnobs</td><td>3</td></tr>
+      <tr><td>Chocolate Hobnobs</td><td>3</td></tr>
+      <tr><td>Hobnobs</td><td>2.2345678812345</td></tr>
       <tr><td>Kitkats</td><td>-1</td></tr>
+      <tr><td>Penguins</td><td>-1.1233456789</td></tr>
       <tr><td>Rich Tea</td><td>-2</td></tr>
     </tbody>
   </table>
+
+  <table id="zerovalues" class="mc-stacked left-key">
+    <caption>Fig. 6: Stacked with 0 and huge range in values</caption>
+    <thead>
+      <tr><th>Some Data</th><th>YES</th><th>NO</th><th>Total</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Testing One</td><td>0</td><td>1</td><td>1</td></tr>
+      <tr><td>Testing Two</td><td>2</td><td>2</td><td>4</td></tr>
+      <tr><td>Testing Three</td><td>4</td><td>0</td><td>4</td></tr>
+      <tr><td>Testing Four</td><td>4</td><td>48</td><td>52</td></tr>
+    </tbody>
+  </table>
+
 
 </body>
 </html>
