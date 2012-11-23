@@ -192,6 +192,27 @@
   });
 
 
+  module('jQuery.magnaCharta OUTDENT-All', {
+    setup: function() {
+      this.$outdentAll = $("#qunit-fixture").children("#outdent-all");
+      this.outdentMC = $.magnaCharta(this.$outdentAll);
+    }
+  });
+
+  test('all cell values are pushed left', function() {
+    this.outdentMC.$graph.find(".mc-bar-cell span").each(function(i, item) {
+      equal(item.style.marginLeft, "100%");
+    });
+  });
+
+  module('jQuery.magnaCharta AUTOOUTDENT', {
+    setup: function() {
+      this.$autoOutdent = $("#qunitfixture").children("#auto-outdent");
+      this.autoOutdentMC = $.magnaCharta(this.$autoOutdent);
+    };
+  });
+
+
 
   module('jQuery.magnaCharta utils', {
     setup: function() {

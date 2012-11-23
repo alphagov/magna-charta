@@ -390,7 +390,6 @@
 
         if( (that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
           $cell.addClass("mc-bar-outdented");
-          $cellSpan.css("", cellPercentWidth + 1 + "%");
           $cellSpan.css({
             "margin-left": "100%",
             "display": "inline-block"
