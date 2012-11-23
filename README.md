@@ -10,11 +10,73 @@ Download the [production version][min] or the [development version][max].
 
 ## Documentation
 
-Documentation is on Github Pages, which means we can show you live graphs, rather than screenshots. [Read the documentation and examples](http://alphagov.github.com/magna-charta/).
+### How it works
+It works by duplicating the table into a `div`, containing more `div`s, which are given various classes to be styled. We provide a sample stylesheet, but none of the styles are applied through the JS. The styling is entirely up to you. The JavaScript is used to give each "bar" within the chart a width, relative to the value within it.
+
+When first beginning, we recommend you start off with our example CSS (written in SASS), or at least use it for reference when writing your chart CSS. It's a nice starting point.
+
+### How to Use it
+
+Grab a copy of jQuery and the Magna Charta source (use the minified version) and then it's as easy as calling `$.magnaCharta()` on some tables.
+
+```javascript
+var chart = $.magnaCharta($("#table1"));
+```
+
+Once you instantiate a chart, the instance of Magna Charta is returned to you.
+
+#### Passing in Options
+
+Magna Charta has some options that are passed in through the JavaScript, and some that can be defined on a per-table basis using CSS classes. We'll cover those shortly, but here's what you can configure through JS _(values shown are defaults)_:
+
+```js
+{
+  outOf: 65, // number to calculate the bar % out of
+  applyOnInit: true, // apply the chart immediately
+  toggleText: "Toggle between chart and table", // if you want toggle links to be added
+  barPadding: 0, // allows you to set a minimum width for all bars
+  autoOutdent: false, // will automatically place values too big for a bar outside it
+  outdentAll: false // will place all bar values just outside the bar rather than sitting in the bar
+};
+```
+
+There's also some options you can set through classes on the table:
+
+- `.mc-stacked`: this tells MC that the chart is stacked - that there are multiple bars per line (for example, [like this](http://cl.ly/image/2j1h2J2M2g0Z/Screen%20Shot%202012-11-23%20at%2011.32.28.png).
+- `.mc-negative`: tells MC that some of the bars in the chart will be negative.
+
+Whilst you can sert the outdenting options in the JavaScript, you can also set them in the CSS if you'd prefer:
+
+- `.mc-auto-outdent`: will automatically outdent values too big for the bars to contain them
+- `.mc-outdented`: will outdent every value so it sits just outside the bar rather than within
+
+#### Classes we add
+
+To help with styling, and cross-browser support, there's a tonne of CSS classes we add to charts. For consistency, they are all prefixed with `mc-`. Of course, you can also style based on the classes youd efine to set options (see above). If you're confused, the best way to check it out is to look at the code on our demo page. Inspect the generated charts, and view the HTML classes on there.
+
+- `.mc-chart`: added to the `div` containing the chart
+- `.mc-thead`: added to the `div` containing the table head. Similar classes exist for other divs representing table elements: `.mc-thead, .mc-tbody, .mc-th, .mc-td, .mc-tr`.
+- `.mc-bar-cell`: added to any `div` turned into a bar
+- `.mc-bar-{i}`: any row that contains multiple bars has its bars given a class based on their index within the row. So the first bar in the row gets a class `.mc-bar-1`, the second `.mc-bar-2`, and so on. This is a nice way to colour different bars different colours.
+- `.mc-key-{i}`: similarly to above, when there's multiple columns in a chart, one per value, the cells with the header that denote what bars are what are given corresponding classes based on their index. This is an easy way to give the cell in the header the same colour as the corresponding bar in the table.
+- `.mc-bar-indented`: given to a bar that has its text value indented (within the bar).
+- `.mc-bar-outdented`: given to a bar that has its text value outdented.
+- `.mc-bar-negative`: given to a bar with a negative value within.
+- `.mc-bar-positive`: given to a bar with a positive value within (but only if this chart is a negative chart).
+- `.mc-key-cell`: given to the cell in the table row that contains the key, not a value.
+
+As said above, we recommend you start with our CSS, or at least refer to it as a starting point.
+
+
+
+## Live Examples
+We use Github Pages, which means we can show you live graphs, rather than screenshots. [Go check out the Magna Charta](http://alphagov.github.com/magna-charta/).
+
+You can also see the JavaScript and CSS used to make the charts.
 
 ## Browser Support
 
-Working in:
+Using our CSS, working in:
 
 - Safari 5
 - Safari 6
@@ -26,11 +88,11 @@ Working in:
 - iPhone, iPad
 - Chrome, Android 4.2
 
-By default, we disable the plugin and revert to standard tables for IE < 8.
+We disable the plugin and revert to standard tables for IE < 8.
 
 ## Contributing
 
-You're going to need Node, npm and Grunt (`npm install -g grunt`) to work on Magna Charta.
+You're going to need Node (V0.8+), npm and Grunt (`npm install -g grunt`) to work on Magna Charta.
 
 - Fork and clone the repository
 - Run `grunt test` to make sure the tests are still passing (which they should be).
