@@ -1,4 +1,4 @@
-/*! Magna Charta - v1.2.4 - 2012-11-22
+/*! Magna Charta - v2 - 2012-11-23
 * https://github.com/alphagov/magna-charta
  */
 
@@ -10,10 +10,10 @@
       var defaults = {
         outOf: 65,
         applyOnInit: true,
-        outdentText: false,
-        outdentTextLevel: 3,
         toggleText: "Toggle between chart and table",
-        barPadding: 0
+        barPadding: 0,
+        autoOutdent: false,
+        outdentAll: false
       };
 
       this.options = $.extend({}, defaults, options);
@@ -34,6 +34,7 @@
         return (v > 4) ? v : undef;
       })();
 
+
       // if it's IE7 or less, we just show the plain tables
       this.ENABLED = !(ie && ie < 8);
 
@@ -45,13 +46,25 @@
       // copy over classes from the table, and add the extra one
       this.$graph.attr("class", this.$table.attr("class")).addClass("mc-chart");
 
+
       // set the stacked option based on giving the table a class of mc-stacked
       this.options.stacked = this.$table.hasClass("mc-stacked");
 
-      this.options.outdentText = (this.options.outdentText === true ? true : this.$table.hasClass("mc-outdented"));
-
       // set the negative option based on giving the table a class of mc-negative
       this.options.negative = this.$table.hasClass("mc-negative");
+
+      // true if it's a 'multiple' table - this means multiple bars per rows, but not stacked.
+      this.options.multiple = !this.options.stacked && (this.$table.hasClass("mc-multiple") || this.$table.find("tbody tr").first().find("td").length > 2);
+
+      // set the outdent options
+      // which can be set via classes or overriden by setting the value to true
+      // in the initial options object that's passed in
+      this.options.autoOutdent = this.options.autoOutdent || this.$table.hasClass("mc-auto-outdent");
+
+      this.options.outdentAll = this.options.outdentAll || this.$table.hasClass("mc-outdented");
+
+      // add a mc-multiple class if it is
+      if(this.options.multiple) { this.$graph.addClass("mc-multiple"); }
 
       this.options.hasCaption = !!this.$table.find("caption").length;
 
@@ -160,6 +173,9 @@
         this.applyWidths();
         this.insert();
         this.$table.addClass('visually-hidden');
+        if(!this.options.stacked) {
+          this.applyOutdent();
+        }
       }
     };
 
@@ -170,6 +186,7 @@
       e.preventDefault();
     };
 
+    // some handy utility methods
     this.utils = {
       isFloat: function(val) {
         return !isNaN(parseFloat(val));
@@ -307,17 +324,18 @@
           var $cell = $(cell);
 
           var parsedCellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
-          var parsedVal = parsedCellVal * that.dimensions.single;
+          var parsedVal = parsedCellVal * that.dimensions.single + ( parsedCellVal === 0 ? 0 : that.options.barPadding);
 
           var absParsedCellVal = Math.abs(parsedCellVal);
           var absParsedVal = Math.abs(parsedVal);
 
           // apply the left margin to the positive bars
           if(that.options.negative) {
-            // if we have to outdent the text, all bars need a small extra left margin
 
             if($cell.hasClass("mc-bar-positive")) {
+
               $cell.css("margin-left", that.dimensions.marginLeft + "%");
+
             } else {
 
               // if its negative but not the maximum negative
@@ -328,50 +346,12 @@
                 var leftMarg = (that.dimensions.maxNegative - absParsedCellVal) * that.dimensions.single;
                 $cell.css("margin-left", leftMarg + "%");
               }
-
-              // set the text indent to negative to pull values just out of the bar
-              if(that.options.outdentText) {
-                $cell.css("text-indent", -(that.options.outdentTextLevel) + "%");
-              }
-            }
-
-            // there's text to the left of some of the bars
-            // so what we do is push all the bars to the right slightly
-            // to give room for the text to the left of the negative bars
-            if(that.options.outdentText) {
-              // for some unknown reason, $cell.css("margin-left") doesn't work here
-              // hence the use of [0].style.marginLeft
-              var curLeft = parseFloat($cell[0].style.marginLeft || 0, 10);
-              $cell.css("margin-left", curLeft + that.options.outdentTextLevel + "%");
             }
           }
 
+          // wrap the cell value in a span tag
+          $cell.wrapInner("<span />");
           $cell.css("width", absParsedVal + "%");
-          $cell.attr("rel", parsedCellVal);
-
-          if(that.options.outdentText && ($cell.hasClass("mc-bar-positive") || !that.options.negative)) {
-            $cell.css("text-indent", (absParsedVal + that.options.outdentTextLevel) + "%");
-          }
-
-          // apply the extra padding, but not if it's a negative chart with outdent on
-          // if the cell value is 0, we dont want to add padding
-          if( !(that.options.outdentText && that.options.negative) && absParsedCellVal !== 0 ) {
-
-            var curWidth = parseFloat($cell[0].style.width || 0, 10);
-            $cell.css("width", ( curWidth + that.options.barPadding ) + "%");
-          }
-          // if it's negative and has bar padding
-          // we need to push the left margin of all the positive bars
-          // over by the padding to keep everything lined up
-          if( that.options.negative && $cell.hasClass("mc-bar-positive") && that.options.barPadding > 0 ) {
-
-            var curMargLeft = parseFloat($cell[0].style.marginLeft || 0, 10);
-
-            if(curMargLeft > 0) {
-              $cell.css("margin-left", curMargLeft + that.options.barPadding + "%");
-              $cell.attr("title", "added extra margin to current " + curMargLeft);
-            }
-          }
 
         });
       });
@@ -379,6 +359,44 @@
 
     this.insert = function() {
       this.$table.after(this.$graph);
+    };
+
+    this.applyOutdent = function() {
+      /*
+       * this figures out if a cell needs an outdent and applies it
+       * it needs an outdent if the width of the text is greater than the width of the bar
+       * if this is the case, wrap the value in a span, and use absolute positioning
+       * to push it out (the bar is styled to be relative)
+       * unfortunately this has to be done once the chart has been inserted
+       */
+      var that = this;
+      var cells = this.$graph.find(".mc-bar-cell");
+      this.$graph.find(".mc-bar-cell").each(function(i, cell) {
+        var $cell = $(cell);
+        var $cellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
+        var $cellSpan = $cell.children("span");
+        var spanWidth = $cellSpan.width() + 10; //+10 just for extra padding
+        var cellWidth = $cell.width();
+        var cellPercentWidth = parseFloat($cell[0].style.width, 10);
+        var cellHeight = $cell.height();
+
+
+        // if it's 0, it is effectively outdented
+        if($cellVal === 0) {
+          $cell.addClass("mc-bar-outdented");
+        }
+
+        if( (that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
+          $cell.addClass("mc-bar-outdented");
+          $cellSpan.css({
+            "margin-left": "100%",
+            "display": "inline-block"
+          });
+        } else {
+          $cell.addClass("mc-bar-indented");
+        }
+      });
+
     };
 
 
