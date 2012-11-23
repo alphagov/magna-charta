@@ -381,6 +381,8 @@
         var spanWidth = $cellSpan.width() + 10; //+10 just for extra padding
         var cellWidth = $cell.width();
         var cellPercentWidth = parseFloat($cell[0].style.width, 10);
+        var cellHeight = $cell.height();
+        $cell.css("height", cellHeight);
 
 
         // if it's 0, it is effectively outdented
@@ -394,6 +396,8 @@
             "margin-left": "100%",
             "display": "inline-block"
           });
+        } else {
+          $cell.addClass("mc-bar-indented");
         }
       });
 

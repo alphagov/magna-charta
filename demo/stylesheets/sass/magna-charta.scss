@@ -163,11 +163,20 @@ $bar-colours:  $dark-blue,
     vertical-align: middle;
   }
 
+
 }
 
 
 .mc-outdented .mc-bar-cell.mc-bar-negative {
   text-align: left;
+}
+
+.mc-bar-cell.mc-bar-negative.mc-bar-indented {
+  position: relative;
+  span {
+    position: absolute;
+    right: 4px;
+  }
 }
 
 .mc-chart.mc-negative .mc-td.mc-key-cell {
