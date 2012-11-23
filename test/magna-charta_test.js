@@ -209,7 +209,7 @@
     setup: function() {
       this.$autoOutdent = $("#qunitfixture").children("#auto-outdent");
       this.autoOutdentMC = $.magnaCharta(this.$autoOutdent);
-    };
+    }
   });
 
 

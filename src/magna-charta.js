@@ -382,7 +382,6 @@
         var cellWidth = $cell.width();
         var cellPercentWidth = parseFloat($cell[0].style.width, 10);
         var cellHeight = $cell.height();
-        $cell.css("height", cellHeight);
 
 
         // if it's 0, it is effectively outdented
