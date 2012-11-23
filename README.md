@@ -105,6 +105,16 @@ You're going to need Node (V0.8+), npm and Grunt (`npm install -g grunt`) to wor
 
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
+__2.0.0__
+
+A lot of rewriting went on here, to hugely improve the way we outdet numbers in bars in particular. It's not backwards compat however, hence the leap to V2. However, the code has improved hugely and as such it's suggested you make the leap.
+
+- support for automatically outdenting numbers if they are too big for the bar
+- outdent negative bar values to the right, so they wont overlap the labels
+- wrapped a `span` around each bar's value, meaning we can control the positioning of the text much better, and be more robust
+- charts that have multiple values per row but are not stacked are now given a class of `mc-multiple`.
+
+
 __1.2.4__
 - fix alignment when using extra bar padding on negative bars
 
