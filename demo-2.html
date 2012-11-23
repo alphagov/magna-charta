@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="lte-ie8 " lang="en"><![endif]--><!--[if gt IE 8]><!--><html lang="en">
+<!--<![endif]-->
+<head>
+  <title>Magna Charta examples</title>
+
+  <style>
+    /* Basic page styles */
+
+    * { margin: 0; padding: 0; }
+    body { font-family: Helvetica, Arial, sans-serif; padding: 25px 100px; }
+    h1 { margin-bottom: 50px; }
+
+    table{
+      width: 100%;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+    caption{
+      margin-bottom: 16px;
+    }
+    thead{display: none;}
+    tr{
+    }
+    td{
+      padding: 5px;
+      margin-bottom: 2px;
+      border: 0 solid blue;
+    }
+    .mc-label{
+      text-align: right;
+      width: 50%;
+    }
+    .mc-bar{
+    }
+    .multiple .mc-bar{
+      display: block;
+      float: left;
+      clear: left;
+    }
+    .stacked .mc-bar{
+      display: block;
+      float: left;
+      color: white;
+      font-weight: 300;
+      margin-right: 1px;
+      background-color: blue;
+    }
+
+  </style>
+
+</head>
+<body>
+
+
+  <table class="chart" id="fig1">
+    <caption>Fig. 1: The niceness of types of biscuit (according to Jack)</caption>
+    <thead>
+      <tr><th>Biscuit</th><th>Niceness</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="mc-label" style="padding-right: 45px">Caramel Digestives</td><td class="mc-bar" style="border-left-width: 100px; margin-left: 40px">100</td></tr>
+      <tr><td class="mc-label" style="padding-right: 45px">Teacakes</td><td class="mc-bar" style="border-left-width: 80px; margin-left: 40px">80</td></tr>
+      <tr><td class="mc-label" style="padding-right: 45px">Nice biscuits</td><td  class="mc-bar"style="border-left-width: 60px; margin-left: 40px">60</td></tr>
+      <tr><td class="mc-label" style="padding-right: 45px">Hobnobs</td><td class="mc-bar" style="border-left-width: 40px; margin-left: 40px">40</td></tr>      
+      <tr><td class="mc-label" style="padding-right: 25px; border-right-width: 20px">Bourbons</td><td class="mc-bar" style="margin-left: 40px">-20</td></tr>
+      <tr><td class="mc-label" style="border-right-width: 40px">Cream crackers</td><td class="mc-bar" style="margin-left: 40px">-40</td></tr>
+    </tbody>
+  </table>
+
+  <table class="multiple chart" id="fig1">
+    <caption>Fig. 2: The niceness of types of biscuit (according to Jack)</caption>
+    <thead>
+      <tr><th>Biscuit</th><th>Niceness</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="mc-label">Caramel Digestives</td><td class="mc-bar" style="border-left-width: 20px;">20</td><td class="mc-bar" style="border-left-width: 40px;">40</td><td class="mc-bar" style="border-left-width: 30px;">30</td></tr>
+      <tr><td class="mc-label">Caramel Digestives</td><td class="mc-bar" style="border-left-width: 20px;">20</td><td class="mc-bar" style="border-left-width: 30px;">30</td><td class="mc-bar" style="border-left-width: 30px;">30</td></tr>
+      <tr><td class="mc-label">Caramel Digestives</td><td class="mc-bar" style="border-left-width: 20px;">20</td><td class="mc-bar" style="border-left-width: 10px;">10</td><td class="mc-bar" style="border-left-width: 30px;">30</td></tr>
+    </tbody>
+  </table>
+
+    <table class="stacked chart" id="fig3">
+    <caption>Fig. 2: The niceness of types of biscuit (according to Jack)</caption>
+    <thead>
+      <tr><th>Biscuit</th><th>Niceness</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="mc-label">Caramel Digestives</td><td class="mc-bar" style="border-left-width: 120px; text-indent: -120px">120</td><td class="mc-bar" style="border-left-width: 40px; text-indent: -40px">40</td><td class="mc-bar" style="border-left-width: 30px; text-indent: -30px">30</td></tr>
+      <tr><td class="mc-label">Caramel Digestives</td><td class="mc-bar" style="border-left-width: 20px; text-indent: -20px">20</td><td class="mc-bar" style="border-left-width: 40px; text-indent: -40px">40</td><td class="mc-bar" style="border-left-width: 30px; text-indent: -30px">30</td></tr>
+
+    </tbody>
+  </table>
+
+
+
+</body>
+</html>
+
