@@ -15,7 +15,8 @@
         outOf: 65,
         applyOnInit: true,
         toggleText: "Toggle between chart and table",
-        barPadding: 0
+        barPadding: 0,
+        autoOutdent: false
       };
 
       this.options = $.extend({}, defaults, options);
@@ -36,6 +37,7 @@
         return (v > 4) ? v : undef;
       })();
 
+
       // if it's IE7 or less, we just show the plain tables
       this.ENABLED = !(ie && ie < 8);
 
@@ -47,11 +49,17 @@
       // copy over classes from the table, and add the extra one
       this.$graph.attr("class", this.$table.attr("class")).addClass("mc-chart");
 
+      // true if it's a 'multiple' table - this means multiple bars per rows, but not stacked.
+      this.options.multiple = this.$table.hasClass("mc-multiple") || this.$table.find("tbody tr").first().find("td").length > 2;
+
       // set the stacked option based on giving the table a class of mc-stacked
       this.options.stacked = this.$table.hasClass("mc-stacked");
 
       // set the negative option based on giving the table a class of mc-negative
       this.options.negative = this.$table.hasClass("mc-negative");
+
+      // add a mc-multiple class if it is
+      if(this.options.multiple) { this.$graph.addClass("mc-multiple"); }
 
       this.options.hasCaption = !!this.$table.find("caption").length;
 

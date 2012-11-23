@@ -95,6 +95,18 @@
     });
   });
 
+  module('jQuery.magnaCharta MULTIPLE', {
+    setup: function() {
+      this.$multipleTable = $("#qunit-fixture").children("#multiple2");
+      this.multipleMC = $.magnaCharta(this.$multipleTable);
+    }
+  });
+
+  test('the graph of a multiple table is given a class', function() {
+    ok(this.multipleMC.$graph.hasClass("mc-multiple"));
+    ok(this.multipleMC.options.multiple);
+  });
+
 
   module('jQuery.magnaCharta STACKED', {
     setup: function() {
