@@ -216,7 +216,12 @@
       if(this.options.stacked) {
         headerCells.last().addClass("mc-stacked-header");
       }
-      headerCells = headerCells.filter(":not(:first)").addClass("mc-key-header");
+      headerCells = headerCells.filter(":not(:first)");
+      if(that.options.stacked) {
+        headerCells.last().addClass("mc-header-total");
+        headerCells = headerCells.filter(":not(:last)");
+      }
+      headerCells.addClass("mc-key-header");
       headerCells.filter(":not(.mc-stacked-header)").each(function(i, item) {
         $(item).addClass("mc-key-" + (i+1));
       });
