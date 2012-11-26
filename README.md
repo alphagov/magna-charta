@@ -105,6 +105,10 @@ You're going to need Node (V0.8+), npm and Grunt (`npm install -g grunt`) to wor
 
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
+__2.0.1__
+
+- add class to the last cell in a header when the bar is stacked - this is the total
+
 __2.0.0__
 
 A lot of rewriting went on here, to hugely improve the way we outdet numbers in bars in particular. It's not backwards compat however, hence the leap to V2. However, the code has improved hugely and as such it's suggested you make the leap.
