@@ -51,21 +51,28 @@
       this.$graph.attr("class", this.$table.attr("class")).addClass("mc-chart");
 
 
-      // set the stacked option based on giving the table a class of mc-stacked
+      // set the stacked option based on
+      // giving the table a class of mc-stacked
       this.options.stacked = this.$table.hasClass("mc-stacked");
 
-      // set the negative option based on giving the table a class of mc-negative
+      // set the negative option based on
+      // giving the table a class of mc-negative
       this.options.negative = this.$table.hasClass("mc-negative");
 
-      // true if it's a 'multiple' table - this means multiple bars per rows, but not stacked.
-      this.options.multiple = !this.options.stacked && (this.$table.hasClass("mc-multiple") || this.$table.find("tbody tr").first().find("td").length > 2);
+      // true if it's a 'multiple' table
+      // this means multiple bars per rows, but not stacked.
+      this.options.multiple = !this.options.stacked && (
+        this.$table.hasClass("mc-multiple") ||
+        this.$table.find("tbody tr").first().find("td").length > 2);
 
       // set the outdent options
       // which can be set via classes or overriden by setting the value to true
       // in the initial options object that's passed in
-      this.options.autoOutdent = this.options.autoOutdent || this.$table.hasClass("mc-auto-outdent");
+      this.options.autoOutdent = this.options.autoOutdent ||
+                                 this.$table.hasClass("mc-auto-outdent");
 
-      this.options.outdentAll = this.options.outdentAll || this.$table.hasClass("mc-outdented");
+      this.options.outdentAll = this.options.outdentAll ||
+                                this.$table.hasClass("mc-outdented");
 
       // add a mc-multiple class if it is
       if(this.options.multiple) { this.$graph.addClass("mc-multiple"); }
@@ -145,7 +152,8 @@
 
     this.constructChart = function() {
       // turn every element in the table into divs with appropriate classes
-      // call them and define this as scope so it's easier to get at options and properties
+      // call them and define this as scope so it's easier to 
+      // get at options and properties
       var thead = this.construct.thead.call(this);
       var tbody = this.construct.tbody.call(this);
 
@@ -237,7 +245,8 @@
       var values = [];
 
 
-      // var to store the maximum negative value, (used only for negative charts)
+      // var to store the maximum negative value
+      // (used only for negative charts)
       var maxNegativeValue = 0;
 
       // loop through every tr in the table
@@ -247,7 +256,8 @@
         // the first td is going to be the key, so ignore it
         var $bodyCells = $this.find(".mc-td:not(:first)");
 
-        // if it's stacked, the last column is a totals, so we don't want that in our calculations
+        // if it's stacked, the last column is a totals
+        // so we don't want that in our calculations
         if(that.options.stacked) {
           var $stackedTotal = $bodyCells.last().addClass("mc-stacked-total");
           $bodyCells = $bodyCells.filter(":not(:last)");
@@ -300,7 +310,8 @@
           }
         });
 
-        // if stacked, we need to push the total value of the row to the values array
+        // if stacked, we need to push the total value of the row
+        // to the values array
         if(that.options.stacked) { values.push(cellsTotalValue); }
 
       });
@@ -333,7 +344,9 @@
           var $cell = $(cell);
 
           var parsedCellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
-          var parsedVal = parsedCellVal * that.dimensions.single + ( parsedCellVal === 0 ? 0 : that.options.barPadding);
+
+          var extraPadding = ( parsedCellVal === 0 ? 0 : that.options.barPadding );
+          var parsedVal = parsedCellVal * that.dimensions.single + extraPadding;
 
           var absParsedCellVal = Math.abs(parsedCellVal);
           var absParsedVal = Math.abs(parsedVal);
