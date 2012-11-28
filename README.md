@@ -88,7 +88,7 @@ Using our CSS, working in:
 - iPhone, iPad
 - Chrome, Android 4.2
 
-We disable the plugin and revert to standard tables for IE < 8.
+We disable the plugin and revert to standard tables for IE < 8. You can change this though on [this line](https://github.com/alphagov/magna-charta/blob/master/src/magna-charta.js#L43).
 
 ## Contributing
 
@@ -99,6 +99,7 @@ You're going to need Node (V0.8+), npm and Grunt (`npm install -g grunt`) to wor
 - Write tests for your new feature and watch them fail.
 - Write your feature.
 - Get all tests passing.
+- Run `grunt` to generate a new Grunt build.
 - Push up to your fork, and then make a pull request.
 
 ## Release History / Changelist
