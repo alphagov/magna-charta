@@ -106,6 +106,10 @@ You're going to need Node (V0.8+), npm and Grunt (`npm install -g grunt`) to wor
 
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
+__2.0.2__
+
+- fixed the way MC applies padding across stacked bars. It now distributes the padding evenly across all the bars
+
 __2.0.1__
 
 - add class to the last cell in a header when the bar is stacked - this is the total
