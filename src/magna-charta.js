@@ -185,9 +185,7 @@
         this.applyWidths();
         this.insert();
         this.$table.addClass('visually-hidden');
-        if(!this.options.stacked) {
-          this.applyOutdent();
-        }
+        this.applyOutdent();
       }
     };
 
@@ -353,15 +351,8 @@
 
           var parsedCellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
 
-          var extraPadding;
 
-          if(that.options.stacked) {
-            extraPadding = ( parsedCellVal === 0 ? 0 : ( that.options.barPadding / barCount ) );
-          } else {
-            extraPadding = ( parsedCellVal === 0 ? 0 : that.options.barPadding );
-          }
-
-          var parsedVal = parsedCellVal * that.dimensions.single + extraPadding;
+          var parsedVal = parsedCellVal * that.dimensions.single;
 
           var absParsedCellVal = Math.abs(parsedCellVal);
           var absParsedVal = Math.abs(parsedVal);
@@ -417,20 +408,25 @@
         var cellPercentWidth = parseFloat($cell[0].style.width, 10);
         var cellHeight = $cell.height();
 
+        if(!that.options.stacked) {
+          // if it's 0, it is effectively outdented
+          if($cellVal === 0) {
+            $cell.addClass("mc-bar-outdented");
+          }
 
-        // if it's 0, it is effectively outdented
-        if($cellVal === 0) {
-          $cell.addClass("mc-bar-outdented");
-        }
-
-        if( (that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
-          $cell.addClass("mc-bar-outdented");
-          $cellSpan.css({
-            "margin-left": "100%",
-            "display": "inline-block"
-          });
+          if( (that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
+            $cell.addClass("mc-bar-outdented");
+            $cellSpan.css({
+              "margin-left": "100%",
+              "display": "inline-block"
+            });
+          } else {
+            $cell.addClass("mc-bar-indented");
+          }
         } else {
-          $cell.addClass("mc-bar-indented");
+          if(spanWidth > cellWidth && $cellVal > 0) {
+            $cell.addClass("mc-value-hidden");
+          }
         }
       });
 
