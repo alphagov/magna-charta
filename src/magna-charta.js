@@ -280,6 +280,9 @@
 
             var parsedVal = parseFloat(cellVal, 10);
             var absParsedVal = Math.abs(parsedVal);
+            if(parsedVal === 0) {
+              $cell.addClass("mc-bar-zero");
+            }
 
             if(that.options.negative) {
 
@@ -339,13 +342,25 @@
 
         var $this = $(row);
 
+        // bar count is all the .mc-bar-cell that are not 0 values
+        // as 0 value cells are hidden - meaning they dont affect the
+        // calculations
+        var barCount = $this.find(".mc-bar-cell:not(.mc-bar-zero)").length;
+
         $this.find(".mc-bar-cell").each(function(j, cell) {
 
           var $cell = $(cell);
 
           var parsedCellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
 
-          var extraPadding = ( parsedCellVal === 0 ? 0 : that.options.barPadding );
+          var extraPadding;
+
+          if(that.options.stacked) {
+            extraPadding = ( parsedCellVal === 0 ? 0 : ( that.options.barPadding / barCount ) );
+          } else {
+            extraPadding = ( parsedCellVal === 0 ? 0 : that.options.barPadding );
+          }
+
           var parsedVal = parsedCellVal * that.dimensions.single + extraPadding;
 
           var absParsedCellVal = Math.abs(parsedCellVal);
