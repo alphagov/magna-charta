@@ -79,8 +79,13 @@
 
       this.options.hasCaption = !!this.$table.find("caption").length;
 
-      if(this.ENABLED && this.options.applyOnInit) {
+      if(this.ENABLED) {
         this.apply();
+        // if applyOnInit is false, toggle immediately
+        // showing the table, hiding the graph
+        if(!this.options.applyOnInit) {
+          this.toggle();
+        }
       }
 
       return this;
@@ -152,25 +157,20 @@
 
     this.constructChart = function() {
       // turn every element in the table into divs with appropriate classes
-      // call them and define this as scope so it's easier to 
+      // call them and define this as scope so it's easier to
       // get at options and properties
       var thead = this.construct.thead.call(this);
       var tbody = this.construct.tbody.call(this);
 
+      var toggleLink = this.construct.toggleLink.call(this);
+
+
       if(this.options.hasCaption) {
-
         var caption = this.construct.caption.call(this);
-        // this will be added to the div chart
-        var toggleLink = this.construct.toggleLink.call(this);
-        // clone the new toggle link to add to the initial table
-        var tableToggleLink = toggleLink.clone(true);
-        // also add the toggleLink to the table's caption too
-        this.$table.find("caption").append(tableToggleLink);
-        // add it to the chart caption too
-        caption.append(toggleLink);
-
         this.$graph.append(caption);
       }
+
+      this.$table.before(toggleLink);
 
       this.$graph.append(thead);
       this.$graph.append(tbody);
@@ -193,7 +193,7 @@
     this.toggle = function(e) {
       this.$graph.toggle();
       this.$table.toggleClass("visually-hidden");
-      e.preventDefault();
+      if(e) e.preventDefault();
     };
 
     // some handy utility methods
@@ -202,7 +202,7 @@
         return !isNaN(parseFloat(val));
       },
       stripValue: function(val) {
-        return val.replace('%', '').replace("£", '').replace("m", "");
+        return val.replace('%', '').replace("£", '').replace("m", "").replace(",","");
       },
       returnMax: function(values) {
         var max = 0;
@@ -425,7 +425,7 @@
           }
         } else {
           if(spanWidth > cellWidth && $cellVal > 0) {
-            $cell.addClass("mc-value-hidden");
+            $cell.addClass("mc-value-overflow");
           }
         }
       });

@@ -266,6 +266,7 @@ $bar-colours:  $dark-blue,
 }
 .mc-toggle-link{
   display: block;
+  margin-top: 30px;
 }
 
 
@@ -278,10 +279,3 @@ $bar-colours:  $dark-blue,
 
 }
 
-// TODO: Tim, put this in the right place :P
-.mc-value-hidden {
-  // this is the bar containing the span
-  span {
-    // this is the span with the value in
-  }
-}

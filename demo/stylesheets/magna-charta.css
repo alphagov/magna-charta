@@ -160,7 +160,8 @@
   padding-right: 25px; }
 
 .mc-toggle-link {
-  display: block; }
+  display: block;
+  margin-top: 30px; }
 
 .visually-hidden,
 .visually-hidden caption {
