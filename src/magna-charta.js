@@ -193,7 +193,7 @@
     this.toggle = function(e) {
       this.$graph.toggle();
       this.$table.toggleClass("visually-hidden");
-      if(e) e.preventDefault();
+      if(e) { e.preventDefault(); }
     };
 
     // some handy utility methods
@@ -401,7 +401,7 @@
       var cells = this.$graph.find(".mc-bar-cell");
       this.$graph.find(".mc-bar-cell").each(function(i, cell) {
         var $cell = $(cell);
-        var $cellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
+        var cellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
         var $cellSpan = $cell.children("span");
         var spanWidth = $cellSpan.width() + 10; //+10 just for extra padding
         var cellWidth = $cell.width();
@@ -410,7 +410,7 @@
 
         if(!that.options.stacked) {
           // if it's 0, it is effectively outdented
-          if($cellVal === 0) {
+          if(cellVal === 0) {
             $cell.addClass("mc-bar-outdented");
           }
 
@@ -424,7 +424,7 @@
             $cell.addClass("mc-bar-indented");
           }
         } else {
-          if(spanWidth > cellWidth && $cellVal > 0) {
+          if(spanWidth > cellWidth && cellVal > 0) {
             $cell.addClass("mc-value-overflow");
           }
         }
