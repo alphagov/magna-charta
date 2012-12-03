@@ -136,6 +136,8 @@
       margin-bottom: 1px;
       color: white;
       text-indent: 4px; }
+    .mc-chart .mc-td.mc-value-overflow, .mc-chart .mc-th.mc-value-overflow {
+      text-indent: -999999px !important; }
   .mc-chart .mc-bar-outdented span {
     color: #111; }
   .mc-chart caption {
@@ -160,7 +162,8 @@
   padding-right: 25px; }
 
 .mc-toggle-link {
-  display: block; }
+  display: block;
+  margin-top: 30px; }
 
 .visually-hidden,
 .visually-hidden caption {

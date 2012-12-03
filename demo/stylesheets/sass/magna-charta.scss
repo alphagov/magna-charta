@@ -214,6 +214,9 @@ $bar-colours:  $dark-blue,
       color: $white;
       text-indent: 4px;
     }
+    &.mc-value-overflow {
+      text-indent: -999999px !important;
+    }
   }
   .mc-bar-outdented {
     span { color: #111; }
@@ -266,6 +269,7 @@ $bar-colours:  $dark-blue,
 }
 .mc-toggle-link{
   display: block;
+  margin-top: 30px;
 }
 
 
