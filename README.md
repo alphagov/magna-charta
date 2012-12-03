@@ -106,6 +106,10 @@ You're going to need Node (V0.8+), npm and Grunt (`npm install -g grunt`) to wor
 
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
+__3.0.0-rc1__
+
+- Calculating the bar padding just was not reliable - there were too many factors. That feature has been removed, and we have enhanced the toggle functionality. Toggle links are added automatically. You can define if the table view or chart view is the default by setting `applyOnInit` (default `true`). If you want to stick to the old functionality, we advise you to stick with V2.02 [Download here](https://github.com/alphagov/magna-charta/archive/v2.0.2.zip).
+
 __2.0.2__
 
 - fixed the way MC applies padding across stacked bars. It now distributes the padding evenly across all the bars

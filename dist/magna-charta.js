@@ -1,4 +1,4 @@
-/*! Magna Charta - v2.0.1 - 2012-11-30
+/*! Magna Charta - v3.0.0-rc1 - 2012-12-03
 * https://github.com/alphagov/magna-charta
  */
 
@@ -75,8 +75,13 @@
 
       this.options.hasCaption = !!this.$table.find("caption").length;
 
-      if(this.ENABLED && this.options.applyOnInit) {
+      if(this.ENABLED) {
         this.apply();
+        // if applyOnInit is false, toggle immediately
+        // showing the table, hiding the graph
+        if(!this.options.applyOnInit) {
+          this.toggle();
+        }
       }
 
       return this;
@@ -148,25 +153,20 @@
 
     this.constructChart = function() {
       // turn every element in the table into divs with appropriate classes
-      // call them and define this as scope so it's easier to 
+      // call them and define this as scope so it's easier to
       // get at options and properties
       var thead = this.construct.thead.call(this);
       var tbody = this.construct.tbody.call(this);
 
+      var toggleLink = this.construct.toggleLink.call(this);
+
+
       if(this.options.hasCaption) {
-
         var caption = this.construct.caption.call(this);
-        // this will be added to the div chart
-        var toggleLink = this.construct.toggleLink.call(this);
-        // clone the new toggle link to add to the initial table
-        var tableToggleLink = toggleLink.clone(true);
-        // also add the toggleLink to the table's caption too
-        this.$table.find("caption").append(tableToggleLink);
-        // add it to the chart caption too
-        caption.append(toggleLink);
-
         this.$graph.append(caption);
       }
+
+      this.$table.before(toggleLink);
 
       this.$graph.append(thead);
       this.$graph.append(tbody);
@@ -181,9 +181,7 @@
         this.applyWidths();
         this.insert();
         this.$table.addClass('visually-hidden');
-        if(!this.options.stacked) {
-          this.applyOutdent();
-        }
+        this.applyOutdent();
       }
     };
 
@@ -191,7 +189,7 @@
     this.toggle = function(e) {
       this.$graph.toggle();
       this.$table.toggleClass("visually-hidden");
-      e.preventDefault();
+      if(e) { e.preventDefault(); }
     };
 
     // some handy utility methods
@@ -200,7 +198,7 @@
         return !isNaN(parseFloat(val));
       },
       stripValue: function(val) {
-        return val.replace('%', '').replace("£", '').replace("m", "");
+        return val.replace('%', '').replace("£", '').replace("m", "").replace(",","");
       },
       returnMax: function(values) {
         var max = 0;
@@ -349,15 +347,8 @@
 
           var parsedCellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
 
-          var extraPadding;
 
-          if(that.options.stacked) {
-            extraPadding = ( parsedCellVal === 0 ? 0 : ( that.options.barPadding / barCount ) );
-          } else {
-            extraPadding = ( parsedCellVal === 0 ? 0 : that.options.barPadding );
-          }
-
-          var parsedVal = parsedCellVal * that.dimensions.single + extraPadding;
+          var parsedVal = parsedCellVal * that.dimensions.single;
 
           var absParsedCellVal = Math.abs(parsedCellVal);
           var absParsedVal = Math.abs(parsedVal);
@@ -406,27 +397,32 @@
       var cells = this.$graph.find(".mc-bar-cell");
       this.$graph.find(".mc-bar-cell").each(function(i, cell) {
         var $cell = $(cell);
-        var $cellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
+        var cellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
         var $cellSpan = $cell.children("span");
         var spanWidth = $cellSpan.width() + 10; //+10 just for extra padding
         var cellWidth = $cell.width();
         var cellPercentWidth = parseFloat($cell[0].style.width, 10);
         var cellHeight = $cell.height();
 
+        if(!that.options.stacked) {
+          // if it's 0, it is effectively outdented
+          if(cellVal === 0) {
+            $cell.addClass("mc-bar-outdented");
+          }
 
-        // if it's 0, it is effectively outdented
-        if($cellVal === 0) {
-          $cell.addClass("mc-bar-outdented");
-        }
-
-        if( (that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
-          $cell.addClass("mc-bar-outdented");
-          $cellSpan.css({
-            "margin-left": "100%",
-            "display": "inline-block"
-          });
+          if( (that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
+            $cell.addClass("mc-bar-outdented");
+            $cellSpan.css({
+              "margin-left": "100%",
+              "display": "inline-block"
+            });
+          } else {
+            $cell.addClass("mc-bar-indented");
+          }
         } else {
-          $cell.addClass("mc-bar-indented");
+          if(spanWidth > cellWidth && cellVal > 0) {
+            $cell.addClass("mc-value-overflow");
+          }
         }
       });
 
