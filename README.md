@@ -2,11 +2,13 @@
 
 A jQuery plugin for producing bar charts from tables.
 
-## Quick Downloads
-Download the [production version][min] or the [development version][max].
+## Downloading
 
-[min]: https://raw.github.com/alphagov/magna-charta/master/dist/magna-charta.min.js
-[max]: https://raw.github.com/alphagov/magna-charta/master/dist/magna-charta.js
+- If you want to download the latest version, just grab the [latest minified within dist][min]. 
+
+- Else, we tag specific versions as [Tags on Github](https://github.com/alphagov/magna-charta/tags), which lets you download the entire repository at a specific version (from V2).
+
+- Or, from V3 onwards, we put the downloads on the [Github downloads page](https://github.com/alphagov/magna-charta/downloads).
 
 ## Documentation
 
@@ -105,6 +107,7 @@ You're going to need Node (V0.8+), npm and Grunt (`npm install -g grunt`) to wor
 
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
+
 __3.0.0__
 
 - Version 3 released!
@@ -175,3 +178,5 @@ __1.0.0__
 
 
 
+[min]: https://raw.github.com/alphagov/magna-charta/master/dist/magna-charta.min.js
+[max]: https://raw.github.com/alphagov/magna-charta/master/dist/magna-charta.js
