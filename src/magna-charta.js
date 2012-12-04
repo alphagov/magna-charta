@@ -8,6 +8,7 @@
 
 (function($) {
 
+  "use strict";
 
   var MagnaCharta = function() {
     this.init = function(table, options) {

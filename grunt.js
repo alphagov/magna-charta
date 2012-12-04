@@ -1,6 +1,8 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
+  "use strict";
+
   // Project configuration.
   grunt.initConfig({
     pkg: '<json:magna-charta.jquery.json>',
@@ -43,7 +45,8 @@ module.exports = function(grunt) {
         undef: true,
         boss: true,
         eqnull: true,
-        browser: true
+        browser: true,
+        strict: true
       },
       globals: {
         jQuery: true,

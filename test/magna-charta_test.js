@@ -3,6 +3,8 @@
 /*global notDeepEqual:false, strictEqual:false, notStrictEqual:false, raises:false*/
 (function($) {
 
+  "use strict";
+
   /*
     ======== A Handy Little QUnit Reference ========
     http://docs.jquery.com/QUnit
