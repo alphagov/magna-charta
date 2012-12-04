@@ -85,6 +85,8 @@
       .mc-chart .mc-tbody .mc-tr .mc-bar-negative {
         text-align: right;
         padding-right: 8px; }
+      .mc-chart .mc-tbody .mc-tr .mc-value-overflow {
+        text-indent: -99999px !important; }
       .mc-chart .mc-tbody .mc-tr .mc-key-cell {
         width: 40%;
         text-indent: 26px;

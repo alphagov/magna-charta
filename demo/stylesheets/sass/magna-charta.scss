@@ -146,6 +146,9 @@ $bar-colours:  $dark-blue,
         text-align: right;
         padding-right: $bar-padding;
       }
+      .mc-value-overflow {
+        text-indent: -99999px !important;
+      }
       // Bar labels
       .mc-key-cell {
         width: $label-width;
