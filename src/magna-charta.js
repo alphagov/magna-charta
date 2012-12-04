@@ -349,7 +349,6 @@
 
         var parsedCellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
 
-
         var parsedVal = parsedCellVal * that.dimensions.single;
 
         var absParsedCellVal = Math.abs(parsedCellVal);
@@ -408,20 +407,22 @@
 
         if(!that.options.stacked) {
         // if it's 0, it is effectively outdented
-        if(cellVal === 0) {
-        $cell.addClass("mc-bar-outdented");
-        }
+          if(cellVal === 0) { $cell.addClass("mc-bar-outdented"); }
 
-        if((that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
-        $cell.addClass("mc-bar-outdented");
-        $cellSpan.css({
-          "margin-left": "100%",
-          "display": "inline-block"
-          });
+          if((that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
+
+            $cell.addClass("mc-bar-outdented");
+
+            $cellSpan.css({
+              "margin-left": "100%",
+              "display": "inline-block"
+            });
+
+          } else {
+            $cell.addClass("mc-bar-indented");
+          }
         } else {
-          $cell.addClass("mc-bar-indented");
-        }
-        } else {
+          // if it's a stacked graph
           if(spanWidth > cellWidth && cellVal > 0) {
             $cell.addClass("mc-value-overflow");
           }
