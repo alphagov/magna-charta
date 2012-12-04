@@ -1,4 +1,4 @@
-/*! Magna Charta - v3.0.0-rc2 - 2012-12-03
+/*! Magna Charta - v3.0.0 - 2012-12-04
 * https://github.com/alphagov/magna-charta
  */
 
@@ -196,7 +196,8 @@
       return !isNaN(parseFloat(val));
     },
     stripValue: function(val) {
-      return val.replace('%', '').replace("£", '').replace("m", "").replace(",","");
+      var re = new RegExp("\\,|£|%|[a-z]", "gi");
+      return val.replace(re, '');
     },
     returnMax: function(values) {
       var max = 0;
@@ -211,18 +212,16 @@
   };
 
   MagnaCharta.prototype.addClassesToHeader = function() {
-    var that = this;
-    var headerCells = this.$graph.find(".mc-th");
+
+    var headerCells = this.$graph.find(".mc-th").filter(":not(:first)");
+
+
     if(this.options.stacked) {
-      headerCells.last().addClass("mc-stacked-header");
-    }
-    headerCells = headerCells.filter(":not(:first)");
-    if(that.options.stacked) {
-      headerCells.last().addClass("mc-header-total");
+      headerCells.last().addClass("mc-stacked-header mc-header-total");
       headerCells = headerCells.filter(":not(:last)");
     }
-    headerCells.addClass("mc-key-header");
-    headerCells.filter(":not(.mc-stacked-header)").each(function(i, item) {
+
+    headerCells.addClass("mc-key-header").filter(":not(.mc-stacked-header)").each(function(i, item) {
       $(item).addClass("mc-key-" + (i+1));
     });
   };
@@ -235,7 +234,6 @@
     // store the cell values in here so later
     // so we can figure out the maximum value later
     var values = [];
-
 
     // var to store the maximum negative value
     // (used only for negative charts)
@@ -345,7 +343,6 @@
 
         var parsedCellVal = parseFloat(that.utils.stripValue($cell.text()), 10);
 
-
         var parsedVal = parsedCellVal * that.dimensions.single;
 
         var absParsedCellVal = Math.abs(parsedCellVal);
@@ -404,20 +401,22 @@
 
         if(!that.options.stacked) {
         // if it's 0, it is effectively outdented
-        if(cellVal === 0) {
-        $cell.addClass("mc-bar-outdented");
-        }
+          if(cellVal === 0) { $cell.addClass("mc-bar-outdented"); }
 
-        if((that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
-        $cell.addClass("mc-bar-outdented");
-        $cellSpan.css({
-          "margin-left": "100%",
-          "display": "inline-block"
-          });
+          if((that.options.autoOutdent && spanWidth > cellWidth) || that.options.outdentAll) {
+
+            $cell.addClass("mc-bar-outdented");
+
+            $cellSpan.css({
+              "margin-left": "100%",
+              "display": "inline-block"
+            });
+
+          } else {
+            $cell.addClass("mc-bar-indented");
+          }
         } else {
-          $cell.addClass("mc-bar-indented");
-        }
-        } else {
+          // if it's a stacked graph
           if(spanWidth > cellWidth && cellVal > 0) {
             $cell.addClass("mc-value-overflow");
           }
