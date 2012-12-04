@@ -200,6 +200,7 @@
       return !isNaN(parseFloat(val));
     },
     stripValue: function(val) {
+      // TODO: got to be a better way of doing this - regex?
       return val.replace('%', '').replace("£", '').replace("m", "").replace(",","");
     },
     returnMax: function(values) {

@@ -48,6 +48,17 @@
     ok(this.singleMC.$graph.hasClass("no-key"));
   });
 
+  test('running toggle switches between chart and table', function() {
+    this.singleMC.toggle();
+    ok(!this.singleMC.$table.hasClass("visually-hidden"));
+    ok(this.singleMC.$graph.filter(":visible").length === 0);
+
+    // toggle it back
+    this.singleMC.toggle();
+    ok(this.singleMC.$table.hasClass("visually-hidden"));
+    ok(this.singleMC.$graph.filter(":visible").length === 1);
+  });
+
   test('new chart div contains all table bits as divs', function() {
     ok(this.singleMC.$graph.find(".mc-thead").length);
     equal(this.singleMC.$graph.find(".mc-tr").length, 4);
@@ -240,6 +251,7 @@
     equal(this.singleMC.utils.stripValue("1.23m"), "1.23");
     equal(this.singleMC.utils.stripValue("£1.23m"), "1.23");
     equal(this.singleMC.utils.stripValue("0.56%"), "0.56");
+    equal(this.singleMC.utils.stripValue("2,35m"), "235");
   });
 
   test('utils.isNegative', function() {
