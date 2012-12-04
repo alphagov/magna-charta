@@ -135,6 +135,12 @@
     equal(this.stackedMC.$graph.find(".mc-key-cell").length, 3, 'key cells');
     equal(this.stackedMC.$graph.find(".mc-stacked-total").length, 3, 'total cells');
   });
+  test('header cells get the right values', function() {
+    var head = this.stackedMC.$graph.find(".mc-thead");
+    equal(head.find(".mc-stacked-header").length, 1);
+    ok(head.find(".mc-th").eq(1).hasClass("mc-key-1"));
+    equal(head.find(".mc-key-header").length, 2);
+  });
 
   test('the bar cells are given the right widths', function() {
     var cells = this.stackedMC.$graph.find(".mc-bar-cell");

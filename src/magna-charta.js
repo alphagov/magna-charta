@@ -216,18 +216,16 @@
   };
 
   MagnaCharta.prototype.addClassesToHeader = function() {
-    var that = this;
-    var headerCells = this.$graph.find(".mc-th");
+
+    var headerCells = this.$graph.find(".mc-th").filter(":not(:first)");
+
+
     if(this.options.stacked) {
-      headerCells.last().addClass("mc-stacked-header");
-    }
-    headerCells = headerCells.filter(":not(:first)");
-    if(that.options.stacked) {
-      headerCells.last().addClass("mc-header-total");
+      headerCells.last().addClass("mc-stacked-header mc-header-total");
       headerCells = headerCells.filter(":not(:last)");
     }
-    headerCells.addClass("mc-key-header");
-    headerCells.filter(":not(.mc-stacked-header)").each(function(i, item) {
+
+    headerCells.addClass("mc-key-header").filter(":not(.mc-stacked-header)").each(function(i, item) {
       $(item).addClass("mc-key-" + (i+1));
     });
   };
