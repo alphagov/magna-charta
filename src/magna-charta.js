@@ -239,7 +239,6 @@
     // so we can figure out the maximum value later
     var values = [];
 
-
     // var to store the maximum negative value
     // (used only for negative charts)
     var maxNegativeValue = 0;

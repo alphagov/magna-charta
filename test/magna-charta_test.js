@@ -169,6 +169,24 @@
     });
   });
 
+  module('jQuery.magnaCharta test applyOnInit', {
+    setup: function() {
+      this.$negTable = $("#qunit-fixture").children("#negative2");
+      this.negMC = $.magnaCharta(this.$negTable, {
+        applyOnInit: false
+      });
+    }
+  });
+
+  test('doesnt show the chart initially', function() {
+    equal(this.negMC.$graph.filter(":visible").length, 0);
+    ok(!this.$negTable.hasClass("visually-hidden"));
+  });
+  test('graph is shown when toggle is called', function() {
+    this.negMC.toggle();
+    equal(this.negMC.$graph.filter(":visible").length,1);
+    ok(this.$negTable.hasClass("visually-hidden"));
+  });
 
   module('jQuery.magnaCharta NEGATIVE', {
     setup: function() {

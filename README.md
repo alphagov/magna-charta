@@ -34,7 +34,6 @@ Magna Charta has some options that are passed in through the JavaScript, and som
   outOf: 65, // number to calculate the bar % out of
   applyOnInit: true, // apply the chart immediately
   toggleText: "Toggle between chart and table", // if you want toggle links to be added
-  barPadding: 0, // allows you to set a minimum width for all bars
   autoOutdent: false, // will automatically place values too big for a bar outside it
   outdentAll: false // will place all bar values just outside the bar rather than sitting in the bar
 };
@@ -105,6 +104,12 @@ You're going to need Node (V0.8+), npm and Grunt (`npm install -g grunt`) to wor
 ## Release History / Changelist
 
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
+
+__3.0.0__
+
+- Version 3 released!
+- a lot of refactoring, rewriting and adding more tests to cover more of the functionality.
+- be aware that the `barPadding` option has been removed. (see 3.0.0-rc1 notes for more).
 
 __3.0.0-rc2__
 
