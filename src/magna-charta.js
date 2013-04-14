@@ -17,7 +17,8 @@
         applyOnInit: true,
         toggleText: "Toggle between chart and table",
         autoOutdent: false,
-        outdentAll: false
+        outdentAll: false,
+        toggleAfter : false // BOOL set TRUE to append the toggle link
       };
 
       this.options = $.extend({}, defaults, options);
@@ -169,7 +170,11 @@
       this.$graph.append(caption);
     }
 
-    this.$table.before(toggleLink);
+    if(!this.options.toggleAfter){
+        this.$table.before(toggleLink);
+    } else {
+        this.$table.parent().append(toggleLink);
+    }
 
     this.$graph.append(thead);
     this.$graph.append(tbody);
