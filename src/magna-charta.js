@@ -170,10 +170,10 @@
       this.$graph.append(caption);
     }
 
-    if(!this.options.toggleAfter){
-        this.$table.before(toggleLink);
+    if(this.options.toggleAfter){
+        this.$table.after(toggleLink);
     } else {
-        this.$table.parent().append(toggleLink);
+        this.$table.before(toggleLink);
     }
 
     this.$graph.append(thead);
