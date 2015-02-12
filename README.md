@@ -108,6 +108,11 @@ You're going to need Node (V0.8+), npm and Grunt (`npm install -g grunt`) to wor
 _We use [Semantic Versioning](http://semver.org/) for our version numbers._
 
 
+__3.0.1__
+
+- Change `visually-hidden` class to follow convention on other `alphagov` repos
+- Introduce `aria-hidden` for the toggle link
+
 __3.0.0__
 
 - Version 3 released!
