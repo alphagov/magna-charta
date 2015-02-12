@@ -165,8 +165,8 @@
   display: block;
   margin-top: 30px; }
 
-.visually-hidden,
-.visually-hidden caption {
+.visuallyhidden,
+.visuallyhidden caption {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px);
   /* IE6, IE7 */

@@ -147,13 +147,12 @@
     return $("<a />", {
       "href" : "#",
       "class" : "mc-toggle-link",
-      "text" : this.options.toggleText
+      "text" : this.options.toggleText,
+      "aria-hidden" : "true"
     }).on("click", function(e) {
       that.toggle(e);
     });
   };
-
-
 
   MagnaCharta.prototype.constructChart = function() {
     // turn every element in the table into divs with appropriate classes
@@ -188,7 +187,7 @@
       this.calculateMaxWidth();
       this.applyWidths();
       this.insert();
-      this.$table.addClass('visually-hidden');
+      this.$table.addClass('visuallyhidden');
       this.applyOutdent();
     }
   };
@@ -196,7 +195,7 @@
   // toggles between showing the table and showing the chart
   MagnaCharta.prototype.toggle = function(e) {
     this.$graph.toggle();
-    this.$table.toggleClass("visually-hidden");
+    this.$table.toggleClass("visuallyhidden");
     if(e) { e.preventDefault(); }
   };
 
