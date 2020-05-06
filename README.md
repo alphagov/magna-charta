@@ -1,4 +1,4 @@
-# Magna Charta
+# Magna Charta - ARCHIVED
 
 A jQuery plugin for producing bar charts from tables.
 
